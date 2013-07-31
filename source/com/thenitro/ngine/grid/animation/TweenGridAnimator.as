@@ -1,11 +1,12 @@
-package com.thenitro.ngine.collections.grid {	
+package com.thenitro.ngine.grid.animation {	
 	import flash.utils.Dictionary;
 	
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.events.EventDispatcher;
+	import com.thenitro.ngine.grid.interfaces.IGridObject;
 	
-	public final class GridAnimator extends EventDispatcher {
+	public final class TweenGridAnimator extends GridAnimator {
 		private var _animating:Boolean;
 		private var _completeEvent:String;
 		
@@ -16,7 +17,7 @@ package com.thenitro.ngine.collections.grid {
 		
 		private var _tweens:Vector.<Tween>;
 		
-		public function GridAnimator() {
+		public function TweenGridAnimator() {
 			_tweens     = new Vector.<Tween>();
 			_objects    = new Dictionary();
 			_addedCount = 0;
@@ -24,7 +25,7 @@ package com.thenitro.ngine.collections.grid {
 			super();
 		};
 		
-		public function add(pElement:IGridObject, pX:Number, pY:Number, pTime:Number):void {
+		override public function add(pElement:IGridObject, pX:Number, pY:Number, pTime:Number):void {
 			if (_animating) {
 				trace("Error: GridAnimator.add: Already animating");
 				return;
@@ -49,7 +50,7 @@ package com.thenitro.ngine.collections.grid {
 			_objects[pElement] = tween;
 		};
 		
-		public function remove(pElement:IGridObject):void {
+		override public function remove(pElement:IGridObject):void {
 			if (_objects[pElement]) {
 				_addedCount--;
 				_tweens.splice(_tweens.indexOf(_objects[pElement]), 1);
@@ -58,7 +59,7 @@ package com.thenitro.ngine.collections.grid {
 			}
 		};
 		
-		public function start(pCompleteEvent:String):void {
+		override public function start(pCompleteEvent:String):void {
 			if (_animating) {
 				trace("Error: GridAnimator.start: Already animating");
 				return;
@@ -79,7 +80,7 @@ package com.thenitro.ngine.collections.grid {
 			}
 		};
 		
-		public function clean():void {
+		override public function clean():void {
 			_animating = false;
 			
 			_addedCount    = 0;

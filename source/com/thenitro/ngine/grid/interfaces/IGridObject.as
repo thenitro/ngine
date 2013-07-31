@@ -1,4 +1,4 @@
-package com.thenitro.ngine.collections.grid {
+package com.thenitro.ngine.grid.interfaces {
 	import com.thenitro.ngine.pool.IReusable;
 	
 	public interface IGridObject extends IReusable {

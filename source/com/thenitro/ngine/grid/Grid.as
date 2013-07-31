@@ -1,7 +1,8 @@
-package com.thenitro.ngine.collections.grid {
+package com.thenitro.ngine.grid {
+	import com.thenitro.ngine.grid.interfaces.IGridContainer;
+	import com.thenitro.ngine.grid.interfaces.IGridObject;
 	import com.thenitro.ngine.pool.Pool;
 	
-	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
 	public class Grid implements IGridContainer {
@@ -12,8 +13,18 @@ package com.thenitro.ngine.collections.grid {
 		private var _sizeX:uint;
 		private var _sizeY:uint;
 		
-		public function Grid() {
+		private var _cellWidth:uint;
+		private var _cellHeight:uint;
+		
+		private var _count:uint;
+		
+		public function Grid(pCellWidth:uint = 0, pCellHeight:uint = 0) {
+			_count = 0;
+			
 			_rows = new Dictionary();
+			
+			_cellWidth  = pCellWidth;
+			_cellHeight = pCellHeight;
 		};
 		
 		public function get sizeX():uint {
@@ -22,6 +33,18 @@ package com.thenitro.ngine.collections.grid {
 		
 		public function get sizeY():uint {
 			return _sizeY;
+		};
+		
+		public function get cellWidth():uint {
+			return _cellWidth;
+		};
+		
+		public function get cellHeight():uint {
+			return _cellHeight;
+		};
+		
+		public function get count():uint {
+			return _count;
 		};
 		
 		public function get reflection():Class {
@@ -40,6 +63,8 @@ package com.thenitro.ngine.collections.grid {
 				pObject.updateIndex(pX, pY);
 			}
 			
+			_count++;
+			
 			return pObject;
 		};
 		
@@ -53,7 +78,7 @@ package com.thenitro.ngine.collections.grid {
 			return cols[pY];
 		};
 		
-		public function addVisual(pObject:IGridObject):void {};
+		public function addVisual(pObject:IGridObject, pUpdatePosition:Boolean = true):void {};
 		public function removeVisual(pObject:IGridObject):void {};
 		
 		public function remove(pX:uint, pY:uint):void {
@@ -61,6 +86,8 @@ package com.thenitro.ngine.collections.grid {
 			if (!cols) {
 				return;
 			}
+			
+			_count--;
 			
 			delete cols[pY];
 		};
@@ -83,13 +110,15 @@ package com.thenitro.ngine.collections.grid {
 		public function clean():void {
 			_sizeX = 0;
 			_sizeY = 0;
+			
+			_count = 0;
 		};
 		
 		public function clone():IGridContainer {
 			var grid:Grid = _pool.get(Grid) as Grid;
 			
 			if (!grid) {
-				grid = new Grid();
+				grid = new Grid(cellWidth, cellHeight);
 				_pool.allocate(Grid, 1);
 			}
 			

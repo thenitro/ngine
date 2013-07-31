@@ -1,4 +1,4 @@
-package com.thenitro.ngine.collections.grid {
+package com.thenitro.ngine.grid.interfaces {
 	
 	public interface IGridGenerator {
 		function setWaveDepth(pSize:uint):void;

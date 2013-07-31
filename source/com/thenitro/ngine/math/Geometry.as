@@ -39,5 +39,11 @@ package com.thenitro.ngine.math {
 			
 			return Math.max(scaleX, scaleY);
 		};
+		
+		public static function map(pNumber:Number, pMinValue:Number, pMaxValue:Number, pTargetMin:Number, pTargetMax:Number):Number {
+			var index:Number = (pMaxValue - pMinValue) / pNumber;
+			
+			return (pTargetMax - pTargetMin) / index; 
+		};
 	}
 }

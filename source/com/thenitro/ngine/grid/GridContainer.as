@@ -1,40 +1,37 @@
-package com.thenitro.ngine.collections.grid {
+package com.thenitro.ngine.grid {
+	import com.thenitro.ngine.grid.interfaces.IGridContainer;
+	import com.thenitro.ngine.grid.interfaces.IGridObject;
 	import com.thenitro.ngine.match3.analytics.AnalyticsGrid;
-	import com.thenitro.ngine.pool.Pool;
-	
-	import flash.utils.Dictionary;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 
 	public class GridContainer extends Grid {
-		private var _cellWidth:uint;
-		private var _cellHeight:uint;
-		
 		private var _container:Sprite;
 		
 		public function GridContainer(pCellWidth:uint, pCellHeight:uint) {
 			_container = new Sprite();
 			
-			_cellWidth  = pCellWidth;
-			_cellHeight = pCellHeight;
+			super(pCellWidth, pCellHeight);
 		};
 		
 		public function get canvas():Sprite {
 			return _container;
 		};
 		
-		override public function addVisual(pObject:IGridObject):void {
+		override public function addVisual(pObject:IGridObject, pUpdatePosition:Boolean = true):void {
 			if (!pObject) {
 				return;
 			}
 			
-			pObject.x = pObject.indexX * _cellWidth;
-			pObject.y = pObject.indexY * _cellHeight;
+			if (pUpdatePosition) {
+				pObject.x = pObject.indexX * cellWidth;
+				pObject.y = pObject.indexY * cellHeight;
+			}
 			
 			_container.addChild(pObject as DisplayObject);
 			
-			//updateIndexes();
+			updateIndexes();
 		};
 		
 		override public function removeVisual(pObject:IGridObject):void {
