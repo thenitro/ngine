@@ -1,4 +1,4 @@
-package com.thenitro.ngine.grid {
+package com.thenitro.ngine.collections.grid {
 	import com.thenitro.ngine.pool.Pool;
 	
 	import flash.geom.Point;

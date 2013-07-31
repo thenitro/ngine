@@ -1,4 +1,4 @@
-package com.thenitro.ngine.grid {	
+package com.thenitro.ngine.collections.grid {	
 	import flash.utils.Dictionary;
 	
 	import starling.animation.Tween;

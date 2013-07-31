@@ -1,4 +1,4 @@
-package com.thenitro.ngine.grid {
+package com.thenitro.ngine.collections.grid {
 	import com.thenitro.ngine.match3.analytics.AnalyticsGrid;
 	import com.thenitro.ngine.pool.Pool;
 	

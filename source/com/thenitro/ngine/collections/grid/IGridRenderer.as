@@ -1,4 +1,4 @@
-package com.thenitro.ngine.grid {
+package com.thenitro.ngine.collections.grid {
 	
 	public interface IGridRenderer {
 		function get numChildren():int;
