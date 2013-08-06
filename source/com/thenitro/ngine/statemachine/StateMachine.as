@@ -1,6 +1,4 @@
 package com.thenitro.ngine.statemachine {
-	import com.junkbyte.console.Cc;
-	
 	import flash.utils.Dictionary;
 	
 	import starling.display.Sprite;
@@ -56,38 +54,14 @@ package com.thenitro.ngine.statemachine {
 			_currState = _states[pStateID];
 			_currState.addEventListener(Event.ADDED_TO_STAGE,
 										addedToStageEventHandler);
-			CONFIG::DEBUG {
-				try {
-					_canvas.addChild(_currState);
-				} catch(error:Error) {
-					Cc.log(error.message);
-					Cc.log(error.getStackTrace());
-				}
-			}
 			
-			CONFIG::RELEASE {
-				_canvas.addChild(_currState);
-			}
+			_canvas.addChild(_currState);
 		};
 		
 		private function addedToStageEventHandler(pEvent:Event):void {
-			CONFIG::DEBUG {
-				try {
-					_currState.removeEventListener(Event.ADDED_TO_STAGE,
-												   addedToStageEventHandler);
-					
-					_currState.start();			
-				} catch(error:Error)  {
-					Cc.log(error.message);
-					Cc.log(error.getStackTrace());
-				}
-			} 
-			
-			CONFIG::RELEASE {
-				_currState.removeEventListener(Event.ADDED_TO_STAGE,
-											   addedToStageEventHandler);
-				_currState.start();	
-			}
+			_currState.removeEventListener(Event.ADDED_TO_STAGE,
+										   addedToStageEventHandler);
+			_currState.start();	
 		};
 	};
 }
