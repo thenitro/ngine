@@ -25,6 +25,10 @@ package com.thenitro.ngine.textures {
 			cut(pBitmapData, pTileWidth, pTileHeight);
 		};
 		
+		public function get maxID():uint {
+			return _maxID;
+		};
+		
 		public function getByIndex(pIndexX:uint, pIndexY:uint):Texture {
 			if (pIndexX >= _tilesNumX || pIndexY >= _tilesNumY) {
 				throw new Error("SpriteSheetCutter.getByIndex(pIndexX, pIndexY): index " + pIndexX + " " + pIndexY + " is out of range!");
@@ -76,7 +80,7 @@ package com.thenitro.ngine.textures {
 			
 			var textureID:int = 0;
 			
-			for (var x:uint = 0; x < _tilesNumX; x++) {
+			for (var y:uint = 0; y < _tilesNumY; y++) {
 				
 				var cell:Vector.<Texture> = _textures[x] as Vector.<Texture>;
 				
@@ -85,7 +89,7 @@ package com.thenitro.ngine.textures {
 					
 				}
 				
-				for (var y:uint = 0; y < _tilesNumY; y++) {
+				for (var x:uint = 0; x < _tilesNumX; x++) {
 					var piece:BitmapData = new BitmapData(pTileWidth, pTileHeight, true, 0x00000000);
 						piece.copyPixels(pBitmapData, new Rectangle(x * pTileWidth, y * pTileHeight, pTileWidth, pTileHeight), new Point());
 					
