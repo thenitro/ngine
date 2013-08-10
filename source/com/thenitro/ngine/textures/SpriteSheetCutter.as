@@ -4,16 +4,17 @@ package com.thenitro.ngine.textures {
 	import flash.geom.Rectangle;
 	
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	public class SpriteSheetCutter {
-		private var _textures:Vector.<Vector.<Texture>>;
-		private var _textureByID:Vector.<Texture>;
-		private var _createdBitmapData:Vector.<BitmapData>;
+		private var _textures:Vector.<Vector.<String>>;
 		
 		private var _tilesNumX:uint;
 		private var _tilesNumY:uint;
 		
 		private var _maxID:uint;
+		
+		private var _atlas:TextureAtlas;
 		
 		public function SpriteSheetCutter(pBitmapData:BitmapData, 
 										  pTileWidth:uint, pTileHeight:uint) {
@@ -35,7 +36,7 @@ package com.thenitro.ngine.textures {
 				return null;
 			}
 			
-			return _textures[pIndexY][pIndexX];
+			return _atlas.getTexture(_textures[pIndexY][pIndexX]);
 		};
 		
 		public function getByID(pID:uint):Texture {
@@ -44,23 +45,15 @@ package com.thenitro.ngine.textures {
 				return null;
 			}
 			
-			return _textureByID[pID];
+			//return _textureByID[pID];
+			return _atlas.getTexture(pID.toString());
 		};
 		
 		public function dispose():void {
-			for each (var cell:Vector.<Texture> in _textures) {
-				for each (var texture:Texture in cell) {
-					texture.dispose();
-				}
-			}
-			
 			_textures = null;
 			
-			for each (var bitmap:BitmapData in _createdBitmapData) {
-				bitmap.dispose();
-			}
-			
-			_createdBitmapData = null;
+			_atlas.dispose();
+			_atlas = null;
 			
 			_tilesNumX = 0;
 			_tilesNumY = 0;
@@ -73,36 +66,39 @@ package com.thenitro.ngine.textures {
 			
 			_maxID = _tilesNumX * _tilesNumY;
 			
-			_createdBitmapData = new Vector.<BitmapData>(_maxID);
-			_textureByID       = new Vector.<Texture>(_maxID);
-			
-			_textures = new Vector.<Vector.<Texture>>(_tilesNumX);
+			_textures = new Vector.<Vector.<String>>(_tilesNumX);
 			
 			var textureID:int = 0;
+			var texuresText:String = '';
 			
 			for (var y:uint = 0; y < _tilesNumY; y++) {				
 				for (var x:uint = 0; x < _tilesNumX; x++) {
-					var cell:Vector.<Texture> = _textures[x] as Vector.<Texture>;
+					var cell:Vector.<String> = _textures[x] as Vector.<String>;
 					
 					if (!cell) {
-						cell = new Vector.<Texture>(_tilesNumY);
+						cell = new Vector.<String>(_tilesNumY);
 						_textures[x] = cell;
 					}
 					
-					var piece:BitmapData = new BitmapData(pTileWidth, pTileHeight, true, 0x00000000);
-						piece.copyPixels(pBitmapData, new Rectangle(x * pTileWidth, y * pTileHeight, pTileWidth, pTileHeight), new Point());
+					texuresText += '<SubTexture name="' + textureID + '" ' + 
+											'x="' + x * pTileWidth + 
+											'" y="' + y * pTileHeight + 
+											'" width="' + pTileWidth + 
+											'" height="' + pTileHeight + 
+											'" frameX="0" frameY="0" ' +
+											'frameWidth="' + pTileHeight + 
+											'" frameHeight="' + pTileHeight + 
+											'"/>';
 					
-					_createdBitmapData.push(piece);
-					
-					var texture:Texture = Texture.fromBitmapData(piece);
-					
-					cell[y] = texture;
-					
-					_textureByID[textureID] = texture;
+					cell[y] = textureID.toString();
 					
 					textureID++;
 				}
 			}
+			
+			_atlas = new TextureAtlas(Texture.fromBitmapData(pBitmapData),
+									  new XML('<TextureAtlas imagePath="dynamic.png">' + 
+										  	  texuresText + "</TextureAtlas>"));
 		};
 	};
 }
