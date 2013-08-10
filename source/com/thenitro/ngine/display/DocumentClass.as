@@ -10,7 +10,7 @@ package com.thenitro.ngine.display {
 	public class DocumentClass extends Sprite {
 		private var _starling:Starling;
 		
-		public function DocumentClass(pTargetClass:Class) {
+		public function DocumentClass(pTargetClass:Class, pDebug:Boolean) {
 			super();
 			
 			stage.align     = StageAlign.TOP_LEFT;
@@ -20,6 +20,10 @@ package com.thenitro.ngine.display {
 			
 			_starling = new Starling(pTargetClass, stage);
 			_starling.start();
+			
+			if (pDebug) {
+				_starling.showStats = true;
+			}
 		};
 		
 		private function stageResizeEventHandler(pEvent:Event):void {
