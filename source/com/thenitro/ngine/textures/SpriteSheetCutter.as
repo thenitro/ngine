@@ -35,7 +35,7 @@ package com.thenitro.ngine.textures {
 				return null;
 			}
 			
-			return _textures[pIndexX][pIndexY];
+			return _textures[pIndexY][pIndexX];
 		};
 		
 		public function getByID(pID:uint):Texture {
@@ -80,16 +80,15 @@ package com.thenitro.ngine.textures {
 			
 			var textureID:int = 0;
 			
-			for (var y:uint = 0; y < _tilesNumY; y++) {
-				
-				var cell:Vector.<Texture> = _textures[x] as Vector.<Texture>;
-				
-				if (!cell) {
-					cell = new Vector.<Texture>(_tilesNumY);
-					
-				}
-				
+			for (var y:uint = 0; y < _tilesNumY; y++) {				
 				for (var x:uint = 0; x < _tilesNumX; x++) {
+					var cell:Vector.<Texture> = _textures[x] as Vector.<Texture>;
+					
+					if (!cell) {
+						cell = new Vector.<Texture>(_tilesNumY);
+						_textures[x] = cell;
+					}
+					
 					var piece:BitmapData = new BitmapData(pTileWidth, pTileHeight, true, 0x00000000);
 						piece.copyPixels(pBitmapData, new Rectangle(x * pTileWidth, y * pTileHeight, pTileWidth, pTileHeight), new Point());
 					
@@ -103,9 +102,6 @@ package com.thenitro.ngine.textures {
 					
 					textureID++;
 				}
-				
-				_textures[x] = cell;
-				
 			}
 		};
 	};
