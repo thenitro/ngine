@@ -1,7 +1,6 @@
 package com.thenitro.ngine.grid {
 	import com.thenitro.ngine.grid.interfaces.IGridContainer;
 	import com.thenitro.ngine.grid.interfaces.IGridObject;
-	import com.thenitro.ngine.match3.analytics.AnalyticsGrid;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
@@ -60,11 +59,11 @@ package com.thenitro.ngine.grid {
 		};
 		
 		override public function clone():IGridContainer {
-			var grid:AnalyticsGrid = _pool.get(AnalyticsGrid) as AnalyticsGrid;
+			var grid:GridContainer = _pool.get(GridContainer) as GridContainer;
 			
 			if (!grid) {
-				grid = new AnalyticsGrid();
-				_pool.allocate(AnalyticsGrid, 1);
+				grid = new GridContainer();
+				_pool.allocate(GridContainer, 1);
 			}
 			
 			for (var i:uint = 0; i < sizeX; i++) {
