@@ -24,6 +24,13 @@ package com.thenitro.ngine.math.vectors {
 			return result;
 		};
 		
+		public static function distanceSquared(pVectorA:Vector2D, pVectorB:Vector2D):Number {
+			var dx:Number = pVectorB.x - pVectorA.x;
+			var dy:Number = pVectorB.y - pVectorA.y;
+			
+			return (dx * dx) + (dy * dy);
+		};
+		
 		public function get reflection():Class {
 			return Vector2D;
 		};

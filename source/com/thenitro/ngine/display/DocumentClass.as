@@ -18,8 +18,11 @@ package com.thenitro.ngine.display {
 			
 			stage.addEventListener(Event.RESIZE, stageResizeEventHandler);
 			
+			Starling.multitouchEnabled = true;
+			
 			_starling = new Starling(pTargetClass, stage);
 			_starling.start();
+			_starling.simulateMultitouch = true;
 			
 			if (pDebug) {
 				_starling.showStats = true;
