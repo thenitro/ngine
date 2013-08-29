@@ -28,7 +28,11 @@ package com.thenitro.ngine.math.vectors {
 			var dx:Number = pVectorB.x - pVectorA.x;
 			var dy:Number = pVectorB.y - pVectorA.y;
 			
-			return (dx * dx) + (dy * dy);
+			return dx * dx + dy * dy;  
+		};
+		
+		public static function distance(pVectorA:Vector2D, pVectorB:Vector2D):Number {
+			return Math.sqrt(distanceSquared(pVectorA, pVectorB));
 		};
 		
 		public function get reflection():Class {
