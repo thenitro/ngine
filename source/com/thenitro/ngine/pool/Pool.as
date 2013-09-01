@@ -41,6 +41,13 @@ package com.thenitro.ngine.pool {
 			var subPool:SubPool = _classes[pElement.reflection] as SubPool;
 			
 			if (subPool) {
+				if (subPool.inPool(pElement)) {
+					trace("Pool.put(pElement) duplicate: " + pElement);
+					//throw new Error("dub");
+					
+					return;
+				}
+				
  				if (subPool.size < subPool.maxSize) {
 					subPool.put(pElement);
 				} else {
@@ -51,8 +58,8 @@ package com.thenitro.ngine.pool {
 					pElement = null;
 				}
 			} else {
-				//trace('Pool.put: memory not allocated for class ' 
-				//	+ pElement.reflection + ' use Pool.allocate() first!');
+				trace('Pool.put: memory not allocated for class ' 
+					+ pElement.reflection + ' use Pool.allocate() first!');
 				
 				pElement.dispose();
 			}
@@ -61,8 +68,12 @@ package com.thenitro.ngine.pool {
 		public function get(pClass:Class):IReusable {
 			var subPool:SubPool = _classes[pClass] as SubPool;
 			
+			trace("Pool.get(pClass)", subPool);
+			
 			if (subPool) {
-				if (subPool.size) {
+				trace("Pool.get(pClass)", subPool.size);
+				
+				if (subPool.size) {					
 					return subPool.get();
 				}
 			}

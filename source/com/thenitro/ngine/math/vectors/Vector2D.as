@@ -79,14 +79,17 @@ package com.thenitro.ngine.math.vectors {
 			_y = Math.sin(pValue) * pLength;
 		};
 		
-		public function poolPrepare():void {
+		public function zero():void {
 			x = 0;
 			y = 0;
 		};
 		
+		public function poolPrepare():void {
+			zero();
+		};
+		
 		public function dispose():void {
-			x = 0;
-			y = 0;
+			zero();
 		};
 	}
 }

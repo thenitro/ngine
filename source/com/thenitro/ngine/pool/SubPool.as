@@ -14,13 +14,18 @@ package com.thenitro.ngine.pool {
 			return _elements.length;
 		};
 			
-		public function put(pElement:IReusable):void {
+		public function inPool(pElement:IReusable):Boolean {
+			return _elements.indexOf(pElement) != -1;
+		};
+		
+		public function put(pElement:IReusable):void {			
 			pElement.poolPrepare();
 			
 			_elements.push(pElement);
 		};
 		
 		public function get():IReusable {
+			trace("SubPool.get()");
 			return _elements.pop();
 		};
 		
