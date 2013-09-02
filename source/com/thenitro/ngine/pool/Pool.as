@@ -42,9 +42,7 @@ package com.thenitro.ngine.pool {
 			
 			if (subPool) {
 				if (subPool.inPool(pElement)) {
-					trace("Pool.put(pElement) duplicate: " + pElement);
-					//throw new Error("dub");
-					
+					trace("Pool.put(pElement) duplicate: " + pElement);					
 					return;
 				}
 				
@@ -68,11 +66,7 @@ package com.thenitro.ngine.pool {
 		public function get(pClass:Class):IReusable {
 			var subPool:SubPool = _classes[pClass] as SubPool;
 			
-			trace("Pool.get(pClass)", subPool);
-			
 			if (subPool) {
-				trace("Pool.get(pClass)", subPool.size);
-				
 				if (subPool.size) {					
 					return subPool.get();
 				}
