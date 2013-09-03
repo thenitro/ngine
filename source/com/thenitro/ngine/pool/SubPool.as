@@ -25,7 +25,6 @@ package com.thenitro.ngine.pool {
 		};
 		
 		public function get():IReusable {
-			trace("SubPool.get()");
 			return _elements.pop();
 		};
 		
