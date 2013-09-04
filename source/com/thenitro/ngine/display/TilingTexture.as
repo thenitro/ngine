@@ -1,7 +1,4 @@
-package com.thenitro.ngine.textures {
-	import com.thenitro.monsterinarow.utils.TextureManager;
-	import com.thenitro.ngine.math.Geometry;
-	
+package com.thenitro.ngine.display {
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;

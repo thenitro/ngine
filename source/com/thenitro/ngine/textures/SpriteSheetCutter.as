@@ -1,7 +1,5 @@
 package com.thenitro.ngine.textures {
 	import flash.display.BitmapData;
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
 	
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
