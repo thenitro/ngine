@@ -66,8 +66,13 @@ package com.thenitro.ngine.math.vectors {
 		public function normalize():void {
 			var l:Number = 1 / lenght();
 			
-			x *= l;
-			y *= l;
+			_x *= l;
+			_y *= l;
+		};
+		
+		public function inverse():void {
+			_x *= -1;
+			_y *= -1;
 		};
 		
 		public function toAngle():Number {
@@ -79,9 +84,22 @@ package com.thenitro.ngine.math.vectors {
 			_y = Math.sin(pValue) * pLength;
 		};
 		
+		public function angle():Number {
+			return Math.atan2(_y, _x);
+		};
+		
 		public function zero():void {
 			x = 0;
 			y = 0;
+		};
+		
+		public function clone():Vector2D {
+			var result:Vector2D = Vector2D.ZERO;
+			
+				result.x = _x;
+				result.y = _y;
+				
+			return result;
 		};
 		
 		public function poolPrepare():void {
