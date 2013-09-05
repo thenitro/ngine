@@ -75,6 +75,10 @@ package com.thenitro.ngine.display.gameentity {
 			_expired  = true;
 		};
 		
+		public function expire():void {
+			_expired = true;
+		};
+		
 		public function poolPrepare():void {
 			_position.zero();
 			_velocity.zero();

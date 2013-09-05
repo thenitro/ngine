@@ -20,5 +20,9 @@ package com.thenitro.ngine.math {
 			
 			return (pTargetMax - pTargetMin) / index; 
 		};
+		
+		public static function lerp(pA:Number, pB:Number, pT:Number):Number {
+			return pA + (pB - pA) * pT;
+		};
 	};
 }

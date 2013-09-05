@@ -14,5 +14,9 @@ package com.thenitro.ngine.math {
 		public static function probability(pPercents:Number):Boolean {
 			return range(0, 100) < pPercents;
 		};
+		
+		public static function variation(pValue:Number, pVariation:Number):Number {
+			return pValue + 2.0 * (Math.random() - 0.5) * pVariation;
+		};
 	}
 }
