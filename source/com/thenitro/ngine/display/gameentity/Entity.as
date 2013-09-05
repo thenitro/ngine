@@ -48,6 +48,10 @@ package com.thenitro.ngine.display.gameentity {
 			return _orientation;
 		};
 		
+		public function set orientation(pValue:Number):void {
+			_orientation = pValue;
+		};
+		
 		public function get radius():Number {
 			return _size;
 		};

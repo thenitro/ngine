@@ -1,12 +1,12 @@
 package com.thenitro.ngine.display.gameentity.manager {
 	import com.thenitro.ngine.display.gameentity.Entity;
-	import com.thenitro.neonshooter.entities.enemies.Enemy;
 	import com.thenitro.ngine.math.vectors.Vector2D;
+	import com.thenitro.ngine.pool.IReusable;
 	import com.thenitro.ngine.pool.Pool;
 	
 	import starling.events.EventDispatcher;
 	
-	public final class EntityManager extends EventDispatcher {
+	public final class EntityManager extends EventDispatcher implements IReusable {
 		public static const EXPIRED:String   = 'expired_event';
 		
 		private static var _pool:Pool = Pool.getInstance();
@@ -16,13 +16,23 @@ package com.thenitro.ngine.display.gameentity.manager {
 		
 		private var _updating:Boolean;
 		
+		private var _useCollision:Boolean;
+		
 		public function EntityManager() {
 			_entities      = [];
 			_addedEntities = [];
 		};
 		
+		public function get reflection():Class {
+			return EntityManager;
+		};
+		
 		public function get entities():Array {
 			return _entities;
+		};
+		
+		public function init(pUseCollision:Boolean):void {
+			_useCollision = pUseCollision;
 		};
 		
 		public function add(pEntity:Entity):void {
@@ -65,7 +75,7 @@ package com.thenitro.ngine.display.gameentity.manager {
 						continue;
 					}
 					
-					if (isColliding(entity, entityB)) {
+					if (_useCollision && isColliding(entity, entityB)) {
 						entity.handleCollision(entityB);
 						entityB.handleCollision(entity);
 					}
@@ -97,6 +107,14 @@ package com.thenitro.ngine.display.gameentity.manager {
 				_entities.splice(_entities.indexOf(entity), 1);				
 				
 			}
+		};
+		
+		public function poolPrepare():void {
+			
+		};
+		
+		public function dispose():void {
+			
 		};
 		
 		private function isColliding(pEntityA:Entity, pEntityB:Entity):Boolean {
