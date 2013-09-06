@@ -9,7 +9,7 @@ package com.thenitro.ngine.grid {
 	public class GridContainer extends Grid {
 		private var _container:Sprite;
 		
-		public function GridContainer(pCellWidth:uint, pCellHeight:uint) {
+		public function GridContainer(pCellWidth:uint = 0, pCellHeight:uint = 0) {
 			_container = new Sprite();
 			
 			super(pCellWidth, pCellHeight);
@@ -22,7 +22,7 @@ package com.thenitro.ngine.grid {
 		override public function addVisual(pObject:IGridObject, pUpdatePosition:Boolean = true):void {
 			var object:IVisualGridObject = pObject as IVisualGridObject;
 			
-			if (!object) {
+			if (!object || !(object is DisplayObject)) {
 				return;
 			}
 			
@@ -30,6 +30,8 @@ package com.thenitro.ngine.grid {
 				object.x = object.indexX * cellWidth;
 				object.y = object.indexY * cellHeight;
 			}
+			
+			trace("GridContainer.addVisual(pObject, pUpdatePosition)", object);
 			
 			_container.addChild(object as DisplayObject);
 			
