@@ -13,6 +13,7 @@ package com.thenitro.ngine.display.gameentity.manager {
 		
 		private var _entities:Array;
 		private var _addedEntities:Array;
+		private var _expired:Array;
 		
 		private var _updating:Boolean;
 		
@@ -21,6 +22,7 @@ package com.thenitro.ngine.display.gameentity.manager {
 		public function EntityManager() {
 			_entities      = [];
 			_addedEntities = [];
+			_expired       = [];
 		};
 		
 		public function get reflection():Class {
@@ -89,23 +91,19 @@ package com.thenitro.ngine.display.gameentity.manager {
 			}
 			
 			_addedEntities.length = 0;
-			
-			var expired:Array = [];
+			_expired.length = 0;
 			
 			for each (entity in _entities) {
 				if (entity.expired) {
-					dispatchEventWith(EXPIRED, false, entity);
-					
-					_entities.splice(_entities.indexOf(entity), 1);
-					_pool.put(entity);
+					_expired.push(entity);
 				}
 			}
 			
-			for each (entity in expired) {
+			for each (entity in _expired) {
 				dispatchEventWith(EXPIRED, false, entity);
 				
 				_entities.splice(_entities.indexOf(entity), 1);				
-				
+				_pool.put(entity);
 			}
 		};
 		
@@ -119,6 +117,10 @@ package com.thenitro.ngine.display.gameentity.manager {
 		
 		private function isColliding(pEntityA:Entity, pEntityB:Entity):Boolean {
 			if (pEntityA.expired || pEntityB.expired) {
+				return false;
+			}
+			
+			if (!pEntityA.radius || !pEntityB.radius) {
 				return false;
 			}
 			
