@@ -76,7 +76,8 @@ package com.thenitro.ngine.display.gameentity {
 		
 		public function handleCollision(pTarget:Entity):void {
 			_collider = pTarget;
-			_expired  = true;
+			
+			expire();
 		};
 		
 		public function expire():void {
