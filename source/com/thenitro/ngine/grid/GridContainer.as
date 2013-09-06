@@ -1,6 +1,7 @@
 package com.thenitro.ngine.grid {
 	import com.thenitro.ngine.grid.interfaces.IGridContainer;
 	import com.thenitro.ngine.grid.interfaces.IGridObject;
+	import com.thenitro.ngine.grid.interfaces.IVisualGridObject;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
@@ -19,16 +20,18 @@ package com.thenitro.ngine.grid {
 		};
 		
 		override public function addVisual(pObject:IGridObject, pUpdatePosition:Boolean = true):void {
-			if (!pObject) {
+			var object:IVisualGridObject = pObject as IVisualGridObject;
+			
+			if (!object) {
 				return;
 			}
 			
 			if (pUpdatePosition) {
-				pObject.x = pObject.indexX * cellWidth;
-				pObject.y = pObject.indexY * cellHeight;
+				object.x = object.indexX * cellWidth;
+				object.y = object.indexY * cellHeight;
 			}
 			
-			_container.addChild(pObject as DisplayObject);
+			_container.addChild(object as DisplayObject);
 			
 			updateIndexes();
 		};
