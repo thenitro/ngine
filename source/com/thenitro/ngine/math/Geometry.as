@@ -18,9 +18,6 @@ package com.thenitro.ngine.math {
 				
 				pTarget.scaleX = scale;
 				pTarget.scaleY = scale;
-				
-				pTarget.x = (pWidth  - pTarget.width)  / 2;
-				pTarget.y = (pHeight - pTarget.height) / 2;
 			}
 		};
 		
