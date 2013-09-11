@@ -31,8 +31,6 @@ package com.thenitro.ngine.grid {
 				object.y = object.indexY * cellHeight;
 			}
 			
-			trace("GridContainer.addVisual(pObject, pUpdatePosition)", object);
-			
 			_container.addChild(object as DisplayObject);
 			
 			updateIndexes();

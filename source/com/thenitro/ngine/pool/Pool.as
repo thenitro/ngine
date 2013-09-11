@@ -49,9 +49,9 @@ package com.thenitro.ngine.pool {
  				if (subPool.size < subPool.maxSize) {
 					subPool.put(pElement);
 				} else {
-					trace('Pool.put: not enough memory for ' 
+					/*trace('Pool.put: not enough memory for ' 
 						+ pElement.reflection + ' ' + pElement + ' max is ' + subPool.maxSize + ' currentSize ' + subPool.size);
-					
+					*/
 					pElement.dispose();
 					pElement = null;
 				}
