@@ -46,6 +46,10 @@ package com.thenitro.ngine.display.gameentity.manager {
 			}
 		};
 		
+		public function remove(pEntity:Entity):void {
+			removeFromStack(pEntity);
+		};
+		
 		public function getNearbyEntities(pPosition:Vector2D, 
 										  pRadius:Number):Array {
 			return _collider.getNearbyEntities(pPosition, pRadius);
@@ -57,6 +61,10 @@ package com.thenitro.ngine.display.gameentity.manager {
 			var entity:Entity;
 			
 			for each (entity in _entities) {
+				if (entity.expired) {
+					continue;
+				}
+				
 				entity.update();
 			}
 			
@@ -104,12 +112,18 @@ package com.thenitro.ngine.display.gameentity.manager {
 			_pool.put(pEntity);
 		};
 		
+		public function clean():void {
+			for each (var entity:Entity in _entities) {
+				entity.expire(false);
+			}
+		};
+		
 		public function poolPrepare():void {
-			
+			clean();
 		};
 		
 		public function dispose():void {
-			
+			clean();			
 		};
 	};
 }

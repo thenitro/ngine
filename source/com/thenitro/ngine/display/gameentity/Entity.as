@@ -80,7 +80,7 @@ package com.thenitro.ngine.display.gameentity {
 			expire();
 		};
 		
-		public function expire():void {
+		public function expire(pEffect:Boolean = true):void {
 			_expired = true;
 		};
 		
