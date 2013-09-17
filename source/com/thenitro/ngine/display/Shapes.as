@@ -37,5 +37,18 @@ package com.thenitro.ngine.display {
 				pTarget.lineTo(dx, dy);
 			}
 		};
+		
+		public static function drawSpiral(pTarget:Graphics, pRadius:int, pAngle:int):void {
+			var angle:int = 0;
+			
+			for(var i:Number = 0; i < pRadius; i++) {   
+				var x:Number = i * Math.cos(angle);
+				var y:Number = i * Math.sin(angle);
+				
+				pTarget.lineTo(x, y);
+				
+				angle += pAngle;
+			}
+		};
 	};
 }

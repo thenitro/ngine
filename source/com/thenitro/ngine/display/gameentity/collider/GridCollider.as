@@ -1,11 +1,13 @@
 package com.thenitro.ngine.display.gameentity.collider {
+	import com.thenitro.ngine.collections.LinkedList;
 	import com.thenitro.ngine.display.gameentity.Entity;
 	import com.thenitro.ngine.math.vectors.Vector2D;
-	
-	import starling.display.DisplayObject;
+	import com.thenitro.ngine.pool.Pool;
 	
 	public final class GridCollider implements ICollider {
-		private var _entities:Vector.<Entity>;
+		private static var _pool:Pool = Pool.getInstance();
+		
+		private var _entities:LinkedList;
 		private var _checks:Vector.<Entity>;
 		
 		private var _grid:Vector.<Vector.<Entity>>;
@@ -32,17 +34,23 @@ package com.thenitro.ngine.display.gameentity.collider {
 			
 			_cells = _cols * _rows;
 			
-			_entities = new Vector.<Entity>();
+			_entities = _pool.get(LinkedList) as LinkedList;
+			
+			if (!_entities) {
+				_entities = new LinkedList();
+				_pool.allocate(LinkedList, 1);
+			}
+			
 			_checks   = new Vector.<Entity>();
 			_grid     = new Vector.<Vector.<Entity>>();
 		};
 		
 		public function addEntity(pEntity:Entity):void {
-			_entities.push(pEntity);
+			_entities.add(pEntity);
 		};
 		
 		public function removeEntity(pEntity:Entity):void {
-			_entities.splice(_entities.indexOf(pEntity), 1);
+			_entities.remove(pEntity);
 		};
 		
 		public function update():void {
@@ -50,12 +58,14 @@ package com.thenitro.ngine.display.gameentity.collider {
 			_grid.length   = _cells;
 			_checks.length = 0;
 			
-			for (var num:int = 0; num < _entities.length; num++) {
-				var entity:Entity = _entities[num];
-				var index:int     = Math.floor(entity.position.y / _gridSize) * _cols + 
-									Math.floor(entity.position.x / _gridSize);
+			var entity:Entity = _entities.first as Entity;
 			
+			while (entity) {
+				var index:int = Math.floor(entity.position.y / _gridSize) * _cols + 
+								Math.floor(entity.position.x / _gridSize);
+				
 				if (index >= _grid.length || index < 0) {
+					entity = _entities.next(entity) as Entity;
 					continue;
 				}
 				
@@ -64,6 +74,8 @@ package com.thenitro.ngine.display.gameentity.collider {
 				}
 				
 				_grid[index].push(entity);
+				
+				entity = _entities.next(entity) as Entity;
 			}
 			
 			for (var i:int = 0; i < _cols; i++) {

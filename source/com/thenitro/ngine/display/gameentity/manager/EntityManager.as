@@ -1,4 +1,5 @@
 package com.thenitro.ngine.display.gameentity.manager {
+	import com.thenitro.ngine.collections.LinkedList;
 	import com.thenitro.ngine.display.gameentity.Entity;
 	import com.thenitro.ngine.display.gameentity.collider.ICollider;
 	import com.thenitro.ngine.math.vectors.Vector2D;
@@ -12,7 +13,8 @@ package com.thenitro.ngine.display.gameentity.manager {
 		
 		private static var _pool:Pool = Pool.getInstance();
 		
-		private var _entities:Array;
+		private var _entities:LinkedList;
+		
 		private var _addedEntities:Array;
 		private var _expired:Array;
 		
@@ -21,7 +23,13 @@ package com.thenitro.ngine.display.gameentity.manager {
 		private var _collider:ICollider;
 		
 		public function EntityManager() {
-			_entities      = [];
+			_entities = _pool.get(LinkedList) as LinkedList;
+			
+			if (!_entities) {
+				_entities = new LinkedList();
+				_pool.allocate(LinkedList, 1);
+			}
+			
 			_addedEntities = [];
 			_expired       = [];
 		};
@@ -30,7 +38,7 @@ package com.thenitro.ngine.display.gameentity.manager {
 			return EntityManager;
 		};
 		
-		public function get entities():Array {
+		public function get entities():LinkedList {
 			return _entities;
 		};
 		
@@ -58,14 +66,16 @@ package com.thenitro.ngine.display.gameentity.manager {
 		public function update():void {
 			_updating = true;
 			
-			var entity:Entity;
+			var entity:Entity = _entities.first as Entity;
 			
-			for each (entity in _entities) {
+			while (entity) {
 				if (entity.expired) {
+					entity = _entities.next(entity) as Entity;
 					continue;
 				}
-				
+
 				entity.update();
+				entity = _entities.next(entity) as Entity;
 			}
 			
 			if (_collider) {
@@ -81,10 +91,14 @@ package com.thenitro.ngine.display.gameentity.manager {
 			_addedEntities.length = 0;
 			_expired.length = 0;
 			
-			for each (entity in _entities) {
+			entity = _entities.first as Entity;
+			
+			while (entity) {
 				if (entity.expired) {
 					_expired.push(entity);
 				}
+				
+				entity = _entities.next(entity) as Entity;
 			}
 			
 			for each (entity in _expired) {
@@ -93,7 +107,7 @@ package com.thenitro.ngine.display.gameentity.manager {
 		};
 		
 		private function addToStack(pEntity:Entity):void {
-			_entities.push(pEntity);
+			_entities.add(pEntity);
 			
 			if (_collider) {
 				_collider.addEntity(pEntity);
@@ -103,7 +117,7 @@ package com.thenitro.ngine.display.gameentity.manager {
 		private function removeFromStack(pEntity:Entity):void {
 			dispatchEventWith(EXPIRED, false, pEntity);
 			
-			_entities.splice(_entities.indexOf(pEntity), 1);
+			_entities.remove(pEntity);
 			
 			if (_collider) {
 				_collider.removeEntity(pEntity);
