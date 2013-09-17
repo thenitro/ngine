@@ -69,11 +69,6 @@ package com.thenitro.ngine.display.gameentity.manager {
 			var entity:Entity = _entities.first as Entity;
 			
 			while (entity) {
-				if (entity.expired) {
-					entity = _entities.next(entity) as Entity;
-					continue;
-				}
-
 				entity.update();
 				entity = _entities.next(entity) as Entity;
 			}
@@ -127,8 +122,11 @@ package com.thenitro.ngine.display.gameentity.manager {
 		};
 		
 		public function clean():void {
-			for each (var entity:Entity in _entities) {
+			var entity:Entity = _entities.first as Entity;
+			
+			while (entity) {
 				entity.expire(false);
+				entity = _entities.next(entity) as Entity;
 			}
 		};
 		
