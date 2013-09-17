@@ -1,5 +1,6 @@
 package com.thenitro.ngine.display.gameentity.manager {
 	import com.thenitro.ngine.display.gameentity.Entity;
+	import com.thenitro.ngine.display.gameentity.collider.ICollider;
 	import com.thenitro.ngine.math.vectors.Vector2D;
 	import com.thenitro.ngine.pool.IReusable;
 	import com.thenitro.ngine.pool.Pool;
@@ -17,7 +18,7 @@ package com.thenitro.ngine.display.gameentity.manager {
 		
 		private var _updating:Boolean;
 		
-		private var _useCollision:Boolean;
+		private var _collider:ICollider;
 		
 		public function EntityManager() {
 			_entities      = [];
@@ -33,33 +34,25 @@ package com.thenitro.ngine.display.gameentity.manager {
 			return _entities;
 		};
 		
-		public function init(pUseCollision:Boolean):void {
-			_useCollision = pUseCollision;
+		public function setCollider(pCollider:ICollider):void {
+			_collider = pCollider;
 		};
 		
-		public function add(pEntity:Entity):void {
-			if (_updating) {
+		public function add(pEntity:Entity):void {			
+			if (_updating) {				
 				_addedEntities.push(pEntity);
 			} else {
-				_entities.push(pEntity);
+				addToStack(pEntity);
 			}
+		};
+		
+		public function remove(pEntity:Entity):void {
+			removeFromStack(pEntity);
 		};
 		
 		public function getNearbyEntities(pPosition:Vector2D, 
 										  pRadius:Number):Array {
-			var result:Array = [];
-			
-			for each (var entity:Entity in _entities) {
-				if (entity.expired) {
-					continue;
-				}
-				
-				if (Vector2D.distanceSquared(entity.position, pPosition) < pRadius * pRadius) {
-					result.push(entity);
-				}
-			}
-			
-			return result;
+			return _collider.getNearbyEntities(pPosition, pRadius);
 		};
 		
 		public function update():void {
@@ -68,26 +61,21 @@ package com.thenitro.ngine.display.gameentity.manager {
 			var entity:Entity;
 			
 			for each (entity in _entities) {
+				if (entity.expired) {
+					continue;
+				}
+				
 				entity.update();
 			}
 			
-			for each (entity in _entities) {
-				for each (var entityB:Entity in _entities) {
-					if (entity == entityB) {
-						continue;
-					}
-					
-					if (_useCollision && isColliding(entity, entityB)) {
-						entity.handleCollision(entityB);
-						entityB.handleCollision(entity);
-					}
-				}
+			if (_collider) {
+				_collider.update();
 			}
 			
 			_updating = false;
 			
 			for each (entity in _addedEntities) {
-				_entities.push(entity);
+				addToStack(entity);
 			}
 			
 			_addedEntities.length = 0;
@@ -100,33 +88,42 @@ package com.thenitro.ngine.display.gameentity.manager {
 			}
 			
 			for each (entity in _expired) {
-				dispatchEventWith(EXPIRED, false, entity);
-				
-				_entities.splice(_entities.indexOf(entity), 1);				
-				_pool.put(entity);
+				removeFromStack(entity);
+			}
+		};
+		
+		private function addToStack(pEntity:Entity):void {
+			_entities.push(pEntity);
+			
+			if (_collider) {
+				_collider.addEntity(pEntity);
+			}
+		};
+		
+		private function removeFromStack(pEntity:Entity):void {
+			dispatchEventWith(EXPIRED, false, pEntity);
+			
+			_entities.splice(_entities.indexOf(pEntity), 1);
+			
+			if (_collider) {
+				_collider.removeEntity(pEntity);
+			}
+			
+			_pool.put(pEntity);
+		};
+		
+		public function clean():void {
+			for each (var entity:Entity in _entities) {
+				entity.expire(false);
 			}
 		};
 		
 		public function poolPrepare():void {
-			
+			clean();
 		};
 		
 		public function dispose():void {
-			
-		};
-		
-		private function isColliding(pEntityA:Entity, pEntityB:Entity):Boolean {
-			if (pEntityA.expired || pEntityB.expired) {
-				return false;
-			}
-			
-			if (!pEntityA.radius || !pEntityB.radius) {
-				return false;
-			}
-			
-			var radius:Number = pEntityA.radius + pEntityB.radius;
-			
-			return Vector2D.distanceSquared(pEntityA.position, pEntityB.position) < radius * radius;
+			clean();			
 		};
 	};
 }

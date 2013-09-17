@@ -12,7 +12,6 @@ package com.thenitro.ngine.statemachine {
 			super();
 		};
 		
-		
 		public function get id():String {
 			throw new IllegalOperationError('Must be overriden!');
 			return null;
