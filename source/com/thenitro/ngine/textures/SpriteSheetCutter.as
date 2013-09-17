@@ -91,8 +91,6 @@ package com.thenitro.ngine.textures {
 					cell[y] = textureID.toString();
 					
 					textureID++;
-					
-					trace("SpriteSheetCutter.cut(pBitmapData, pTileWidth, pTileHeight)", x, y, textureID);
 				}
 			}
 			
