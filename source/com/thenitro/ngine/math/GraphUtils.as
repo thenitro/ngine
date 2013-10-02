@@ -38,12 +38,6 @@ package com.thenitro.ngine.math {
 					continue;
 				}
 				
-				/*neighbors.push( 
-					pGrid.take(current.indexX - 1, current.indexY    ),
-					pGrid.take(current.indexX    , current.indexY - 1),
-					pGrid.take(current.indexX + 1, current.indexY    ),
-					pGrid.take(current.indexX    , current.indexY + 1));*/
-				
 				pAddHeighbors(pGrid, current.indexX, current.indexY, neighbors);
 				
 				for each (var neighbor:IGridObject in neighbors) {
