@@ -22,7 +22,7 @@ package com.thenitro.ngine.math {
 		};
 		
 		public static function determineMinScale(pSourceWidth:Number, pSourceHeight:Number, 
-											 pTargetWidth:Number, pTargetHeight:Number):Number {
+											     pTargetWidth:Number, pTargetHeight:Number):Number {
 			var scaleX:Number = pTargetWidth  / pSourceWidth;
 			var scaleY:Number = pTargetHeight / pSourceHeight;
 			
@@ -30,7 +30,7 @@ package com.thenitro.ngine.math {
 		};
 		
 		public static function determineMaxScale(pSourceWidth:Number, pSourceHeight:Number, 
-											 pTargetWidth:Number, pTargetHeight:Number):Number {
+											     pTargetWidth:Number, pTargetHeight:Number):Number {
 			var scaleX:Number = pTargetWidth  / pSourceWidth;
 			var scaleY:Number = pTargetHeight / pSourceHeight;
 			

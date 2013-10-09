@@ -1,6 +1,9 @@
 package com.thenitro.ngine.math {
+	import com.thenitro.ngine.grid.Grid;
 	import com.thenitro.ngine.grid.interfaces.IGridContainer;
 	import com.thenitro.ngine.grid.interfaces.IGridObject;
+	
+	import feathers.controls.Header;
 	
 	import flash.errors.IllegalOperationError;
 	import flash.utils.Dictionary;
@@ -12,7 +15,8 @@ package com.thenitro.ngine.math {
 			throw new IllegalOperationError('GraphUtils is static!');
 		};
 		
-		public static function bfs(pIndexX:uint, pIndexY:uint, pGrid:IGridContainer):Array {
+		public static function bfs(pIndexX:uint, pIndexY:uint,
+								   pGrid:IGridContainer, pAddHeighbors:Function):Array {
 			var current:IGridObject;
 			var searched:IGridObject = pGrid.take(pIndexX, pIndexY);
 			
@@ -34,11 +38,7 @@ package com.thenitro.ngine.math {
 					continue;
 				}
 				
-				neighbors.push( 
-					pGrid.take(current.indexX - 1, current.indexY    ),
-					pGrid.take(current.indexX    , current.indexY - 1),
-					pGrid.take(current.indexX + 1, current.indexY    ),
-					pGrid.take(current.indexX    , current.indexY + 1));
+				pAddHeighbors(pGrid, current.indexX, current.indexY, neighbors);
 				
 				for each (var neighbor:IGridObject in neighbors) {
 					if (!neighbor) {
@@ -63,6 +63,25 @@ package com.thenitro.ngine.math {
 			}
 			
 			return selected;
+		};
+		
+		public static function addNeighborsHorizontal(pGrid:Grid, 
+													  pIndexX:int, pIndexY:int, 
+													  pContainer:Array):void {
+			pContainer.push(pGrid.take(pIndexX - 1, pIndexY), pGrid.take(pIndexX + 1, pIndexY));
+		};
+		
+		public static function addNeighborsVertical(pGrid:Grid, 
+													pIndexX:int, pIndexY:int, 
+													pContainer:Array):void {
+			pContainer.push(pGrid.take(pIndexX, pIndexY - 1), pGrid.take(pIndexX, pIndexY + 1));
+		};
+		
+		public static function addNeighborsVerticalHorizintal(pGrid:Grid, 
+													pIndexX:int, pIndexY:int, 
+													pContainer:Array):void {
+			addNeighborsVertical(pGrid, pIndexX, pIndexY, pContainer);
+			addNeighborsHorizontal(pGrid, pIndexX, pIndexY, pContainer);
 		};
 	};
 }
