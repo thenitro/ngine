@@ -52,7 +52,7 @@ package com.thenitro.ngine.display.gameentity {
 			_orientation = pValue;
 		};
 		
-		public function get radius():Number {
+		public function get size():Number {
 			return _size;
 		};
 		

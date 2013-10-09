@@ -22,12 +22,16 @@ package com.thenitro.ngine.display.gameentity.collider {
 		private var _cols:int;
 		private var _rows:int;
 		
+		private var _colliderMethod:Function;
+		
 		public function GridCollider(pWidth:Number, pHeight:Number, 
-									 pGridSize:Number) {
+									 pGridSize:Number, pColliderMethod:Function) {
 			_width  = pWidth;
 			_height = pHeight;
 			
 			_gridSize = pGridSize;
+			
+			_colliderMethod = pColliderMethod;
 			
 			_cols = Math.ceil(_width  / _gridSize);
 			_rows = Math.ceil(_height / _gridSize);
@@ -139,13 +143,11 @@ package com.thenitro.ngine.display.gameentity.collider {
 				return false;
 			}
 			
-			if (!pEntityA.radius || !pEntityB.radius) {
+			if (!pEntityA.size || !pEntityB.size) {
 				return false;
 			}
 			
-			var radius:Number = pEntityA.radius + pEntityB.radius;
-			
-			return Vector2D.distanceSquared(pEntityA.position, pEntityB.position) < radius * radius;
+			return _colliderMethod(pEntityA, pEntityB);
 		};
 		
 		private function checkOneCell(pX:int, pY:int):void {			

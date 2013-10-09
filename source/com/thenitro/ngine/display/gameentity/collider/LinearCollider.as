@@ -5,10 +5,14 @@ package com.thenitro.ngine.display.gameentity.collider {
 	import com.thenitro.ngine.pool.Pool;
 	
 	public final class LinearCollider implements ICollider {
-		private static var _pool:Pool = Pool.getInstance(); 
-		private var _entities:LinkedList;
+		private static var _pool:Pool = Pool.getInstance();
 		
-		public function LinearCollider() {
+		private var _entities:LinkedList;
+		private var _colliderMethod:Function;
+		
+		public function LinearCollider(pColliderMethod:Function) {
+			_colliderMethod = pColliderMethod;
+			
 			_entities = _pool.get(LinkedList) as LinkedList;
 			
 			if (!_entities) {
@@ -49,9 +53,11 @@ package com.thenitro.ngine.display.gameentity.collider {
 				var entityB:Entity = _entities.first as Entity;
 				
 				while (entityB) {
-					if (isColliding(entity, entityB)) {
-						entity.handleCollision(entityB);
-						entityB.handleCollision(entity);
+					if (isColliding(entityA, entityB)) {
+						trace("LinearCollider.update()", entityA, entityB);
+						
+						entityA.handleCollision(entityB);
+						entityB.handleCollision(entityA);
 					}
 					
 					entityB = _entities.next(entityB) as Entity;
@@ -70,13 +76,11 @@ package com.thenitro.ngine.display.gameentity.collider {
 				return false;
 			}
 			
-			if (!pEntityA.radius || !pEntityB.radius) {
+			if (!pEntityA.size || !pEntityB.size) {
 				return false;
 			}
 			
-			var radius:Number = pEntityA.radius + pEntityB.radius;
-			
-			return Vector2D.distanceSquared(pEntityA.position, pEntityB.position) < radius * radius;
+			return _colliderMethod(pEntityA, pEntityB);
 		};
 	}
 }

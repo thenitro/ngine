@@ -24,5 +24,10 @@ package com.thenitro.ngine.math {
 		public static function lerp(pA:Number, pB:Number, pT:Number):Number {
 			return pA + (pB - pA) * pT;
 		};
+		
+		public static function valueInRange(pValue:Number, 
+											 pMin:Number, pMax:Number):Boolean {
+			return pValue >= pMin && pValue <= pMax;
+		};
 	};
 }
