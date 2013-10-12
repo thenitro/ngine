@@ -49,7 +49,7 @@ package com.thenitro.ngine.statemachine {
 				return;
 			}
 			
-			dispatchEventWith(STATE_CHANGE);
+			dispatchEventWith(STATE_CHANGE, false, pStateID);
 			
 			_currState = _states[pStateID];
 			_currState.addEventListener(Event.ADDED_TO_STAGE,

@@ -63,6 +63,70 @@ package com.thenitro.ngine.math.vectors {
 			return (_x * _x) + (_y *_y);
 		};
 		
+		public function substract(pTarget:Vector2D, pClone:Boolean = false):Vector2D {
+			var result:Vector2D = pClone ? clone() : this;
+				result.x -= pTarget.x;
+				result.y -= pTarget.y;
+			
+			return result;
+		};
+		
+		public function substractScalar(pTarget:Number, pClone:Boolean = false):Vector2D {
+			var result:Vector2D = pClone ? clone() : this;
+				result.x -= pTarget;
+				result.y -= pTarget;
+			
+			return result;
+		};
+		
+		public function add(pTarget:Vector2D, pClone:Boolean = false):Vector2D {
+			var result:Vector2D = pClone ? clone() : this;
+				result.x += pTarget.x;
+				result.y += pTarget.y;
+			
+			return result;
+		};
+		
+		public function addScalar(pTarget:Number, pClone:Boolean = false):Vector2D {
+			var result:Vector2D = pClone ? clone() : this;
+				result.x += pTarget;
+				result.y += pTarget;
+			
+			return result;
+		};
+		
+		public function multiply(pTarget:Vector2D, pClone:Boolean = false):Vector2D {
+			var result:Vector2D = pClone ? clone() : this;
+				result.x *= pTarget.x;
+				result.y *= pTarget.y;
+			
+			return result;
+		};
+		
+		public function multiplyScalar(pTarget:Number, pClone:Boolean = false):Vector2D {
+			var result:Vector2D = pClone ? clone() : this;
+				result.x *= pTarget;
+				result.y *= pTarget;
+			
+			return result;
+		};
+		
+		public function divide(pTarget:Vector2D, pClone:Boolean = false):Vector2D {
+			var result:Vector2D = pClone ? clone() : this;
+				result.x /= pTarget.x;
+				result.y /= pTarget.y;
+			
+			return result;
+		};
+		
+		public function divideScalar(pTarget:Number, pClone:Boolean = false):Vector2D {
+			var result:Vector2D = pClone ? clone() : this;
+				result.x /= pTarget;
+				result.y /= pTarget;
+			
+			return result;
+		};
+		
 		public function normalize():void {
 			var l:Number = 1 / lenght();
 			
@@ -86,6 +150,14 @@ package com.thenitro.ngine.math.vectors {
 		
 		public function angle():Number {
 			return Math.atan2(_y, _x);
+		};
+		
+		public function dotProduct(pTarget:Vector2D):Number {
+			return x * pTarget.x + y * pTarget.y;
+		};
+		
+		public function crossProduct(pTarget:Vector2D):Number {
+			return x * pTarget.y - y * pTarget.x;
 		};
 		
 		public function zero():void {
