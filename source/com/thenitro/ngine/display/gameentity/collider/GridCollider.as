@@ -4,7 +4,7 @@ package com.thenitro.ngine.display.gameentity.collider {
 	import com.thenitro.ngine.math.vectors.Vector2D;
 	import com.thenitro.ngine.pool.Pool;
 	
-	public final class GridCollider implements ICollider {
+	public class GridCollider implements ICollider {
 		private static var _pool:Pool = Pool.getInstance();
 		
 		private var _entities:LinkedList;

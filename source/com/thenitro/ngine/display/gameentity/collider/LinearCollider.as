@@ -4,7 +4,7 @@ package com.thenitro.ngine.display.gameentity.collider {
 	import com.thenitro.ngine.math.vectors.Vector2D;
 	import com.thenitro.ngine.pool.Pool;
 	
-	public final class LinearCollider implements ICollider {
+	public class LinearCollider implements ICollider {
 		private static var _pool:Pool = Pool.getInstance();
 		
 		private var _entities:LinkedList;
@@ -12,13 +12,7 @@ package com.thenitro.ngine.display.gameentity.collider {
 		
 		public function LinearCollider(pColliderMethod:Function) {
 			_colliderMethod = pColliderMethod;
-			
-			_entities = _pool.get(LinkedList) as LinkedList;
-			
-			if (!_entities) {
-				_entities = new LinkedList();
-				_pool.allocate(LinkedList, 1);
-			}
+			_entities       = LinkedList.EMPTY;
 		};
 		
 		public function addEntity(pEntity:Entity):void {
@@ -54,8 +48,6 @@ package com.thenitro.ngine.display.gameentity.collider {
 				
 				while (entityB) {
 					if (isColliding(entityA, entityB)) {
-						trace("LinearCollider.update()", entityA, entityB);
-						
 						entityA.handleCollision(entityB);
 						entityB.handleCollision(entityA);
 					}

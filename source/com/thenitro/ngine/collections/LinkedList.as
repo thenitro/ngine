@@ -1,9 +1,13 @@
 package com.thenitro.ngine.collections {
+	import com.thenitro.ngine.display.gameentity.Entity;
 	import com.thenitro.ngine.pool.IReusable;
+	import com.thenitro.ngine.pool.Pool;
 	
 	import flash.utils.Dictionary;
 	
 	public final class LinkedList implements IReusable {
+		private static var _pool:Pool = Pool.getInstance();
+		
 		private var _header:Object;
 		
 		private var _prev:Dictionary;
@@ -20,6 +24,17 @@ package com.thenitro.ngine.collections {
 			_next = new Dictionary();
 			
 			_next[_header] = _prev[_header] = _header;
+		};
+		
+		public static function get EMPTY():LinkedList {
+			var result:LinkedList = _pool.get(LinkedList) as LinkedList;
+			
+			if (!result) {
+				result = new LinkedList();
+				_pool.allocate(LinkedList, 1);
+			}
+			
+			return result;
 		};
 		
 		public function get reflection():Class {
