@@ -18,5 +18,9 @@ package com.thenitro.ngine.math {
 		public static function variation(pValue:Number, pVariation:Number):Number {
 			return pValue + 2.0 * (Math.random() - 0.5) * pVariation;
 		};
+		
+		public static function get color():uint {
+			return Math.random() * 0xFFFFFF;
+		};
 	}
 }

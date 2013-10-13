@@ -5,8 +5,6 @@ package com.thenitro.ngine.display.gameentity.collider {
 	import com.thenitro.ngine.pool.Pool;
 	
 	public class LinearCollider implements ICollider {
-		private static var _pool:Pool = Pool.getInstance();
-		
 		private var _entities:LinkedList;
 		private var _colliderMethod:Function;
 		
