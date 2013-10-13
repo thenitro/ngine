@@ -1,4 +1,5 @@
 package com.thenitro.ngine.math.vectors {
+	import com.thenitro.ngine.math.Random;
 	import com.thenitro.ngine.pool.IReusable;
 	import com.thenitro.ngine.pool.Pool;
 	
@@ -158,6 +159,11 @@ package com.thenitro.ngine.math.vectors {
 		
 		public function crossProduct(pTarget:Vector2D):Number {
 			return x * pTarget.y - y * pTarget.x;
+		};
+		
+		public function randomize(pMin:Number, pMax:Number):void {
+			x = Random.range(pMin, pMax);
+			y = Random.range(pMin, pMax);
 		};
 		
 		public function zero():void {
