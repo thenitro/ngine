@@ -13,6 +13,18 @@ package com.thenitro.ngine.math {
 			return Math.round(decimal * pValue) / decimal;
 		};
 		
+		/**
+		 * The clamped value.
+		 * if value > max, max will be returned
+		 * if value < min, min will be returned
+		 * if min <= value >= max, value will be returned
+		 *  
+		 * @param pValue The value to clamp.
+		 * @param pMin   The minimum value. If value is less than min, min will be returned.
+		 * @param pMax   The maximum value. If value is greater than max, max will ber returned.
+		 * @return       The clamped value.
+		 * 
+		 */		
 		public static function clamp(pValue:Number, pMin:Number, pMax:Number):Number {
 			if (pValue <= pMin) {
 				pValue = pMin;
