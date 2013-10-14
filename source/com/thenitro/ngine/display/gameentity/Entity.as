@@ -44,12 +44,16 @@ package com.thenitro.ngine.display.gameentity {
 			return _velocity;
 		};
 		
+		public function set orientation(pValue:Number):void {
+			_orientation = pValue;
+		};
+		
 		public function get orientation():Number {
 			return _orientation;
 		};
 		
-		public function set orientation(pValue:Number):void {
-			_orientation = pValue;
+		public function set size(pValue:Number):void {
+			_size = pValue;
 		};
 		
 		public function get size():Number {
