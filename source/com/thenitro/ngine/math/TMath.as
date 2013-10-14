@@ -13,6 +13,16 @@ package com.thenitro.ngine.math {
 			return Math.round(decimal * pValue) / decimal;
 		};
 		
+		public static function clamp(pValue:Number, pMin:Number, pMax:Number):Number {
+			if (pValue <= pMin) {
+				pValue = pMin;
+			} else if (pValue >= pMax) {
+				pValue = pMax;
+			}
+			
+			return pValue;
+		};
+		
 		public static function map(pNumber:Number, 
 								   pMinValue:Number, pMaxValue:Number,
 								   pTargetMin:Number, pTargetMax:Number):Number {
