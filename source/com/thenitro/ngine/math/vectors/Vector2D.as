@@ -36,6 +36,10 @@ package com.thenitro.ngine.math.vectors {
 			return Math.sqrt(distanceSquared(pVectorA, pVectorB));
 		};
 		
+		public static function equals(pVectorA:Vector2D, pVectorB:Vector2D):Boolean {
+			return pVectorA.x == pVectorB.x && pVectorA.y == pVectorB.y;
+		};
+		
 		public function get reflection():Class {
 			return Vector2D;
 		};
@@ -56,7 +60,7 @@ package com.thenitro.ngine.math.vectors {
 			_y = pValue;
 		};
 		
-		public function lenght():Number {
+		public function length():Number {
 			return Math.sqrt(lengthSquared());
 		};
 		
@@ -129,7 +133,7 @@ package com.thenitro.ngine.math.vectors {
 		};
 		
 		public function normalize():void {
-			var l:Number = 1 / lenght();
+			var l:Number = 1 / length();
 			
 			_x *= l;
 			_y *= l;
@@ -164,6 +168,10 @@ package com.thenitro.ngine.math.vectors {
 		public function randomize(pMin:Number, pMax:Number):void {
 			x = Random.range(pMin, pMax);
 			y = Random.range(pMin, pMax);
+		};
+		
+		public function equals(pVectorB:Vector2D):Boolean {
+			return x == pVectorB.x && y == pVectorB.y;
 		};
 		
 		public function zero():void {
