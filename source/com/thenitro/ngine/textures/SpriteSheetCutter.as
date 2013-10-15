@@ -34,6 +34,9 @@ package com.thenitro.ngine.textures {
 				return null;
 			}
 			
+			trace("SpriteSheetCutter.getByIndex(pIndexX, pIndexY)", pIndexX, pIndexY);
+			trace("SpriteSheetCutter.getByIndex(pIndexX, pIndexY)", _textures.length, _textures[pIndexY].length);
+			
 			return _atlas.getTexture(_textures[pIndexY][pIndexX]);
 		};
 		
@@ -59,8 +62,10 @@ package com.thenitro.ngine.textures {
 		
 		private function cut(pBitmapData:BitmapData, 
 							 pTileWidth:uint, pTileHeight:uint):void {
-			_tilesNumX = Math.ceil(pBitmapData.width / pTileHeight);
-			_tilesNumY = Math.ceil(pBitmapData.height / pTileHeight);
+			_tilesNumX = Math.round(pBitmapData.width / pTileHeight);
+			_tilesNumY = Math.round(pBitmapData.height / pTileHeight);
+			
+			trace("SpriteSheetCutter.cut(pBitmapData, pTileWidth, pTileHeight)", _tilesNumX, _tilesNumY);
 			
 			_maxID = _tilesNumX * _tilesNumY;
 			
