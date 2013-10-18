@@ -68,13 +68,13 @@ package com.thenitro.ngine.display.gameentity.manager {
 			
 			var entity:Entity = _entities.first as Entity;
 			
+			if (_collider) {
+				_collider.update();
+			}
+			
 			while (entity) {
 				entity.update();
 				entity = _entities.next(entity) as Entity;
-			}
-			
-			if (_collider) {
-				_collider.update();
 			}
 			
 			_updating = false;

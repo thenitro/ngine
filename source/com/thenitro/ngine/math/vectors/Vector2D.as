@@ -133,7 +133,11 @@ package com.thenitro.ngine.math.vectors {
 		};
 		
 		public function normalize():void {
-			var l:Number = 1 / length();
+			var l:Number = length();
+			
+			if (l > 0) {
+				l = 1 / l;
+			}
 			
 			_x *= l;
 			_y *= l;
