@@ -57,7 +57,7 @@ package com.thenitro.ngine.display.gameentity.collider {
 			_entities.remove(pEntity);
 		};
 		
-		public function update():void {
+		public function update(pElapsed:Number):void {
 			_grid.length   = 0;
 			_grid.length   = _cells;
 			_checks.length = 0;

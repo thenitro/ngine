@@ -6,7 +6,7 @@ package com.thenitro.ngine.display.gameentity.collider {
 		function addEntity(pEntity:Entity):void;
 		function removeEntity(pEntity:Entity):void;
 		
-		function update():void;
+		function update(pElapsed:Number):void;
 		
 		function getNearbyEntities(pPosition:Vector2D, pRadius:Number):Array;
 		function isColliding(pEntityA:Entity, pEntityB:Entity):Boolean;

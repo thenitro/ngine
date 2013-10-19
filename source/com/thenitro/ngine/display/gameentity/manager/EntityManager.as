@@ -6,6 +6,8 @@ package com.thenitro.ngine.display.gameentity.manager {
 	import com.thenitro.ngine.pool.IReusable;
 	import com.thenitro.ngine.pool.Pool;
 	
+	import flash.utils.getTimer;
+	
 	import starling.events.EventDispatcher;
 	
 	public final class EntityManager extends EventDispatcher implements IReusable {
@@ -21,6 +23,8 @@ package com.thenitro.ngine.display.gameentity.manager {
 		private var _updating:Boolean;
 		
 		private var _collider:ICollider;
+		
+		private var _oldTime:int;
 		
 		public function EntityManager() {
 			_entities = _pool.get(LinkedList) as LinkedList;
@@ -64,16 +68,20 @@ package com.thenitro.ngine.display.gameentity.manager {
 		};
 		
 		public function update():void {
+			var time:int       = getTimer();
+			var elapsed:Number = (time - _oldTime) / 1000;
+			
+			_oldTime  = time;
 			_updating = true;
 			
 			var entity:Entity = _entities.first as Entity;
 			
 			if (_collider) {
-				_collider.update();
+				_collider.update(elapsed);
 			}
 			
 			while (entity) {
-				entity.update();
+				entity.update(elapsed);
 				entity = _entities.next(entity) as Entity;
 			}
 			

@@ -68,9 +68,9 @@ package com.thenitro.ngine.display.gameentity {
 			return _collider;
 		};
 		
-		public function update():void {
-			_position.x += _velocity.x;
-			_position.y += _velocity.y;
+		public function update(pElapsed:Number):void {
+			_position.x += _velocity.x * pElapsed;
+			_position.y += _velocity.y * pElapsed;
 			
 			_canvas.x = _position.x;
 			_canvas.y = _position.y;
