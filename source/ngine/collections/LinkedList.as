@@ -1,9 +1,8 @@
 package ngine.collections {
-	import com.thenitro.ngine.display.gameentity.Entity;
+	import flash.utils.Dictionary;
+	
 	import ngine.pool.IReusable;
 	import ngine.pool.Pool;
-	
-	import flash.utils.Dictionary;
 	
 	public final class LinkedList implements IReusable {
 		private static var _pool:Pool = Pool.getInstance();

@@ -1,5 +1,5 @@
 package ngine.pathfinding {
-	import ngine.grid.Grid;
+	import ngine.collections.grid.Grid;
 	
 	public final class Pathfinder {
 		private static var _allowInstance:Boolean;

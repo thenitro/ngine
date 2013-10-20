@@ -1,10 +1,13 @@
-package ngine.grid {
-	import ngine.grid.interfaces.IGridContainer;
-	import ngine.grid.interfaces.IGridObject;
-	import ngine.grid.interfaces.IVisualGridObject;
+package ngine.display.gridcontainer {
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
+	import ngine.collections.grid.interfaces.IGridObject;
+	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
+	import ngine.collections.grid.Grid;
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
+	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
 
 	public class GridContainer extends Grid {
 		private var _container:Sprite;

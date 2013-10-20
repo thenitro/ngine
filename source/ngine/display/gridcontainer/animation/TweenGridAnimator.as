@@ -1,10 +1,10 @@
-package ngine.grid.animation {	
+package ngine.display.gridcontainer.animation {	
 	import flash.utils.Dictionary;
 	
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.events.EventDispatcher;
-	import ngine.grid.interfaces.IGridObject;
+	import ngine.collections.grid.interfaces.IGridObject;
 	
 	public final class TweenGridAnimator extends GridAnimator {
 		private var _animating:Boolean;

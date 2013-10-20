@@ -1,4 +1,4 @@
-package ngine.grid.animation {
+package ngine.display.gridcontainer.animation {
 	public class DummyGridAnimator extends GridAnimator {
 		
 		public function DummyGridAnimator() {

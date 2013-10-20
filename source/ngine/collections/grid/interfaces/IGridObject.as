@@ -1,4 +1,4 @@
-package ngine.grid.interfaces {
+package ngine.collections.grid.interfaces {
 	import ngine.pool.IReusable;
 	
 	public interface IGridObject extends IReusable {

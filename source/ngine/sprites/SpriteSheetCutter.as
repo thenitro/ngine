@@ -1,4 +1,4 @@
-package ngine.textures {
+package ngine.sprites {
 	import flash.display.BitmapData;
 	
 	import starling.textures.Texture;

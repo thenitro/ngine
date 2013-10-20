@@ -1,5 +1,5 @@
 package ngine.pathfinding {
-	import ngine.grid.interfaces.IGridObject;
+	import ngine.collections.grid.interfaces.IGridObject;
 	
 	public final class Node implements IGridObject {
 		public var g:Number;

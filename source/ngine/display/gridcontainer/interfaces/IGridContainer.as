@@ -1,5 +1,6 @@
-package ngine.grid.interfaces {
+package ngine.display.gridcontainer.interfaces {
 	import ngine.pool.IReusable;
+	import ngine.collections.grid.interfaces.IGridObject;
 
 	public interface IGridContainer extends IReusable {
 		function get sizeX():uint;

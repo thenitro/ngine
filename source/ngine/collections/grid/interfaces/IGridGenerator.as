@@ -1,4 +1,5 @@
-package ngine.grid.interfaces {
+package ngine.collections.grid.interfaces {
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	
 	public interface IGridGenerator {
 		function setWaveDepth(pSize:uint):void;

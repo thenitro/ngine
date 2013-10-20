@@ -1,6 +1,6 @@
-package ngine.grid.animation {
+package ngine.display.gridcontainer.animation {
 	import starling.events.EventDispatcher;
-	import ngine.grid.interfaces.IGridObject;
+	import ngine.collections.grid.interfaces.IGridObject;
 	
 	public class GridAnimator extends EventDispatcher {
 		

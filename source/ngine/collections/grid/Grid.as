@@ -1,6 +1,6 @@
-package ngine.grid {
-	import ngine.grid.interfaces.IGridContainer;
-	import ngine.grid.interfaces.IGridObject;
+package ngine.collections.grid {
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
+	import ngine.collections.grid.interfaces.IGridObject;
 	import ngine.pool.Pool;
 	
 	import flash.utils.Dictionary;
