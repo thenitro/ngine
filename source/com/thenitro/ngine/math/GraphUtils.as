@@ -3,8 +3,6 @@ package com.thenitro.ngine.math {
 	import com.thenitro.ngine.grid.interfaces.IGridContainer;
 	import com.thenitro.ngine.grid.interfaces.IGridObject;
 	
-	import feathers.controls.Header;
-	
 	import flash.errors.IllegalOperationError;
 	import flash.utils.Dictionary;
 
