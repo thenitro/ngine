@@ -1,10 +1,10 @@
 package ngine.math {
-	import com.thenitro.ngine.grid.Grid;
-	import com.thenitro.ngine.grid.interfaces.IGridContainer;
-	import com.thenitro.ngine.grid.interfaces.IGridObject;
-	
 	import flash.errors.IllegalOperationError;
 	import flash.utils.Dictionary;
+	
+	import ngine.collections.grid.Grid;
+	import ngine.collections.grid.interfaces.IGridObject;
+	import ngine.display.gridcontainer.interfaces.IGridContainer;
 
 	public class GraphUtils {
 		private static const EMPTY_ARRAY:Array = [];
