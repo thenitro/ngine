@@ -33,8 +33,8 @@ package ngine.core.collider {
 			
 			_colliderMethod = pColliderMethod;
 			
-			_cols = Math.ceil(_width  / _gridSize);
-			_rows = Math.ceil(_height / _gridSize);
+			_cols = Math.ceil(_width  / _gridSize) + 1;
+			_rows = Math.ceil(_height / _gridSize) + 1;
 			
 			_cells = _cols * _rows;
 			

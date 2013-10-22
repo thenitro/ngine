@@ -1,9 +1,9 @@
 package ngine.core.collider {
-	import com.thenitro.ngine.display.gameentity.Entity;
+	import flash.errors.IllegalOperationError;
+	
+	import ngine.core.Entity;
 	import ngine.math.TMath;
 	import ngine.math.vectors.Vector2D;
-	
-	import flash.errors.IllegalOperationError;
 	
 	public final class ColliderMethods {
 		
