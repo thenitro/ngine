@@ -82,6 +82,11 @@ package ngine.core.manager {
 			
 			while (entity) {
 				entity.update(elapsed);
+				
+				if (entity.expired) {
+					_expired.push(entity);
+				}
+				
 				entity = _entities.next(entity) as Entity;
 			}
 			
@@ -92,21 +97,12 @@ package ngine.core.manager {
 			}
 			
 			_addedEntities.length = 0;
-			_expired.length = 0;
-			
-			entity = _entities.first as Entity;
-			
-			while (entity) {
-				if (entity.expired) {
-					_expired.push(entity);
-				}
-				
-				entity = _entities.next(entity) as Entity;
-			}
 			
 			for each (entity in _expired) {
 				removeFromStack(entity);
 			}
+			
+			_expired.length = 0;
 		};
 		
 		private function addToStack(pEntity:Entity):void {
@@ -118,6 +114,8 @@ package ngine.core.manager {
 		};
 		
 		private function removeFromStack(pEntity:Entity):void {
+			pEntity.expire(false);
+			
 			dispatchEventWith(EXPIRED, false, pEntity);
 			
 			_entities.remove(pEntity);
