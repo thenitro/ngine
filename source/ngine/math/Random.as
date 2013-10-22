@@ -22,5 +22,9 @@ package ngine.math {
 		public static function get color():uint {
 			return Math.random() * 0xFFFFFF;
 		};
+		
+		public static function arrayElement(pContent:Array):* {
+			return pContent[Math.round(Math.random() * (pContent.length - 1))];
+		};
 	}
 }
