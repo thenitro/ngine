@@ -38,16 +38,23 @@ package ngine.display {
 			}
 		};
 		
-		public static function drawSpiral(pTarget:Graphics, pRadius:int, pAngle:int):void {
-			var angle:int = 0;
+		public static function drawSpiral(pTarget:Graphics, pRadius:int, 
+										  pSides:int, pCoils:int):void {
+			pTarget.moveTo(0, 0);
 			
-			for(var i:Number = 0; i < pRadius; i++) {   
-				var x:Number = i * Math.cos(angle);
-				var y:Number = i * Math.sin(angle);
+			var awayStep:Number   = pRadius / pSides;
+			var aroundStep:Number = pCoils  / pSides;
+			
+			var aroundRadians:Number = aroundStep * 2 * Math.PI;
+			
+			for(var i:int = 1; i <= pSides; i++){
+				var away:Number   = i * awayStep;
+				var around:Number = i * aroundRadians;
+				
+				var x:Number = Math.cos(around) * away;
+				var y:Number = Math.sin(around) * away;
 				
 				pTarget.lineTo(x, y);
-				
-				angle += pAngle;
 			}
 		};
 	};

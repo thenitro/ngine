@@ -105,16 +105,16 @@ package ngine.core.collider {
 		};
 		
 		public function getNearbyEntities(pPosition:Vector2D, 
-										  pRadius:Number):Array {
+										  pRadius:Number, pSorted:Boolean = false):Array {
 			var result:Array = [];
 			
-			var currentIndexX:int = Math.round(pPosition.x / _gridSize);
-			var currentIndexY:int = Math.round(pPosition.y / _gridSize);
+			var currentIndexX:int = Math.ceil(pPosition.x / _gridSize);
+			var currentIndexY:int = Math.ceil(pPosition.y / _gridSize);
 			
 			var size:int = Math.ceil(pRadius / _gridSize);
 			
 			for (var i:int = currentIndexX - size; i < currentIndexX + size; i++) {
-				for (var j:int = currentIndexY - size; j < currentIndexX + size; j++) {
+				for (var j:int = currentIndexY - size; j < currentIndexY + size; j++) {
 					var index:int = j * _cols + i;
 					
 					if (index < 0 || index >=_grid.length) {
@@ -133,6 +133,16 @@ package ngine.core.collider {
 						}
 					}
 				}
+			}
+			
+			if (pSorted) {
+				result.sort(function(pA:Entity, pB:Entity):int {
+					if (Vector2D.distanceSquared(pA.position, pPosition) > Vector2D.distanceSquared(pB.position, pPosition)) {
+						return 1;
+					}
+					
+					return -1;
+				});
 			}
 			
 			return result;

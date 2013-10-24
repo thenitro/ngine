@@ -1,12 +1,12 @@
 package ngine.core.manager {
+	import flash.utils.getTimer;
+	
 	import ngine.collections.LinkedList;
 	import ngine.core.Entity;
 	import ngine.core.collider.ICollider;
 	import ngine.math.vectors.Vector2D;
 	import ngine.pool.IReusable;
 	import ngine.pool.Pool;
-	
-	import flash.utils.getTimer;
 	
 	import starling.events.EventDispatcher;
 	
@@ -63,8 +63,8 @@ package ngine.core.manager {
 		};
 		
 		public function getNearbyEntities(pPosition:Vector2D, 
-										  pRadius:Number):Array {
-			return _collider.getNearbyEntities(pPosition, pRadius);
+										  pRadius:Number, pSorted:Boolean = false):Array {
+			return _collider.getNearbyEntities(pPosition, pRadius, pSorted);
 		};
 		
 		public function update():void {
@@ -114,7 +114,13 @@ package ngine.core.manager {
 		};
 		
 		private function removeFromStack(pEntity:Entity):void {
-			pEntity.expire(false);
+			if (_updating) {
+				pEntity.expire(false);
+				
+				_expired.push(pEntity);
+				
+				return;
+			}
 			
 			dispatchEventWith(EXPIRED, false, pEntity);
 			
