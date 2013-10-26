@@ -11,7 +11,8 @@ package ngine.core.manager {
 	import starling.events.EventDispatcher;
 	
 	public final class EntityManager extends EventDispatcher implements IReusable {
-		public static const EXPIRED:String   = 'expired_event';
+		public static const ADDED:String   = 'added_event';
+		public static const EXPIRED:String = 'expired_event';
 		
 		private static var _pool:Pool = Pool.getInstance();
 		
@@ -111,6 +112,8 @@ package ngine.core.manager {
 			if (_collider) {
 				_collider.addEntity(pEntity);
 			}
+			
+			dispatchEventWith(ADDED, false, pEntity);
 		};
 		
 		private function removeFromStack(pEntity:Entity):void {
