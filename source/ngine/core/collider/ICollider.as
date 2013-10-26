@@ -9,6 +9,7 @@ package ngine.core.collider {
 		function update(pElapsed:Number):void;
 		
 		function getNearbyEntities(pPosition:Vector2D, pRadius:Number, 
+								   pFilterFunction:Function = null,
 								   pSorted:Boolean = false):Array;
 		function isColliding(pEntityA:Entity, pEntityB:Entity):Boolean;
 	};

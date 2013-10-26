@@ -105,7 +105,9 @@ package ngine.core.collider {
 		};
 		
 		public function getNearbyEntities(pPosition:Vector2D, 
-										  pRadius:Number, pSorted:Boolean = false):Array {
+										  pRadius:Number, 
+										  pFilterFunction:Function = null, 
+										  pSorted:Boolean = false):Array {
 			var result:Array = [];
 			
 			var currentIndexX:int = Math.ceil(pPosition.x / _gridSize);
@@ -127,9 +129,11 @@ package ngine.core.collider {
 						continue;
 					}
 					
-					for (var k:int = 0; k < cell.length; k++) {
+					for (var k:int = 0; k < cell.length; k++) {						
 						if (Vector2D.distanceSquared(cell[k].position, pPosition) < pRadius * pRadius) {
-							result.push(cell[k]);
+							if (pFilterFunction == null || pFilterFunction(cell[k])) {
+								result.push(cell[k]);
+							}
 						}
 					}
 				}

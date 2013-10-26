@@ -64,8 +64,10 @@ package ngine.core.manager {
 		};
 		
 		public function getNearbyEntities(pPosition:Vector2D, 
-										  pRadius:Number, pSorted:Boolean = false):Array {
-			return _collider.getNearbyEntities(pPosition, pRadius, pSorted);
+										  pRadius:Number, 
+										  pFilterFunction:Function = null, 
+										  pSorted:Boolean = false):Array {
+			return _collider.getNearbyEntities(pPosition, pRadius, pFilterFunction, pSorted);
 		};
 		
 		public function update():void {
