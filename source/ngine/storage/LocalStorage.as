@@ -10,6 +10,8 @@ package ngine.storage {
 		
 		private var _storage:SharedObject;
 		
+		private var _inited:Boolean;
+		
 		public function LocalStorage() {
 			if (!_allowInstance) {
 				throw new IllegalOperationError('LocalStorage: is Singleton!');
@@ -26,8 +28,13 @@ package ngine.storage {
 			return _instance;
 		};
 		
+		public function get inited():Boolean {
+			return _inited;
+		};
+		
 		public function init(pAppID:String):void {
 			_storage = SharedObject.getLocal(pAppID);
+			_inited  = true;
 		};
 		
 		public function load(pID:String):* {

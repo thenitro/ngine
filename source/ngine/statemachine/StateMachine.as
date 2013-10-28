@@ -61,7 +61,7 @@ package ngine.statemachine {
 		private function addedToStageEventHandler(pEvent:Event):void {
 			_currState.removeEventListener(Event.ADDED_TO_STAGE,
 										   addedToStageEventHandler);
-			_currState.start();	
+			_currState.start();
 		};
 	};
 }
