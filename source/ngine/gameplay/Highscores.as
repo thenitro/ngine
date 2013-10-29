@@ -41,7 +41,10 @@ package ngine.gameplay {
 			}
 			
 			_scores.sort(Array.NUMERIC | Array.DESCENDING);
-			_scores.length = _maxItems;
+			
+			if (_scores.length >= _maxItems) {
+				_scores.length = _maxItems;
+			}
 			
 			_inited = true;
 		};
@@ -57,9 +60,11 @@ package ngine.gameplay {
 				return;
 			}
 			
-			
 			_scores.unshift(pScore);
-			_scores.length = _maxItems;
+			
+			if (_scores.length >= _maxItems) {
+				_scores.length = _maxItems;
+			}
 			_scores.sort(Array.NUMERIC | Array.DESCENDING);
 			
 			_storage.save(_recordID, _scores);

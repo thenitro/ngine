@@ -70,21 +70,17 @@ package ngine.core.manager {
 			return _collider.getNearbyEntities(pPosition, pRadius, pFilterFunction, pSorted);
 		};
 		
-		public function update():void {
-			var time:int       = getTimer();
-			var elapsed:Number = (time - _oldTime) / 1000;
-			
-			_oldTime  = time;
+		public function update(pElapsed:Number):void {
 			_updating = true;
 			
 			var entity:Entity = _entities.first as Entity;
 			
 			if (_collider) {
-				_collider.update(elapsed);
+				_collider.update(pElapsed);
 			}
 			
 			while (entity) {
-				entity.update(elapsed);
+				entity.update(pElapsed);
 				
 				if (entity.expired) {
 					_expired.push(entity);
