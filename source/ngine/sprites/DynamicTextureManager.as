@@ -8,31 +8,10 @@ package ngine.sprites {
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	
-	public class DynamicTexture {
-		private var _textures:Object;
-		private var _scale:Number;
+	public class DynamicTextureManager extends AbstractTextureManager {
 		
-		public function DynamicTexture() {
-			_textures = {};
+		public function DynamicTextureManager() {
 			
-		};
-		
-		public function init(pStage:Stage, 
-							 pReferenceWidth:Number, pReferenceHeight:Number):void {
-			var scaleX:Number = pStage.stageWidth  / pReferenceWidth;
-			var scaleY:Number = pStage.stageHeight / pReferenceHeight;
-			
-			_scale = Math.min(scaleX, scaleY);
-			
-			trace("DynamicTexture.init(pStage, pReferenceWidth, pReferenceHeight)", _scale);
-		};
-		
-		public function parse():void {
-			
-		};
-		
-		public function getTexture(pID:String):Texture {
-			return _textures[pID] as Texture;
 		};
 		
 		protected function convertToTextures(pTarget:Sprite):void {
@@ -42,8 +21,8 @@ package ngine.sprites {
 			for (i = 0; i < pTarget.numChildren; i++) {
 				child = pTarget.getChildAt(i);
 				
-				child.width  *= _scale;
-				child.height *= _scale;
+				child.width  *= scale;
+				child.height *= scale;
 				
 				child.width  = child.width  > 2048 ? 2048 : child.width;
 				child.height = child.height > 2048 ? 2048 : child.height;
@@ -53,8 +32,7 @@ package ngine.sprites {
 			
 			for (i = 0; i < pTarget.numChildren; i++) {
 				child = pTarget.getChildAt(i);
-				
-				_textures[child.name] = atlas.getTextures(child.name)[0];
+				addTexure(child.name, atlas.getTextures(child.name)[0]);
 			}
 		};
 	};
