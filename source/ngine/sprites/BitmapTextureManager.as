@@ -9,7 +9,7 @@ package ngine.sprites {
 			super();
 		};
 		
-		private function parseTexure(pID:String, pTexture:BitmapData):void {
+		protected function parseTexure(pID:String, pTexture:BitmapData):void {
 			addTexure(pID, Texture.fromBitmapData(pTexture, false, false, scale));
 		};
 	}
