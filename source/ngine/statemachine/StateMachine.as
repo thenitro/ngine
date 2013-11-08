@@ -29,6 +29,10 @@ package ngine.statemachine {
 			return _currState;
 		};
 		
+		public function getStateByID(pStateID:String):State {
+			return _states[pStateID] as State;
+		};
+		
 		public function setCanvas(pCanvas:Sprite):void {
 			_canvas = pCanvas;
 		};
