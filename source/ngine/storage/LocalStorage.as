@@ -38,10 +38,18 @@ package ngine.storage {
 		};
 		
 		public function load(pID:String):* {
+			if (!_inited) {
+				return null;
+			}
+			
 			return _storage.data[pID];
 		};
 	
 		public function save(pID:String, pData:Object):void {
+			if (!_inited) {
+				return;
+			}
+			
 			_storage.data[pID] = pData;
 			
 			var flushStatus:String;
