@@ -3,7 +3,7 @@ package ngine.statemachine {
 	
 	import starling.display.Sprite;
 	
-	public class State extends Sprite {
+	public class State extends Sprite implements IState {
 		private var _machine:StateMachine;
 		
 		public function State(pMachine:StateMachine) {

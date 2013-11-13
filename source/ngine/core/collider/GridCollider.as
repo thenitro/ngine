@@ -1,5 +1,5 @@
 package ngine.core.collider {
-	import ngine.collections.LinkedList;
+	import ndatas.LinkedList;
 	import ngine.core.Entity;
 	import ngine.math.vectors.Vector2D;
 	import ngine.pool.Pool;

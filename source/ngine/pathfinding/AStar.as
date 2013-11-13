@@ -1,5 +1,5 @@
 package ngine.pathfinding {
-	import ngine.collections.grid.Grid;
+	import ndatas.grid.Grid;
 	
 	import flash.utils.Dictionary;
 	

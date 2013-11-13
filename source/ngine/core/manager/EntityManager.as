@@ -1,7 +1,7 @@
 package ngine.core.manager {
 	import flash.utils.getTimer;
 	
-	import ngine.collections.LinkedList;
+	import ndatas.LinkedList;
 	import ngine.core.Entity;
 	import ngine.core.collider.ICollider;
 	import ngine.math.vectors.Vector2D;

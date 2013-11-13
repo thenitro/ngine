@@ -1,15 +1,13 @@
 package ngine.display.gridcontainer {
+	import ndatas.grid.Grid;
+	import ndatas.grid.IGridObject;
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
-	import ngine.collections.grid.interfaces.IGridObject;
 	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-	import ngine.collections.grid.Grid;
-	import ngine.display.gridcontainer.interfaces.IGridContainer;
-	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
 
-	public class GridContainer extends Grid {
+	public class GridContainer extends Grid implements IGridContainer {
 		private var _container:Sprite;
 		
 		public function GridContainer(pCellWidth:uint = 0, pCellHeight:uint = 0) {
@@ -49,6 +47,12 @@ package ngine.display.gridcontainer {
 					addVisual(take(i, j)); 
 				}
 			}
+		};
+		
+		override public function swap(pObjectAX:uint, pObjectAY:uint, 
+									  pObjectBX:uint, pObjectBY:uint):void {
+			super.swap(pObjectAX, pObjectAY, pObjectBX, pObjectBY);
+			updateIndexes();
 		};
 		
 		override public function updateIndexes():void {
