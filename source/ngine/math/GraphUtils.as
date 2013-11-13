@@ -4,6 +4,7 @@ package ngine.math {
 	
 	import ndatas.grid.Grid;
 	import ndatas.grid.IGridObject;
+	
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
 
 	public class GraphUtils {
@@ -16,7 +17,7 @@ package ngine.math {
 		public static function bfs(pIndexX:uint, pIndexY:uint,
 								   pGrid:IGridContainer, pAddHeighbors:Function):Array {
 			var current:IGridObject;
-			var searched:IGridObject = pGrid.take(pIndexX, pIndexY);
+			var searched:IGridObject = pGrid.take(pIndexX, pIndexY) as IGridObject;
 			
 			if (!searched) {
 				return EMPTY_ARRAY;

@@ -1,7 +1,8 @@
 package ngine.math.vectors {
 	import ngine.math.Random;
-	import ngine.pool.IReusable;
-	import ngine.pool.Pool;
+	
+	import npooling.IReusable;
+	import npooling.Pool;
 	
 	public final class Vector2D implements IReusable {
 		private static var _pool:Pool = Pool.getInstance();

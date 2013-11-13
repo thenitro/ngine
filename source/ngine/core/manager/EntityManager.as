@@ -1,12 +1,12 @@
 package ngine.core.manager {
-	import flash.utils.getTimer;
-	
 	import ndatas.LinkedList;
+	
 	import ngine.core.Entity;
 	import ngine.core.collider.ICollider;
 	import ngine.math.vectors.Vector2D;
-	import ngine.pool.IReusable;
-	import ngine.pool.Pool;
+	
+	import npooling.IReusable;
+	import npooling.Pool;
 	
 	import starling.events.EventDispatcher;
 	

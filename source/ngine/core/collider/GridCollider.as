@@ -1,8 +1,10 @@
 package ngine.core.collider {
 	import ndatas.LinkedList;
+	
 	import ngine.core.Entity;
 	import ngine.math.vectors.Vector2D;
-	import ngine.pool.Pool;
+	
+	import npooling.Pool;
 	
 	public class GridCollider implements ICollider {
 		private static var _pool:Pool = Pool.getInstance();

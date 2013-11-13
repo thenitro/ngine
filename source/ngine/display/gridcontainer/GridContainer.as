@@ -1,6 +1,8 @@
 package ngine.display.gridcontainer {
+	import ndatas.MatrixMxN;
 	import ndatas.grid.Grid;
 	import ndatas.grid.IGridObject;
+	
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
 	import ngine.display.gridcontainer.interfaces.IVisualGridObject;
 	
@@ -10,43 +12,28 @@ package ngine.display.gridcontainer {
 	public class GridContainer extends Grid implements IGridContainer {
 		private var _container:Sprite;
 		
+		private var _cellWidth:Number;
+		private var _cellHeight:Number;
+		
 		public function GridContainer(pCellWidth:uint = 0, pCellHeight:uint = 0) {
 			_container = new Sprite();
 			
-			super(pCellWidth, pCellHeight);
+			_cellWidth  = pCellWidth;
+			_cellHeight = pCellHeight;	
+			
+			super();
 		};
 		
 		public function get canvas():Sprite {
 			return _container;
 		};
 		
-		override public function addVisual(pObject:IGridObject, pUpdatePosition:Boolean = true):void {
-			var object:IVisualGridObject = pObject as IVisualGridObject;
-			
-			if (!object || !(object is DisplayObject)) {
-				return;
-			}
-			
-			if (pUpdatePosition) {
-				object.x = object.indexX * cellWidth;
-				object.y = object.indexY * cellHeight;
-			}
-			
-			_container.addChild(object as DisplayObject);
-			
-			updateIndexes();
+		public function get cellWidth():Number {
+			return _cellWidth;
 		};
 		
-		override public function removeVisual(pObject:IGridObject):void {
-			_container.removeChild(pObject as DisplayObject);
-		};
-		
-		override public function update():void {
-			for (var i:uint = 0; i < sizeX; i++) {
-				for (var j:uint = 0; j < sizeY; j++) {
-					addVisual(take(i, j)); 
-				}
-			}
+		public function get cellHeight():Number {
+			return _cellHeight;
 		};
 		
 		override public function swap(pObjectAX:uint, pObjectAY:uint, 
@@ -55,20 +42,7 @@ package ngine.display.gridcontainer {
 			updateIndexes();
 		};
 		
-		override public function updateIndexes():void {
-			for (var i:uint = 0; i < sizeX; i++) {
-				for (var j:uint = 0; j < sizeY; j++) {
-					var data:IGridObject = take(i, j);
-					var child:DisplayObject = data as DisplayObject;
-					
-					if (child && _container.contains(child)) {
-						_container.setChildIndex(data as DisplayObject, i + j * sizeX);
-					}
-				}
-			}
-		};
-		
-		override public function clone():IGridContainer {
+		override public function clone():MatrixMxN {
 			var grid:GridContainer = _pool.get(GridContainer) as GridContainer;
 			
 			if (!grid) {
@@ -94,7 +68,7 @@ package ngine.display.gridcontainer {
 						continue;
 					}
 					
-					var child:IGridObject = take(i, j);
+					var child:IGridObject = take(i, j) as IGridObject;
 					
 					_container.removeChild(child as DisplayObject);
 					remove(i, j);
@@ -104,6 +78,48 @@ package ngine.display.gridcontainer {
 			}
 			
 			super.clean();
+		};
+		
+		public function addVisual(pObject:Object, pUpdatePosition:Boolean = true):void {
+			var object:IVisualGridObject = pObject as IVisualGridObject;
+			
+			if (!object || !(object is DisplayObject)) {
+				return;
+			}
+			
+			if (pUpdatePosition) {
+				object.x = object.indexX * cellWidth;
+				object.y = object.indexY * cellHeight;
+			}
+			
+			_container.addChild(object as DisplayObject);
+			
+			updateIndexes();
+		};
+		
+		public function removeVisual(pObject:Object):void {
+			_container.removeChild(pObject as DisplayObject);
+		};
+		
+		public function update():void {
+			for (var i:uint = 0; i < sizeX; i++) {
+				for (var j:uint = 0; j < sizeY; j++) {
+					addVisual(take(i, j) as IGridObject); 
+				}
+			}
+		};
+		
+		public function updateIndexes():void {
+			for (var i:uint = 0; i < sizeX; i++) {
+				for (var j:uint = 0; j < sizeY; j++) {
+					var data:IGridObject = take(i, j) as IGridObject;
+					var child:DisplayObject = data as DisplayObject;
+					
+					if (child && _container.contains(child)) {
+						_container.setChildIndex(data as DisplayObject, i + j * sizeX);
+					}
+				}
+			}
 		};
 	};
 }

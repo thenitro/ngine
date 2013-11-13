@@ -1,7 +1,8 @@
 package ngine.math {
 	import ngine.math.vectors.Vector2D;
-	import ngine.pool.IReusable;
-	import ngine.pool.Pool;
+	
+	import npooling.IReusable;
+	import npooling.Pool;
 	
 	public final class TRectangle implements IReusable {
 		private static var _pool:Pool = Pool.getInstance();
