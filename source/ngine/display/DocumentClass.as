@@ -2,6 +2,8 @@ package ngine.display {
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
+	import flash.display3D.Context3DProfile;
+	import flash.display3D.Context3DRenderMode;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
@@ -21,7 +23,9 @@ package ngine.display {
 			Starling.multitouchEnabled = true;
 			Starling.handleLostContext = true;
 			
-			_starling = new Starling(pTargetClass, stage);
+			_starling = new Starling(pTargetClass, stage, null, null, 
+									 Context3DRenderMode.AUTO, 
+									 Context3DProfile.BASELINE_EXTENDED);
 			_starling.start();
 			_starling.simulateMultitouch  = true;
 			_starling.enableErrorChecking = true;
