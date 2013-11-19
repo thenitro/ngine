@@ -10,6 +10,8 @@ package ngine.math.vectors {
 		private var _x:Number;
 		private var _y:Number;
 		
+		private var _depth:Number;
+		
 		public function Vector2D(pX:Number = 0, pY:Number = 0) {
 			_x = pX;
 			_y = pY;
@@ -24,6 +26,14 @@ package ngine.math.vectors {
 			}
 			
 			return result;
+		};
+		
+		public function get depth():Number {
+			return _depth;
+		};
+		
+		public function set depth(pValue:Number):void {
+			_depth = pValue;
 		};
 		
 		public static function distanceSquared(pVectorA:Vector2D, pVectorB:Vector2D):Number {
@@ -177,6 +187,33 @@ package ngine.math.vectors {
 		
 		public function equals(pVectorB:Vector2D):Boolean {
 			return x == pVectorB.x && y == pVectorB.y;
+		};
+		
+		public function floor(pNewInstance:Boolean = false):Vector2D {
+			var result:Vector2D = pNewInstance ? clone() : this;
+			
+				result.x = Math.floor(result.x);
+				result.y = Math.floor(result.y);
+				
+			return result;
+		};
+		
+		public function ceil(pNewInstance:Boolean = false):Vector2D {
+			var result:Vector2D = pNewInstance ? clone() : this;
+			
+				result.x = Math.ceil(result.x);
+				result.y = Math.ceil(result.y);
+			
+			return result;
+		};
+		
+		public function round(pNewInstance:Boolean = false):Vector2D {
+			var result:Vector2D = pNewInstance ? clone() : this;
+			
+				result.x = Math.round(result.x);
+				result.y = Math.round(result.y);
+			
+			return result;
 		};
 		
 		public function zero():void {

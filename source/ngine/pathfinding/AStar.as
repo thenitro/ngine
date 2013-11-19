@@ -33,20 +33,20 @@ package ngine.pathfinding {
 		};
 		
 		public static function manhattan(pNode:Node, pEndNode:Node):Number {
-			return Math.abs(pNode.x - pEndNode.x) * _straightCost + 
-			       Math.abs(pNode.y + pEndNode.y) * _straightCost;
+			return Math.abs(pNode.indexX - pEndNode.indexX) * _straightCost + 
+			       Math.abs(pNode.indexY + pEndNode.indexY) * _straightCost;
 		};
 		
 		public static function euclidian(pNode:Node, pEndNode:Node):Number {
-			var dx:Number = pNode.x - pEndNode.x;
-			var dy:Number = pNode.y - pEndNode.y;
+			var dx:Number = pNode.indexX - pEndNode.indexX;
+			var dy:Number = pNode.indexY - pEndNode.indexY;
 			
 			return Math.sqrt(dx * dx + dy * dy) * _straightCost;
 		};
 		
 		public static function diagonal(pNode:Node, pEndNode:Node):Number {
-			var dx:Number = Math.abs(pNode.x - pEndNode.x);
-			var dy:Number = Math.abs(pNode.y - pEndNode.y);
+			var dx:Number = Math.abs(pNode.indexX - pEndNode.indexX);
+			var dy:Number = Math.abs(pNode.indexY - pEndNode.indexY);
 			
 			var diagonal:Number = Math.min(dx, dy);
 			var straight:Number = dx + dy;
@@ -109,11 +109,11 @@ package ngine.pathfinding {
 			var iterations:uint = 0;
 			
 			while (node != _endNode) {
-				startX = max(0, node.x - 1);
-				startY = max(0, node.y - 1);
+				startX = max(0, node.indexX - 1);
+				startY = max(0, node.indexY - 1);
 				
-				endX = min(_grid.sizeX - 1, node.x + 1);
-				endY = min(_grid.sizeY - 1, node.y + 1);
+				endX = min(_grid.sizeX - 1, node.indexX + 1);
+				endY = min(_grid.sizeY - 1, node.indexY + 1);
 				
 				for (i = startX; i <= endX; ++i) {
 					for (j = startY; j <= endY; ++j) {
@@ -122,14 +122,15 @@ package ngine.pathfinding {
 						iterations++;
 						
 						if (test == node || !test.walkable ||
-							!Node(_grid.take(node.x, test.y)).walkable ||
-							!Node(_grid.take(test.x, node.y)).walkable) {
+							!Node(_grid.take(node.indexX, test.indexY)).walkable ||
+							!Node(_grid.take(test.indexX, node.indexY)).walkable) {
 								continue;
 						}
 						
 						cost = _straightCost;
 						
-						if (!((node.x == test.x) || (node.y == test.y))) {
+						if (!((node.indexX == test.indexX) || 
+							  (node.indexY == test.indexY))) {
 							cost = _diagonalCost; //diagonal
 							//continue; //diagonal off
 						}
@@ -172,7 +173,7 @@ package ngine.pathfinding {
 			}
 			
 			buildPath();
-			//trace("AStar.search:", 'FINDED in', iterations, 'iterations');
+			trace("AStar.search:", 'FINDED in', iterations, 'iterations');
 			
 			return true;
 		};

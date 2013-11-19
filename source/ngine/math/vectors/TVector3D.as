@@ -1,8 +1,6 @@
 package ngine.math.vectors {
-	import ngine.pool.IReusable;
-	import ngine.pool.Pool;
-	
-	import flash.geom.Vector3D;
+	import npooling.IReusable;
+	import npooling.Pool;
 	
 	public class TVector3D implements IReusable {
 		private static var _pool:Pool = Pool.getInstance();
@@ -170,12 +168,36 @@ package ngine.math.vectors {
 			return result;
 		};
 		
-		public function clone():TVector3D {
-			var result:TVector3D = ZERO;
+		public function distanceTo(pTarget:TVector3D):Number {
+			return distance(this, pTarget);
+		};
+		
+		public function floor(pNewInstance:Boolean = false):TVector3D {
+			var result:TVector3D = pNewInstance ? clone() : this;
 			
-				result.x = x;
-				result.y = y;
-				result.z = z;
+				result.x = Math.floor(result.x);
+				result.y = Math.floor(result.y);
+				result.z = Math.floor(result.z);
+			
+			return result;
+		};
+		
+		public function ceil(pNewInstance:Boolean = false):TVector3D {
+			var result:TVector3D = pNewInstance ? clone() : this;
+			
+				result.x = Math.ceil(result.x);
+				result.y = Math.ceil(result.y);
+				result.z = Math.ceil(result.z);
+			
+			return result;
+		};
+		
+		public function round(pNewInstance:Boolean = false):TVector3D {
+			var result:TVector3D = pNewInstance ? clone() : this;
+			
+				result.x = Math.round(result.x);
+				result.y = Math.round(result.y);
+				result.z = Math.round(result.z);
 			
 			return result;
 		};
@@ -186,12 +208,26 @@ package ngine.math.vectors {
 			z = 0;
 		};
 		
+		public function clone():TVector3D {
+			var result:TVector3D = ZERO;
+			
+				result.x = x;
+				result.y = y;
+				result.z = z;
+			
+			return result;
+		};
+		
 		public function poolPrepare():void {
 			zero();
 		};
 		
 		public function dispose():void {
 			zero();
+		};
+		
+		public function toString():String {
+			return "[object TVector3D: x=" + x + ", y= " + y + ", z= " + z + " ]";
 		};
 	}
 }

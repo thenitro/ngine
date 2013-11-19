@@ -94,6 +94,7 @@ package ngine.core {
 			_velocity.zero();
 			
 			_orientation = 0;
+			_canvas.rotation = 0;
 			
 			_expired = false;
 		};

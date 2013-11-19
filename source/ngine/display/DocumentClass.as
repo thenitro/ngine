@@ -19,10 +19,12 @@ package ngine.display {
 			stage.addEventListener(Event.RESIZE, stageResizeEventHandler);
 			
 			Starling.multitouchEnabled = true;
+			Starling.handleLostContext = true;
 			
 			_starling = new Starling(pTargetClass, stage);
 			_starling.start();
-			_starling.simulateMultitouch = true;
+			_starling.simulateMultitouch  = true;
+			_starling.enableErrorChecking = true;
 			
 			if (pDebug) {
 				_starling.showStats = true;

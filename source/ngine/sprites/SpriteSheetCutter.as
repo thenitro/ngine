@@ -99,7 +99,7 @@ package ngine.sprites {
 				}
 			}
 			
-			_atlas = new TextureAtlas(Texture.fromBitmapData(pBitmapData),
+			_atlas = new TextureAtlas(Texture.fromBitmapData(pBitmapData, false),
 									  new XML('<TextureAtlas imagePath="dynamic.png">' + 
 										  	  texuresText + "</TextureAtlas>"));
 		};

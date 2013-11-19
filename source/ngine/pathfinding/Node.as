@@ -17,27 +17,6 @@ package ngine.pathfinding {
 			
 		};
 		
-		public function set alpha(pValue:Number):void {
-		};
-		
-		public function get alpha():Number {
-			return 0;
-		};
-		
-		public function get x():Number {
-			return 0;
-		};
-		
-		public function get y():Number {
-			return 0;
-		};
-		
-		public function set x(pValue:Number):void {
-		};
-		
-		public function set y(pValue:Number):void {
-		};
-		
 		public function get indexX():uint {
 			return _indexX;
 		};
