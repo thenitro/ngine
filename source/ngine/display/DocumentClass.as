@@ -25,7 +25,7 @@ package ngine.display {
 			
 			_starling = new Starling(pTargetClass, stage, null, null, 
 									 Context3DRenderMode.AUTO, 
-									 Context3DProfile.BASELINE_EXTENDED);
+									 Context3DProfile.BASELINE);
 			_starling.start();
 			_starling.simulateMultitouch  = true;
 			_starling.enableErrorChecking = true;
