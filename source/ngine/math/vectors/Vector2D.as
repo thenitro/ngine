@@ -1,5 +1,6 @@
 package ngine.math.vectors {
 	import ngine.math.Random;
+	import ngine.math.TMath;
 	
 	import npooling.IReusable;
 	import npooling.Pool;
@@ -159,10 +160,6 @@ package ngine.math.vectors {
 			_y *= -1;
 		};
 		
-		public function toAngle():Number {
-			return Math.atan2(_y, _x);
-		};
-		
 		public function fromAngle(pValue:Number, pLength:Number = 1):void {
 			_x = Math.cos(pValue) * pLength;
 			_y = Math.sin(pValue) * pLength;
@@ -212,6 +209,16 @@ package ngine.math.vectors {
 			
 				result.x = Math.round(result.x);
 				result.y = Math.round(result.y);
+			
+			return result;
+		};
+		
+		public function clamp(pMinValue:Number, pMaxValue:Number, 
+							  pClone:Boolean = false):Vector2D {
+			var result:Vector2D = pClone ? clone() : this;
+				result.fromAngle(result.angle(), 
+								 TMath.clamp(result.length(), pMinValue, 
+															  pMaxValue));
 			
 			return result;
 		};
