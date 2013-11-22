@@ -169,6 +169,10 @@ package ngine.math.vectors {
 			return Math.atan2(_y, _x);
 		};
 		
+		public function distanceTo(pTarget:Vector2D):Number {
+			return distance(this, pTarget);
+		};
+		
 		public function dotProduct(pTarget:Vector2D):Number {
 			return x * pTarget.x + y * pTarget.y;
 		};
