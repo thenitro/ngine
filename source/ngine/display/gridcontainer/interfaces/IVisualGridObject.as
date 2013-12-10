@@ -1,5 +1,5 @@
 package ngine.display.gridcontainer.interfaces {
-	import ndatas.grid.IGridObject;
+	import ncollections.grid.IGridObject;
 	
 	public interface IVisualGridObject extends IGridObject {
 		function set alpha(pValue:Number):void;

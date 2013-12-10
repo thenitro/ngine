@@ -1,6 +1,5 @@
 package ngine.display.gridcontainer.interfaces {
-	import ndatas.MatrixMxN;
-	import ndatas.grid.IGridObject;
+	import ncollections.MatrixMxN;
 	
 	import npooling.IReusable;
 
