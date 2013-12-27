@@ -36,6 +36,11 @@ package ngine.display.gridcontainer {
 			return _cellHeight;
 		};
 		
+		override public function remove(pX:uint, pY:uint):void {
+			removeVisual(take(pX, pY));
+			super.remove(pX, pY);
+		};
+		
 		override public function swap(pObjectAX:uint, pObjectAY:uint, 
 									  pObjectBX:uint, pObjectBY:uint):void {
 			super.swap(pObjectAX, pObjectAY, pObjectBX, pObjectBY);
