@@ -1,5 +1,5 @@
 package ngine.core.manager {
-	import ndatas.LinkedList;
+	import ncollections.LinkedList;
 	
 	import ngine.core.Entity;
 	import ngine.core.collider.ICollider;

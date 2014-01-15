@@ -10,29 +10,38 @@ package ngine.display {
 	import starling.core.Starling;
 	
 	public class DocumentClass extends Sprite {
+		private var TargetClass:Class;
 		private var _starling:Starling;
 		
-		public function DocumentClass(pTargetClass:Class, pDebug:Boolean) {
+		public function DocumentClass(pTargetClass:Class) {
 			super();
+			
+			TargetClass = pTargetClass;
 			
 			stage.align     = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
-			stage.addEventListener(Event.RESIZE, stageResizeEventHandler);
+			addEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
+		};
+		
+		private function addedToStageEventHandler(pEvent:Event):void {
+			removeEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
 			
 			Starling.multitouchEnabled = true;
 			Starling.handleLostContext = true;
 			
-			_starling = new Starling(pTargetClass, stage, null, null, 
-									 Context3DRenderMode.AUTO, 
-									 Context3DProfile.BASELINE);
+			_starling = new Starling(TargetClass, stage, null, null, 
+												Context3DRenderMode.AUTO, 
+												Context3DProfile.BASELINE);
 			_starling.start();
 			_starling.simulateMultitouch  = true;
 			_starling.enableErrorChecking = true;
 			
-			if (pDebug) {
+			CONFIG::DEBUG {
 				_starling.showStats = true;
 			}
+			
+			stage.addEventListener(Event.RESIZE, stageResizeEventHandler);
 		};
 		
 		private function stageResizeEventHandler(pEvent:Event):void {

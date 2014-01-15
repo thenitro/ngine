@@ -2,8 +2,8 @@ package ngine.math {
 	import flash.errors.IllegalOperationError;
 	import flash.utils.Dictionary;
 	
-	import ndatas.grid.Grid;
-	import ndatas.grid.IGridObject;
+	import ncollections.grid.Grid;
+	import ncollections.grid.IGridObject;
 	
 	import ngine.display.gridcontainer.interfaces.IGridContainer;
 

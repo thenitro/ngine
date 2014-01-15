@@ -4,7 +4,7 @@ package ngine.display.gridcontainer.animation {
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.events.EventDispatcher;
-	import ndatas.grid.IGridObject;
+	import ncollections.grid.IGridObject;
 	
 	public final class TweenGridAnimator extends GridAnimator {
 		private var _animating:Boolean;
