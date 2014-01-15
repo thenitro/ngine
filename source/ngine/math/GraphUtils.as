@@ -15,7 +15,7 @@ package ngine.math {
 		};
 		
 		public static function bfs(pIndexX:uint, pIndexY:uint,
-								   pGrid:IGridContainer, pAddHeighbors:Function):Array {
+								   pGrid:Grid, pAddHeighbors:Function):Array {
 			var current:IGridObject;
 			var searched:IGridObject = pGrid.take(pIndexX, pIndexY) as IGridObject;
 			
