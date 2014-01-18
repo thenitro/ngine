@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testrun name="" >
+<testsuite  name="Default Test Suite" project="NgineTests">
+<testsuite name="flexUnitTests.ngine.math:MathSuite" type="testsuiteclass"/>
+<testsuite name="flexUnitTests.ngine.math:PrimeNumberCase" type="testcaseclass"/>
+</testsuite>
+<portNumber value="8765" />
+</testrun>

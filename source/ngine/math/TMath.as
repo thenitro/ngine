@@ -51,5 +51,56 @@ package ngine.math {
 											 pMin:Number, pMax:Number):Boolean {
 			return pValue >= pMin && pValue <= pMax;
 		};
+		
+		/**
+		 * Calculating Greatest common divisor
+		 * http://en.wikipedia.org/wiki/Greatest_common_divisor
+		 * with Euclidean algorithm
+		 * http://en.wikipedia.org/wiki/Euclidean_algorithm
+		 * 
+		 * @param pA int
+		 * @param pB int
+		 * @return int greatest common divisor 
+		 * 
+		 */		
+		
+		public static function gcd(pA:int, pB:int):int {
+			var temp:int;
+			
+			while (pB != 0) {
+				temp = pB;
+				pB   = pA % pB;
+				pA   = temp;
+			}
+			
+			return pA;
+		};
+		
+		public static function mul(pA:int, pB:int, pM:int):int {
+			if (pB == 1) {
+				return pA;
+			}
+			
+			if (pB % 2 == 0) {
+				var temp:int = mul(pA, pB / 2, pM);
+				
+				return (2 * temp) % pM;
+			}
+			
+			return (mul(pA, pB - 1, pM) + pA) % pM;
+		};
+		
+		public static function pows(pA:int, pB:int, pM:int):int {
+			if (pB == 0) {
+				return 1;
+			}
+			
+			if (pB % 2 == 0) {
+				var temp:int = pows(pA, pB / 2, pM);
+				return mul(temp, temp, pM) % pM;
+			}
+			
+			return (mul(pows(pA, pB - 1, pM), pA, pM)) % pM;
+		};
 	};
 }
