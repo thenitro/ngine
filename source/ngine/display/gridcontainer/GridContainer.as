@@ -116,7 +116,7 @@ package ngine.display.gridcontainer {
 		public function update():void {
 			for (var i:uint = 0; i < sizeX; i++) {
 				for (var j:uint = 0; j < sizeY; j++) {
-					addVisual(take(i, j) as IGridObject); 
+					addVisual(take(i, j) as IGridObject);
 				}
 			}
 		};
