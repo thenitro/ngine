@@ -30,9 +30,11 @@ package ngine.sprites {
 			
 			var atlas:TextureAtlas = DynamicAtlas.fromMovieClipContainer(pTarget, 1, 0, true, true);
 			
-			for (i = 0; i < pTarget.numChildren; i++) {
+			for (i = 0; i < pTarget.numChildren; i++) {				
 				child = pTarget.getChildAt(i);
 				addTexure(child.name, atlas.getTextures(child.name)[0]);
+				
+				trace("DynamicTextureManager.convertToTextures(pTarget)", child.name);
 			}
 		};
 	};
