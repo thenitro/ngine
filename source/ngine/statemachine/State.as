@@ -13,7 +13,7 @@ package ngine.statemachine {
 		};
 		
 		public function get id():String {
-			throw new IllegalOperationError('Must be overriden!');
+			throw new IllegalOperationError(this + ': Must be overriden!');
 			return null;
 		};
 		
@@ -22,11 +22,11 @@ package ngine.statemachine {
 		};
 		
 		public function start():void {			
-			throw new IllegalOperationError('Must be overriden!');
+			throw new IllegalOperationError(this + ': Must be overriden!');
 		};
 		
 		public function stop():void {
-			throw new IllegalOperationError('Must be overriden!');			
+			throw new IllegalOperationError(this + ': Must be overriden!');			
 		};
 	};
 }

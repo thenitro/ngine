@@ -14,17 +14,16 @@ package ngine.display {
 		private var _starling:Starling;
 		
 		public function DocumentClass(pTargetClass:Class) {
-			super();
-			
 			TargetClass = pTargetClass;
 			
-			stage.align     = StageAlign.TOP_LEFT;
-			stage.scaleMode = StageScaleMode.NO_SCALE;
-			
+			super();
 			addEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
 		};
 		
 		private function addedToStageEventHandler(pEvent:Event):void {
+			stage.align     = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			
 			removeEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
 			
 			Starling.multitouchEnabled = true;

@@ -42,14 +42,10 @@ package ngine.statemachine {
 		};
 		
 		public function startState(pStateID:String):void {
-			if (_currState) {
-				_prevState = _currState;
-				_prevState.stop();
-				
-				_canvas.removeChild(_prevState);
-			}
+			stopCurrentState();
 			
 			if (!_states[pStateID]) {
+				trace("StateMachine.startState(pStateID) ERROR there is no state", pStateID);
 				return;
 			}
 			
@@ -60,6 +56,17 @@ package ngine.statemachine {
 										addedToStageEventHandler);
 			
 			_canvas.addChild(_currState);
+		};
+		
+		public function stopCurrentState():void {
+			if (_currState) {
+				_prevState = _currState;
+				_prevState.stop();
+				
+				_canvas.removeChild(_prevState);
+			}
+			
+			_currState = null;
 		};
 		
 		private function addedToStageEventHandler(pEvent:Event):void {
