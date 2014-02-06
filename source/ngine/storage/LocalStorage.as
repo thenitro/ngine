@@ -74,6 +74,10 @@ package ngine.storage {
 				}
 			}
 		};
+
+        public function clear():void {
+            _storage.clear();
+        }
 		
 		private function storageNetStatusEventHandler(pEvent:NetStatusEvent):void {
 			switch(pEvent.info.code) {
