@@ -29,9 +29,9 @@ package ngine.display {
 			Starling.multitouchEnabled = true;
 			Starling.handleLostContext = true;
 			
-			_starling = new Starling(TargetClass, stage, null, null, 
+			_starling = new Starling(TargetClass, stage/*, null, null, 
 												Context3DRenderMode.AUTO, 
-												Context3DProfile.BASELINE_CONSTRAINED);
+												Context3DProfile.BASELINE_CONSTRAINED*/);
 			_starling.start();
 			_starling.simulateMultitouch  = true;
 			_starling.enableErrorChecking = true;
