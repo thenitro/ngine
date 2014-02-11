@@ -21,7 +21,7 @@ package ngine.statemachine {
 			return _machine;
 		};
 		
-		public function start():void {			
+		public function start(pArgs:Array = null):void {			
 			throw new IllegalOperationError(this + ': Must be overriden!');
 		};
 		

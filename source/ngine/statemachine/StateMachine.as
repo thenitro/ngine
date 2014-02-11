@@ -15,6 +15,8 @@ package ngine.statemachine {
 		private var _currState:State;
 		private var _prevState:State;
 		
+		private var _args:Array;
+		
 		public function StateMachine() {
 			_states = new Dictionary();
 			
@@ -41,7 +43,7 @@ package ngine.statemachine {
 			_states[pState.id] = pState;
 		};
 		
-		public function startState(pStateID:String):void {
+		public function startState(pStateID:String, pArgs:Array = null):void {
 			stopCurrentState();
 			
 			if (!_states[pStateID]) {
@@ -50,6 +52,8 @@ package ngine.statemachine {
 			}
 			
 			dispatchEventWith(STATE_CHANGE, false, pStateID);
+			
+			_args = pArgs;
 			
 			_currState = _states[pStateID];
 			_currState.addEventListener(Event.ADDED_TO_STAGE,
@@ -72,7 +76,8 @@ package ngine.statemachine {
 		private function addedToStageEventHandler(pEvent:Event):void {
 			_currState.removeEventListener(Event.ADDED_TO_STAGE,
 										   addedToStageEventHandler);
-			_currState.start();
+			
+			_currState.start(_args);
 		};
 	};
 }
