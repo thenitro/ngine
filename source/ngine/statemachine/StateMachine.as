@@ -16,6 +16,7 @@ package ngine.statemachine {
 		private var _prevState:State;
 		
 		private var _args:Array;
+		private var _prevArgs:Array;
 		
 		public function StateMachine() {
 			_states = new Dictionary();
@@ -25,6 +26,10 @@ package ngine.statemachine {
 		
 		public function get prevState():State {
 			return _prevState;
+		};
+		
+		public function get prevArgs():Array {
+			return _prevArgs;
 		};
 		
 		public function get currentState():State {
@@ -44,7 +49,7 @@ package ngine.statemachine {
 		};
 		
 		public function startState(pStateID:String, pArgs:Array = null):void {
-			stopCurrentState();
+			forceStopState();
 			
 			if (!_states[pStateID]) {
 				trace("StateMachine.startState(pStateID) ERROR there is no state", pStateID);
@@ -63,14 +68,24 @@ package ngine.statemachine {
 		};
 		
 		public function stopCurrentState():void {
+			forceStopState();
+			
+			_prevState = null;
+			_prevArgs  = null;
+		};
+		
+		private function forceStopState():void {
 			if (_currState) {
 				_prevState = _currState;
 				_prevState.stop();
+				
+				_prevArgs = _args;
 				
 				_canvas.removeChild(_prevState);
 			}
 			
 			_currState = null;
+			_args      = null;
 		};
 		
 		private function addedToStageEventHandler(pEvent:Event):void {
