@@ -100,8 +100,6 @@ package ngine.display.gridcontainer {
 			}
 			
 			if (pUpdatePosition) {
-				trace("GridContainer.addVisual(pObject, pUpdatePosition)", cellWidth, cellHeight);
-				
 				object.x = object.indexX * cellWidth;
 				object.y = object.indexY * cellHeight;
 			}
