@@ -7,7 +7,33 @@ package ngine.math {
 			throw new IllegalOperationError("Math is static!");
 		};
 		
-		public static function roundDecimal(pValue:Number, pPrecision:int):Number {
+		/**
+		 * returns next highest power of two
+		 * hack by http://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2
+		 * 
+		 * By Sean Eron Anderson
+		 * seander@cs.stanford.edu
+		 * 
+		 * @param pValue
+		 * @return 
+		 * 
+		 */		
+		public static function nextPowerOfTwo(pValue:int):int {
+			pValue--;
+			
+			pValue |= pValue >>  1;
+			pValue |= pValue >>  2;
+			pValue |= pValue >>  4;
+			pValue |= pValue >>  8;
+			pValue |= pValue >> 16;
+			
+			pValue++;
+			
+			return pValue;
+		};
+		
+		public static function roundDecimal(pValue:Number, 
+											pPrecision:int):Number {
 			var decimal:Number = Math.pow(10, pPrecision);
 			
 			return Math.round(decimal * pValue) / decimal;
@@ -25,7 +51,8 @@ package ngine.math {
 		 * @return       The clamped value.
 		 * 
 		 */		
-		public static function clamp(pValue:Number, pMin:Number, pMax:Number):Number {
+		public static function clamp(pValue:Number, 
+									 pMin:Number, pMax:Number):Number {
 			if (pValue <= pMin) {
 				pValue = pMin;
 			} else if (pValue >= pMax) {
@@ -48,7 +75,7 @@ package ngine.math {
 		};
 		
 		public static function valueInRange(pValue:Number, 
-											 pMin:Number, pMax:Number):Boolean {
+											pMin:Number, pMax:Number):Boolean {
 			return pValue >= pMin && pValue <= pMax;
 		};
 		
