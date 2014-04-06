@@ -73,10 +73,12 @@ package ngine.core {
 			_position.x += _velocity.x * pElapsed;
 			_position.y += _velocity.y * pElapsed;
 			
-			_canvas.x = _position.x;
-			_canvas.y = _position.y;
-			
-			_canvas.rotation = _orientation;
+			if (_canvas) {
+				_canvas.x = _position.x;
+				_canvas.y = _position.y;
+				
+				_canvas.rotation = _orientation;
+			}
 		};
 		
 		public function handleCollision(pTarget:Entity):void {

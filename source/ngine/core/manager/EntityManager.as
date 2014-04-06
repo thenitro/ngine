@@ -67,7 +67,8 @@ package ngine.core.manager {
 										  pRadius:Number, 
 										  pFilterFunction:Function = null, 
 										  pSorted:Boolean = false):Array {
-			return _collider.getNearbyEntities(pPosition, pRadius, pFilterFunction, pSorted);
+			return _collider.getNearbyEntities(pPosition, pRadius, 
+											   pFilterFunction, pSorted);
 		};
 		
 		public function update(pElapsed:Number):void {
