@@ -1,8 +1,10 @@
-package ngine.core.collider {
+package ngine.core.collider.abstract {
 	import ngine.core.Entity;
 	import ngine.math.vectors.Vector2D;
 	
 	public interface ICollider {		
+		function setup(pParameters:IColliderParameters):void;
+		
 		function addEntity(pEntity:Entity):void;
 		function removeEntity(pEntity:Entity):void;
 		

@@ -2,7 +2,7 @@ package ngine.core.manager {
 	import ncollections.LinkedList;
 	
 	import ngine.core.Entity;
-	import ngine.core.collider.ICollider;
+	import ngine.core.collider.abstract.ICollider;
 	import ngine.math.vectors.Vector2D;
 	
 	import npooling.IReusable;

@@ -1,4 +1,4 @@
-package ngine.core.collider {
+package ngine.core.collider.abstract {
 	import flash.errors.IllegalOperationError;
 	
 	import ngine.core.Entity;

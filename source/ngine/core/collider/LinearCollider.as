@@ -1,15 +1,27 @@
 package ngine.core.collider {
 	import ncollections.LinkedList;
+	
 	import ngine.core.Entity;
+	import ngine.core.collider.abstract.ICollider;
+	import ngine.core.collider.abstract.IColliderParameters;
+	import ngine.core.collider.parameters.LinearColliderParameters;
 	import ngine.math.vectors.Vector2D;
 	
+	import npooling.Pool;
+	
 	public class LinearCollider implements ICollider {
-		private var _entities:LinkedList;
-		private var _colliderMethod:Function;
+		private static var _pool:Pool = Pool.getInstance();
 		
-		public function LinearCollider(pColliderMethod:Function) {
-			_colliderMethod = pColliderMethod;
-			_entities       = LinkedList.EMPTY;
+		private var _entities:LinkedList;
+		private var _parameters:LinearColliderParameters;
+		
+		public function LinearCollider() {
+			_entities = LinkedList.EMPTY;
+		};
+		
+		public function setup(pParameters:IColliderParameters):void {
+			_pool.put(_parameters);
+			_parameters = pParameters as LinearColliderParameters;
 		};
 		
 		public function addEntity(pEntity:Entity):void {
@@ -51,7 +63,7 @@ package ngine.core.collider {
 			return result;
 		};
 		
-		public function update():void {
+		public function update(pElapsed:Number):void {
 			var entityA:Entity = _entities.first as Entity;
 			
 			while (entityA) {
@@ -83,7 +95,7 @@ package ngine.core.collider {
 				return false;
 			}
 			
-			return _colliderMethod(pEntityA, pEntityB);
+			return _parameters.colliderMethod(pEntityA, pEntityB);
 		};
 	}
 }

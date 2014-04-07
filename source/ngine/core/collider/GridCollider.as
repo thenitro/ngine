@@ -2,6 +2,9 @@ package ngine.core.collider {
 	import ncollections.LinkedList;
 	
 	import ngine.core.Entity;
+	import ngine.core.collider.abstract.ICollider;
+	import ngine.core.collider.abstract.IColliderParameters;
+	import ngine.core.collider.parameters.GridColliderParameters;
 	import ngine.math.vectors.Vector2D;
 	
 	import npooling.Pool;
@@ -9,37 +12,19 @@ package ngine.core.collider {
 	public class GridCollider implements ICollider {
 		private static var _pool:Pool = Pool.getInstance();
 		
+		private var _parameters:GridColliderParameters;
+		
 		private var _entities:LinkedList;
 		private var _checks:Vector.<Entity>;
 		
 		private var _grid:Vector.<Vector.<Entity>>;
-		
-		private var _gridSize:int;
-		
-		private var _width:int;
-		private var _height:int;
 		
 		private var _cells:int;
 		
 		private var _cols:int;
 		private var _rows:int;
 		
-		private var _colliderMethod:Function;
-		
-		public function GridCollider(pWidth:Number, pHeight:Number, 
-									 pGridSize:Number, pColliderMethod:Function) {
-			_width  = pWidth;
-			_height = pHeight;
-			
-			_gridSize = pGridSize;
-			
-			_colliderMethod = pColliderMethod;
-			
-			_cols = Math.ceil(_width  / _gridSize) + 1;
-			_rows = Math.ceil(_height / _gridSize) + 1;
-			
-			_cells = _cols * _rows;
-			
+		public function GridCollider() {
 			_entities = _pool.get(LinkedList) as LinkedList;
 			
 			if (!_entities) {
@@ -49,6 +34,20 @@ package ngine.core.collider {
 			
 			_checks   = new Vector.<Entity>();
 			_grid     = new Vector.<Vector.<Entity>>();
+		};
+		
+		public function setup(pParameters:IColliderParameters):void {
+			_parameters = pParameters as GridColliderParameters;
+			
+			_entities.clean();
+			
+			_checks.length = 0;
+			_grid.length   = 0;
+			
+			_cols = Math.ceil(_parameters.width  / _parameters.gridSize) + 1;
+			_rows = Math.ceil(_parameters.height / _parameters.gridSize) + 1;
+			
+			_cells = _cols * _rows;
 		};
 		
 		public function addEntity(pEntity:Entity):void {
@@ -67,8 +66,10 @@ package ngine.core.collider {
 			var entity:Entity = _entities.first as Entity;
 			
 			while (entity) {
-				var index:int = Math.floor(entity.position.y / _gridSize) * _cols + 
-								Math.floor(entity.position.x / _gridSize);
+				var index:int = Math.floor(entity.position.y / 
+										   _parameters.gridSize) * _cols + 
+								Math.floor(entity.position.x / 
+										   _parameters.gridSize);
 				
 				if (index >= _grid.length || index < 0) {
 					entity = _entities.next(entity) as Entity;
@@ -112,10 +113,10 @@ package ngine.core.collider {
 										  pSorted:Boolean = false):Array {
 			var result:Array = [];
 			
-			var currentIndexX:int = Math.ceil(pPosition.x / _gridSize);
-			var currentIndexY:int = Math.ceil(pPosition.y / _gridSize);
+			var currentIndexX:int = Math.ceil(pPosition.x / _parameters.gridSize);
+			var currentIndexY:int = Math.ceil(pPosition.y / _parameters.gridSize);
 			
-			var size:int = Math.ceil(pRadius / _gridSize);
+			var size:int = Math.ceil(pRadius / _parameters.gridSize);
 			
 			for (var i:int = currentIndexX - size; i < currentIndexX + size; i++) {
 				for (var j:int = currentIndexY - size; j < currentIndexY + size; j++) {
@@ -132,7 +133,8 @@ package ngine.core.collider {
 					}
 					
 					for (var k:int = 0; k < cell.length; k++) {						
-						if (Vector2D.distanceSquared(cell[k].position, pPosition) < pRadius * pRadius) {
+						if (Vector2D.distanceSquared(cell[k].position, pPosition) < 
+							pRadius * pRadius) {
 							if (pFilterFunction == null || pFilterFunction(cell[k])) {
 								result.push(cell[k]);
 							}
@@ -143,7 +145,8 @@ package ngine.core.collider {
 			
 			if (pSorted) {
 				result.sort(function(pA:Entity, pB:Entity):int {
-					if (Vector2D.distanceSquared(pA.position, pPosition) > Vector2D.distanceSquared(pB.position, pPosition)) {
+					if (Vector2D.distanceSquared(pA.position, pPosition) > 
+						Vector2D.distanceSquared(pB.position, pPosition)) {
 						return 1;
 					}
 					
@@ -163,7 +166,7 @@ package ngine.core.collider {
 				return false;
 			}
 			
-			return _colliderMethod(pEntityA, pEntityB);
+			return _parameters.colliderMethod(pEntityA, pEntityB);
 		};
 		
 		private function checkOneCell(pX:int, pY:int):void {			
