@@ -15,6 +15,17 @@ package ngine.math {
 			_size     = Vector2D.ZERO;
 		};
 		
+		public static function get EMPTY():TRectangle {
+			var results:TRectangle = _pool.get(TRectangle) as TRectangle;
+			
+			if (!results) {
+				results = new TRectangle();
+				_pool.allocate(TRectangle, 1);
+			}
+			
+			return results;
+		};
+		
 		public function get reflection():Class {
 			return TRectangle;
 		};
