@@ -24,6 +24,10 @@ package ngine.display.gridcontainer {
 			super();
 		};
 		
+		override public function get reflection():Class {
+			return GridContainer;
+		};
+		
 		public function get canvas():Sprite {
 			return _container;
 		};
