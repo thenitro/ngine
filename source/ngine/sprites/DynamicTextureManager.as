@@ -4,8 +4,6 @@ package ngine.sprites {
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	
-	import starling.display.Stage;
-	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	
 	public class DynamicTextureManager extends AbstractTextureManager {

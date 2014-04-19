@@ -8,6 +8,7 @@ package ngine.sprites {
 		
 		public function AbstractTextureManager() {
 			_textures = {};
+			_scale    = 1.0;
 		};
 		
 		public function get scale():Number {
