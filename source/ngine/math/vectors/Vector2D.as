@@ -29,14 +29,6 @@ package ngine.math.vectors {
 			return result;
 		};
 		
-		public function get depth():Number {
-			return _depth;
-		};
-		
-		public function set depth(pValue:Number):void {
-			_depth = pValue;
-		};
-		
 		public static function distanceSquared(pVectorA:Vector2D, pVectorB:Vector2D):Number {
 			var dx:Number = pVectorB.x - pVectorA.x;
 			var dy:Number = pVectorB.y - pVectorA.y;
@@ -52,8 +44,20 @@ package ngine.math.vectors {
 			return pVectorA.x == pVectorB.x && pVectorA.y == pVectorB.y;
 		};
 		
+		public static function direction(pVectorA:Vector2D, pVectorB:Vector2D):Number {
+			return Math.atan2(pVectorB.y - pVectorA.y, pVectorB.x - pVectorA.x);
+		};
+		
 		public function get reflection():Class {
 			return Vector2D;
+		};
+		
+		public function get depth():Number {
+			return _depth;
+		};
+		
+		public function set depth(pValue:Number):void {
+			_depth = pValue;
 		};
 		
 		public function get x():Number {
@@ -225,6 +229,10 @@ package ngine.math.vectors {
 															  pMaxValue));
 			
 			return result;
+		};
+		
+		public function direction(pTarget:Vector2D):Number {
+			return Vector2D.direction(this, pTarget);
 		};
 		
 		public function zero():void {
