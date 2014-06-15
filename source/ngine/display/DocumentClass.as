@@ -1,15 +1,13 @@
 package ngine.display {
-	import flash.display.Sprite;
-	import flash.display.StageAlign;
-	import flash.display.StageScaleMode;
-	import flash.display3D.Context3DProfile;
-	import flash.display3D.Context3DRenderMode;
-	import flash.events.Event;
-	import flash.geom.Rectangle;
-	
-	import starling.core.Starling;
-	
-	public class DocumentClass extends Sprite {
+    import flash.display.Sprite;
+    import flash.display.StageAlign;
+    import flash.display.StageScaleMode;
+    import flash.events.Event;
+    import flash.geom.Rectangle;
+
+    import starling.core.Starling;
+
+    public class DocumentClass extends Sprite {
 		private var TargetClass:Class;
 		private var _starling:Starling;
 		

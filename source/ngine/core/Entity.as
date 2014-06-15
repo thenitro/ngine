@@ -1,13 +1,13 @@
 package ngine.core {
-	import ngine.math.TRectangle;
-	import ngine.math.vectors.Vector2D;
-	
-	import npooling.IReusable;
-	import npooling.Pool;
-	
-	import starling.display.DisplayObject;
-	
-	public class Entity implements IReusable {
+    import nmath.TRectangle;
+    import nmath.vectors.Vector2D;
+
+    import npooling.IReusable;
+    import npooling.Pool;
+
+    import starling.display.DisplayObject;
+
+    public class Entity implements IReusable {
 		protected static var _pool:Pool = Pool.getInstance();
 		
 		protected var _canvas:DisplayObject;

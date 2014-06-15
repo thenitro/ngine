@@ -1,16 +1,17 @@
 package ngine.core.manager {
-	import ncollections.LinkedList;
-	
-	import ngine.core.Entity;
-	import ngine.core.collider.abstract.ICollider;
-	import ngine.math.vectors.Vector2D;
-	
-	import npooling.IReusable;
-	import npooling.Pool;
-	
-	import starling.events.EventDispatcher;
-	
-	public final class EntityManager extends EventDispatcher implements IReusable {
+    import ncollections.LinkedList;
+
+    import ngine.core.Entity;
+    import ngine.core.collider.abstract.ICollider;
+
+    import nmath.vectors.Vector2D;
+
+    import npooling.IReusable;
+    import npooling.Pool;
+
+    import starling.events.EventDispatcher;
+
+    public final class EntityManager extends EventDispatcher implements IReusable {
 		public static const ADDED:String   = 'added_event';
 		public static const EXPIRED:String = 'expired_event';
 		
@@ -63,7 +64,7 @@ package ngine.core.manager {
 			removeFromStack(pEntity);
 		};
 		
-		public function getNearbyEntities(pPosition:Vector2D, 
+		public function getNearbyEntities(pPosition:Vector2D,
 										  pRadius:Number, 
 										  pFilterFunction:Function = null, 
 										  pSorted:Boolean = false):Array {
