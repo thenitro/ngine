@@ -6,8 +6,9 @@ package ngine.statemachine {
 	import starling.events.EventDispatcher;
 	
 	public final class StateMachine extends EventDispatcher {
-		public static const STATE_CHANGE:String = 'state_change';
-		
+		public static const STATE_STOPPED:String = 'state_stopped';
+		public static const STATE_STARTED:String = 'state_started';
+
 		private var _canvas:Sprite;
 		
 		private var _states:Dictionary;
@@ -56,7 +57,7 @@ package ngine.statemachine {
 				return;
 			}
 			
-			dispatchEventWith(STATE_CHANGE, false, pStateID);
+			dispatchEventWith(STATE_STOPPED, false, _prevState);
 			
 			_args = pArgs;
 			
@@ -65,6 +66,8 @@ package ngine.statemachine {
 										addedToStageEventHandler);
 			
 			_canvas.addChild(_currState);
+
+            dispatchEventWith(STATE_STARTED, false, _currState);
 		};
 		
 		public function stopCurrentState():void {
