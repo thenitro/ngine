@@ -36,6 +36,7 @@ package ngine.display {
 			
 			CONFIG::DEBUG {
 				_starling.showStats = true;
+                _starling.showStatsAt('right');
 			}
 			
 			stage.addEventListener(Event.RESIZE, stageResizeEventHandler);
