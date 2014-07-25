@@ -20,6 +20,10 @@ package ngine.display.ui {
             return _defaultText;
         };
 
+        public function restoreDefaultText():void {
+            text = _defaultText;
+        };
+
         private function addedToStageEventHandler(pEvent:Event):void {
             removeEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
 
