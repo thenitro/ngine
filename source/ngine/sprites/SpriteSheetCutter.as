@@ -62,9 +62,10 @@ package ngine.sprites {
 		
 		private function cut(pBitmapData:BitmapData, 
 							 pTileWidth:uint, pTileHeight:uint):void {
-			_tilesNumX = Math.round(pBitmapData.width / pTileHeight);
+			_tilesNumX = Math.round(pBitmapData.width / pTileWidth);
 			_tilesNumY = Math.round(pBitmapData.height / pTileHeight);
-			
+
+            trace('SpriteSheetCutter.cut:', pBitmapData.width, pBitmapData.height, pTileWidth, pTileHeight);
 			trace("SpriteSheetCutter.cut(pBitmapData, pTileWidth, pTileHeight)", _tilesNumX, _tilesNumY);
 			
 			_maxID = _tilesNumX * _tilesNumY;
