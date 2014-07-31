@@ -40,5 +40,9 @@ package ngine.files {
         public function getByURL(pURL:String):TFile {
             return _filesByURL[pURL] as TFile;
         };
+
+        public function contains(pID:String):Boolean {
+            return _filesByID[pID] || _filesByURL[pID];
+        };
     }
 }

@@ -15,6 +15,7 @@ package ngine.files {
     import flash.utils.Dictionary;
 
     import starling.events.EventDispatcher;
+    import starling.textures.Texture;
 
     public class FilesLoader extends EventDispatcher {
         public static const PROGRESS_EVENT:String = 'event_progress';
@@ -165,8 +166,8 @@ package ngine.files {
             if (loader.content is MovieClip) {
                 file.setContent(loader, target.bytesTotal);
             } else {
-                file.setContent(Bitmap(loader.content).bitmapData.clone(),
-                        target.bytesTotal);
+                file.setContent(Texture.fromBitmapData(Bitmap(loader.content).bitmapData.clone()),
+                                target.bytesTotal);
 
                 loader.unload();
             }
