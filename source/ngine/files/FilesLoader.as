@@ -68,7 +68,7 @@ package ngine.files {
             return _total - _loaded;
         };
 
-        public function add(pURL:String, pID:String):void {
+        public function add(pURL:String, pID:String, pForceBinaryLoading:Boolean = false):void {
             if (!_completed) {
                 trace('FilesLoader.add: Wait till files loading!');
                 return;
@@ -82,7 +82,7 @@ package ngine.files {
                 return;
             }
 
-            _stack[pURL] = new TFile(pURL, pID);
+            _stack[pURL] = new TFile(pURL, pID, pForceBinaryLoading);
             _total++;
         };
 
@@ -97,17 +97,17 @@ package ngine.files {
             for each (var file:TFile in _stack) {
                 loadFile(file);
             }
-
         };
 
-        private function loadFile(pFile:TFile): void{
+        private function loadFile(pFile:TFile):void{
             _urlRequest.url = pFile.url;
 
             var loaderContext:LoaderContext = new LoaderContext();
-            loaderContext.checkPolicyFile = true;
+                loaderContext.checkPolicyFile = true;
 
-            if (pFile.extension == 'jpg' || pFile.extension == 'png' ||
-                pFile.extension == 'gif' || pFile.extension == 'swf') {
+            if ((pFile.extension == 'jpg' || pFile.extension == 'png' ||
+                 pFile.extension == 'gif' || pFile.extension == 'swf') &&
+                    !pFile.forceBinaryLoading) {
 
                 var loader:Loader = new Loader();
                     loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,
@@ -128,7 +128,7 @@ package ngine.files {
             } else {
                 var urlLoader:URLLoader = new URLLoader();
 
-                if (pFile.extension == "xml") {
+                if (pFile.extension == "xml" && !pFile.forceBinaryLoading) {
                     urlLoader.dataFormat = URLLoaderDataFormat.TEXT;
                 } else {
                     urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
