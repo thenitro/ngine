@@ -16,6 +16,8 @@ package ngine.core.manager {
 		public static const EXPIRED:String = 'expired_event';
 		
 		private static var _pool:Pool = Pool.getInstance();
+
+        private var _disposed:Boolean;
 		
 		private var _entities:LinkedList;
 		
@@ -43,6 +45,10 @@ package ngine.core.manager {
 		public function get reflection():Class {
 			return EntityManager;
 		};
+
+        public function get disposed():Boolean {
+            return _disposed;
+        };
 		
 		public function get entities():LinkedList {
 			return _entities;
@@ -150,7 +156,9 @@ package ngine.core.manager {
 		};
 		
 		public function dispose():void {
-			clean();			
+			clean();
+
+            _disposed = true;
 		};
 	};
 }

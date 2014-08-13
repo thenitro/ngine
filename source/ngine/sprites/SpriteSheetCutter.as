@@ -9,7 +9,7 @@ package ngine.sprites {
 		
 		private var _tilesNumX:uint;
 		private var _tilesNumY:uint;
-		
+
 		private var _maxID:uint;
 		
 		private var _atlas:TextureAtlas;
@@ -20,7 +20,7 @@ package ngine.sprites {
 				throw new Error("SpriteSheetCutter: BitmapData is empty!");
 				return;
 			}
-			
+
 			cut(pBitmapData, pTileWidth, pTileHeight);
 		};
 		
@@ -33,10 +33,7 @@ package ngine.sprites {
 				throw new Error("SpriteSheetCutter.getByIndex(pIndexX, pIndexY): index " + pIndexX + " " + pIndexY + " is out of range!");
 				return null;
 			}
-			
-			trace("SpriteSheetCutter.getByIndex(pIndexX, pIndexY)", pIndexX, pIndexY);
-			trace("SpriteSheetCutter.getByIndex(pIndexX, pIndexY)", _textures.length, _textures[pIndexY].length);
-			
+
 			return _atlas.getTexture(_textures[pIndexY][pIndexX]);
 		};
 		
@@ -62,11 +59,9 @@ package ngine.sprites {
 		
 		private function cut(pBitmapData:BitmapData, 
 							 pTileWidth:uint, pTileHeight:uint):void {
-			_tilesNumX = Math.round(pBitmapData.width / pTileHeight);
+			_tilesNumX = Math.round(pBitmapData.width / pTileWidth);
 			_tilesNumY = Math.round(pBitmapData.height / pTileHeight);
-			
-			trace("SpriteSheetCutter.cut(pBitmapData, pTileWidth, pTileHeight)", _tilesNumX, _tilesNumY);
-			
+
 			_maxID = _tilesNumX * _tilesNumY;
 			
 			_textures = new Vector.<Vector.<String>>(_tilesNumX);

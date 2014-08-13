@@ -21,6 +21,8 @@ package ngine.core {
 		protected var _expired:Boolean;
 		
 		protected var _collider:Entity;
+
+        private var _disposed:Boolean;
 		
 		public function Entity() {
 			_position = Vector2D.ZERO;
@@ -32,6 +34,10 @@ package ngine.core {
 		public function get reflection():Class {
 			return Entity;
 		};
+
+        public function get disposed():Boolean {
+            return _disposed;
+        };
 		
 		public function get canvas():DisplayObject {
 			return _canvas;
@@ -102,6 +108,8 @@ package ngine.core {
 		};
 		
 		public function dispose():void {
+            _disposed = true;
+
 			_pool.put(_position);
 			_pool.put(_velocity);
 			
