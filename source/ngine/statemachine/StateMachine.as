@@ -50,6 +50,10 @@ package ngine.statemachine {
 		};
 		
 		public function startState(pStateID:String, pArgs:Array = null):void {
+            if (_currState && _currState.id == pStateID) {
+                return;
+            }
+
 			forceStopState();
 			
 			if (!_states[pStateID]) {
