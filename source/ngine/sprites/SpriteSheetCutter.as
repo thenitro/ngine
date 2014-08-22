@@ -61,7 +61,7 @@ package ngine.sprites {
 							 pTileWidth:uint, pTileHeight:uint):void {
 			_tilesNumX = Math.round(pBitmapData.width / pTileWidth);
 			_tilesNumY = Math.round(pBitmapData.height / pTileHeight);
-
+            
 			_maxID = _tilesNumX * _tilesNumY;
 			
 			_textures = new Vector.<Vector.<String>>(_tilesNumX);
