@@ -6,6 +6,7 @@ package ngine.files {
 
     import starling.events.Event;
     import starling.events.EventDispatcher;
+    import starling.textures.TextureSmoothing;
 
     public class DragonBonesMultiFactory extends EventDispatcher {
         private var _files:Vector.<TFile>;
@@ -42,6 +43,7 @@ package ngine.files {
 
         private function factoryParsingCompleteEventHandler(pEvent:Object):void {
             var target:StarlingFactory = pEvent.target as StarlingFactory;
+                target.displaySmoothing = TextureSmoothing.TRILINEAR;
             var file:TFile             = _map[target];
 
             _factories.splice(_factories.indexOf(target), 1);
