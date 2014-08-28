@@ -9,7 +9,7 @@ package ngine.display {
 		
 		private var _width:Number;
 		private var _height:Number;
-		
+
 		public function TilingTexture(pTexture:Texture, pWidth:Number, pHeight:Number) {
 			_texture = pTexture;
 			
@@ -19,19 +19,31 @@ package ngine.display {
 			super();
 			addEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
 		};
+
+        public function resize(pWidth:Number, pHeight:Number):void {
+            _width  = pWidth;
+            _height = pHeight;
+
+            removeChildren(0, -1, true);
+            createTextures();
+        };
 		
 		private function addedToStageEventHandler(pEvent:Event):void {
 			removeEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
-			
-			for (var i:uint = 0; i < Math.ceil(_width / _texture.width); i++) {
-				for (var j:uint = 0; j < Math.ceil(_height / _texture.height); j++) {
-					var image:Image = new Image(_texture);
-						image.x = i * (_texture.width - 2);
-						image.y = j * (_texture.height - 2);
-					
-					addChild(image);	
-				}
-			}			
+			createTextures();
 		};
+
+        private function createTextures():void {
+            for (var i:uint = 0; i < Math.ceil(_width / _texture.width); i++) {
+                for (var j:uint = 0; j < Math.ceil(_height / _texture.height); j++) {
+                    var image:Image = new Image(_texture);
+
+                        image.x = i * _texture.width;
+                        image.y = j * _texture.height;
+
+                    addChild(image);
+                }
+            }
+        };
 	};
 }
