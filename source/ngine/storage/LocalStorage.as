@@ -37,12 +37,12 @@ package ngine.storage {
 			_inited  = true;
 		};
 		
-		public function load(pID:String):* {
+		public function load(pID:String, pDefaultValue:Object = null):* {
 			if (!_inited) {
 				return null;
 			}
 			
-			return _storage.data[pID];
+			return _storage.data[pID] || pDefaultValue;
 		};
 	
 		public function save(pID:String, pData:Object):void {

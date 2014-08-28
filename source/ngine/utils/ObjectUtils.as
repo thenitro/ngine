@@ -7,6 +7,14 @@ package ngine.utils {
             throw new IllegalOperationError('ObjectUtils is static!')
         };
 
+        public static function getFirstItem(pObject:Object):Object {
+            for each (var item:Object in pObject) {
+                return item;
+            }
+
+            return null;
+        };
+
         public static function repr(pObject:Object, pDeep:Boolean = false):void {
             var makeLines:Function = function(pCount:int):String {
                 if (!pCount) {
