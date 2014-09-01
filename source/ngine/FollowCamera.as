@@ -1,12 +1,11 @@
 package ngine {
-	import ngine.core.Entity;
-	import ngine.math.TRectangle;
-	import nphysics.bodies.Body;
-	import nphysics.world.World;
-	
-	import starling.display.DisplayObject;
-	
-	public final class FollowCamera {
+    import ngine.core.Entity;
+
+    import nmath.TRectangle;
+
+    import starling.display.DisplayObject;
+
+    public final class FollowCamera {
 		private var _target:Entity;
 		
 		private var _bounds:TRectangle;

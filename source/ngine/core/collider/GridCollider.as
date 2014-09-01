@@ -1,15 +1,16 @@
 package ngine.core.collider {
-	import ncollections.LinkedList;
-	
-	import ngine.core.Entity;
-	import ngine.core.collider.abstract.ICollider;
-	import ngine.core.collider.abstract.IColliderParameters;
-	import ngine.core.collider.parameters.GridColliderParameters;
-	import ngine.math.vectors.Vector2D;
-	
-	import npooling.Pool;
-	
-	public class GridCollider implements ICollider {
+    import ncollections.LinkedList;
+
+    import ngine.core.Entity;
+    import ngine.core.collider.abstract.ICollider;
+    import ngine.core.collider.abstract.IColliderParameters;
+    import ngine.core.collider.parameters.GridColliderParameters;
+
+    import nmath.vectors.Vector2D;
+
+    import npooling.Pool;
+
+    public class GridCollider implements ICollider {
 		private static var _pool:Pool = Pool.getInstance();
 		
 		private var _parameters:GridColliderParameters;
@@ -107,7 +108,7 @@ package ngine.core.collider {
 			}
 		};
 		
-		public function getNearbyEntities(pPosition:Vector2D, 
+		public function getNearbyEntities(pPosition:Vector2D,
 										  pRadius:Number, 
 										  pFilterFunction:Function = null, 
 										  pSorted:Boolean = false):Array {

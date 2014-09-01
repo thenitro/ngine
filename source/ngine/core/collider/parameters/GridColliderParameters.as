@@ -1,10 +1,10 @@
 package ngine.core.collider.parameters {
-	import ngine.core.collider.abstract.IColliderParameters;
-	
-	import npooling.IReusable;
-	import npooling.Pool;
-	
-	public final class GridColliderParameters implements IReusable, IColliderParameters {
+    import ngine.core.collider.abstract.IColliderParameters;
+
+    import npooling.IReusable;
+    import npooling.Pool;
+
+    public final class GridColliderParameters implements IReusable, IColliderParameters {
 		private static var _pool:Pool = Pool.getInstance();
 		
 		private var _colliderMethod:Function;
@@ -13,6 +13,8 @@ package ngine.core.collider.parameters {
 		private var _height:Number;
 		
 		private var _gridSize:Number;
+
+        private var _disposed:Boolean;
 		
 		public function GridColliderParameters() {
 		};
@@ -32,6 +34,10 @@ package ngine.core.collider.parameters {
 		public function get reflection():Class {
 			return GridColliderParameters;
 		};
+
+        public function get disposed():Boolean {
+            return _disposed;
+        };
 		
 		public function get colliderMethod():Function {
 			return _colliderMethod;
@@ -65,6 +71,7 @@ package ngine.core.collider.parameters {
 		};
 		
 		public function dispose():void {
+            _disposed       = true;
 			_colliderMethod = null;
 		};
 		
