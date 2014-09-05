@@ -34,6 +34,8 @@ package ngine.display {
 		};
 
         private function createTextures():void {
+            unflatten();
+
             for (var i:uint = 0; i < Math.ceil(_width / _texture.width); i++) {
                 for (var j:uint = 0; j < Math.ceil(_height / _texture.height); j++) {
                     var image:Image = new Image(_texture);
@@ -44,6 +46,8 @@ package ngine.display {
                     addChild(image);
                 }
             }
+
+            flatten();
         };
 	};
 }
