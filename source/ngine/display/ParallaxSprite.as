@@ -1,9 +1,7 @@
 package ngine.display {
-    import flash.events.PressAndTapGestureEvent;
     import flash.utils.Dictionary;
 
     import nmath.TMath;
-
     import nmath.vectors.Vector2D;
 
     import starling.display.Sprite;
@@ -31,7 +29,7 @@ package ngine.display {
                                  pMultiply:Number):void {
             _width  = pWidth;
 
-            var texture:TilingTexture = new TilingTexture(pTexture, _width + _width * (1.0 - pMultiply), pTexture.height);
+            var texture:TilingTexture = new TilingTexture(pTexture, _width, pTexture.height, TilingTexture.ALIGN_CENTER);
 
             _layers.push(texture);
             _multiply[texture] = pMultiply;
@@ -42,17 +40,17 @@ package ngine.display {
 
         public function offset(pOffset:Vector2D):void {
             for each (var texture:TilingTexture in _layers) {
-                if (_layers[0] == texture) {
+                if (_multiply[texture] == 0.0) {
                     continue;
                 }
 
                 texture.x -= Math.round(pOffset.x * _multiply[texture]);
-                texture.x  = TMath.clamp(texture.x, 0, texture.width - _width);
+                texture.x  = TMath.clamp(texture.x, -texture.width / 2 + stage.stageWidth, 0);
             }
         };
 
         public function resize(pWidth:Number):void {
-            _width  = pWidth;
+            _width = pWidth;
 
             for each (var texture:TilingTexture in _layers) {
                 resizeTexture(texture, pWidth);
@@ -62,13 +60,18 @@ package ngine.display {
         private function resizeTexture(pTexture:TilingTexture,
                                        pWidth:Number):void {
             pTexture.resize(pWidth, pTexture.height);
-            pTexture.x = (pWidth - pTexture.width) / 2;
 
             if (pTexture == _layers[0]) {
                 return;
             }
 
             pTexture.y = _layers[0].height - pTexture.height;
+
+            if (_multiply[pTexture] == 0.0) {
+                return;
+            }
+
+            pTexture.x = (pWidth - pTexture.width) / 2;
         };
     };
 }
