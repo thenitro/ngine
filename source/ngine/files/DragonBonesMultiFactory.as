@@ -29,6 +29,11 @@ package ngine.files {
 
         public function load():void {
             for each (var file:TFile in _files) {
+                if (file.content is StarlingFactory) {
+                    parsingComplete(file.content as StarlingFactory);
+                    continue;
+                }
+
                 var factory:StarlingFactory = new StarlingFactory();
                     factory.generateMipMaps = true;
                     factory.addEventListener(Event.COMPLETE,
@@ -42,13 +47,17 @@ package ngine.files {
         };
 
         private function factoryParsingCompleteEventHandler(pEvent:Object):void {
-            var target:StarlingFactory = pEvent.target as StarlingFactory;
+            var target:StarlingFactory  = pEvent.target as StarlingFactory;
                 target.displaySmoothing = TextureSmoothing.TRILINEAR;
-            var file:TFile             = _map[target];
 
-            _factories.splice(_factories.indexOf(target), 1);
+            var file:TFile = _map[target];
+                file.setContent(target, file.bytes);
 
-            file.setContent(target, file.bytes);
+            parsingComplete(target);
+        };
+
+        private function parsingComplete(pTarget:StarlingFactory):void {
+            _factories.splice(_factories.indexOf(pTarget), 1);
 
             if (!_factories.length) {
                 dispatchEventWith(Event.COMPLETE);
