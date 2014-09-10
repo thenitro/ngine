@@ -17,7 +17,7 @@ package ngine.files {
     import starling.events.EventDispatcher;
     import starling.textures.Texture;
 
-    public class FilesLoader extends EventDispatcher {
+    public class FilesLoader extends EventDispatcher implements IProgressable {
         public static const PROGRESS_EVENT:String = 'event_progress';
 
         private var _urlRequest:URLRequest;
@@ -33,8 +33,8 @@ package ngine.files {
 
         private var _completed:Boolean;
 
-        private var _total:uint;
-        private var _loaded:uint;
+        private var _total:int;
+        private var _loaded:int;
 
         public function FilesLoader() {
             _urlRequest = new URLRequest();
@@ -52,11 +52,15 @@ package ngine.files {
             return _completed;
         };
 
-        public function get loaded():uint {
+        public function get progress():Number {
+            return progressed / total;
+        };
+
+        public function get progressed():int {
             return _loaded;
         };
 
-        public function get total():uint {
+        public function get total():int {
             return _total;
         };
 
@@ -66,6 +70,10 @@ package ngine.files {
 
         public function get queueLenght():Number {
             return _total - _loaded;
+        };
+
+        public function get description():String {
+            return 'Loading files';
         };
 
         public function add(pURL:String, pID:String, pForceBinaryLoading:Boolean = false):void {
@@ -149,6 +157,8 @@ package ngine.files {
         private function loaderCompleteEventHandler(pEvent:Event):void {
             var target:LoaderInfo = pEvent.target as LoaderInfo;
             var loader:Loader     = _loaders[target] as Loader;
+
+            trace('FilesLoader.loaderCompleteEventHandler:');
 
             if (!loader) {
                 return;

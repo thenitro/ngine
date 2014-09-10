@@ -8,7 +8,9 @@ package ngine.files {
     import starling.events.EventDispatcher;
     import starling.textures.TextureSmoothing;
 
-    public class DragonBonesMultiFactory extends EventDispatcher {
+    public class DragonBonesMultiFactory extends EventDispatcher implements IProgressable {
+        public static const PROGRESS:String = 'dragon_bones_multi_factory_progress';
+
         private var _files:Vector.<TFile>;
         private var _factories:Vector.<StarlingFactory>;
 
@@ -21,6 +23,22 @@ package ngine.files {
             _factories = new Vector.<StarlingFactory>();
 
             _map = new Dictionary();
+        };
+
+        public function get description():String {
+            return 'Parsing animation';
+        };
+
+        public function get progress():Number {
+            return progressed / total;
+        };
+
+        public function get progressed():int {
+            return total - _factories.length;
+        };
+
+        public function get total():int {
+            return _files.length;
         };
 
         public function addFile(pFile:TFile):void {
@@ -42,8 +60,6 @@ package ngine.files {
 
                 _map[factory] = file;
             }
-
-            _files.length = 0;
         };
 
         private function factoryParsingCompleteEventHandler(pEvent:Object):void {
@@ -59,7 +75,11 @@ package ngine.files {
         private function parsingComplete(pTarget:StarlingFactory):void {
             _factories.splice(_factories.indexOf(pTarget), 1);
 
+            dispatchEventWith(PROGRESS);
+
             if (!_factories.length) {
+                _files.length = 0;
+
                 dispatchEventWith(Event.COMPLETE);
             }
         };
