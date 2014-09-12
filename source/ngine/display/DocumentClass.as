@@ -31,7 +31,7 @@ package ngine.display {
 												Context3DRenderMode.AUTO, 
 												Context3DProfile.BASELINE_CONSTRAINED*/);
 			_starling.start();
-			_starling.simulateMultitouch  = true;
+            _starling.simulateMultitouch  = true;
 			_starling.enableErrorChecking = true;
 			
 			CONFIG::DEBUG {

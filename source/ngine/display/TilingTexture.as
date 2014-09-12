@@ -1,10 +1,12 @@
 package ngine.display {
-	import starling.display.Image;
+    import ngine.display.scale.IScalable;
+
+    import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.textures.Texture;
 	
-	public final class TilingTexture extends Sprite {
+	public final class TilingTexture extends Sprite implements IScalable {
         public static const ALIGN_RIGHT:int  = -1;
         public static const ALIGN_LEFT:int   =  1;
         public static const ALIGN_CENTER:int =  0;
@@ -16,6 +18,9 @@ package ngine.display {
 
         private var _align:int;
 
+        private var _scale:Number;
+        private var _scaleFactor:Number;
+
 		public function TilingTexture(pTexture:Texture,
                                       pWidth:Number, pHeight:Number,
                                       pAlign:int = ALIGN_LEFT) {
@@ -25,14 +30,26 @@ package ngine.display {
 			_height = pHeight;
 
             _align = pAlign;
+
+            _scale = 1.0;
+            _scaleFactor = 1.0;
 			
 			super();
 			addEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
 		};
 
+        public function scale(pScale:Number, pScaleFactor:Number):void {
+            _scale       = pScale;
+            _scaleFactor = pScaleFactor;
+
+            resize(_width, _height);
+        };
+
         public function resize(pWidth:Number, pHeight:Number):void {
             _width  = pWidth;
             _height = pHeight;
+
+            trace('TilingTexture.resize:', _width, _height);
 
             removeChildren(0, -1, true);
             createTextures();
@@ -46,11 +63,14 @@ package ngine.display {
         private function createTextures():void {
             unflatten();
 
+            var sWidth:Number  = _width  * _scaleFactor;
+            var sHeight:Number = _height * _scaleFactor;
+
             var startX:int = 0;
             var startY:int = 0;
 
-            var endX:int = Math.ceil(_width / _texture.width);
-            var endY:int = Math.ceil(_height / _texture.height);
+            var endX:int = Math.ceil(sWidth / _texture.width);
+            var endY:int = Math.ceil(sHeight / _texture.height);
 
             if (_align == ALIGN_LEFT || _align == ALIGN_RIGHT) {
                 startX = 0;
