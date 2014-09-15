@@ -1,5 +1,8 @@
 package ngine.display.scale {
-    public class ScaleManager {
+    import starling.events.Event;
+    import starling.events.EventDispatcher;
+
+    public class ScaleManager extends EventDispatcher {
         private var _scale:Number;
         private var _scaleFactor:Number;
 
@@ -33,6 +36,8 @@ package ngine.display.scale {
             for each (var observer:IScalable in _observers) {
                 observer.scale(_scale, _scaleFactor);
             }
+
+            dispatchEventWith(Event.CHANGE, false, scale);
         };
     };
 }
