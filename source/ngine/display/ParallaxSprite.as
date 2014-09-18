@@ -60,8 +60,6 @@ package ngine.display {
         };
 
         public function scale(pScale:Number, pScaleFactor:Number):void {
-            trace('ParallaxSprite.scale:', pScale, pScaleFactor);
-
             _scale       = pScale;
             _scaleFactor = pScaleFactor;
 
@@ -80,8 +78,6 @@ package ngine.display {
                                        pWidth:Number):void {
             pTexture.resize(pWidth, pTexture.height * _scale);
 
-            trace('ParallaxSprite.resizeTexture:', pTexture.height);
-
             if (pTexture == _layers[0]) {
                 return;
             }
@@ -93,8 +89,6 @@ package ngine.display {
             }
 
             pTexture.x = (pWidth - pTexture.width) / 2;
-
-            trace('ParallaxSprite.resizeTexture:', height);
         };
     };
 }

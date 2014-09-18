@@ -49,8 +49,6 @@ package ngine.display {
             _width  = pWidth;
             _height = pHeight;
 
-            trace('TilingTexture.resize:', _width, _height);
-
             removeChildren(0, -1, true);
             createTextures();
         };

@@ -110,6 +110,8 @@ package ngine.files {
         private function loadFile(pFile:TFile):void{
             _urlRequest.url = pFile.url;
 
+            trace('FilesLoader.loadFile:', pFile.url);
+
             var loaderContext:LoaderContext = new LoaderContext();
                 loaderContext.checkPolicyFile = true;
 
@@ -157,8 +159,6 @@ package ngine.files {
         private function loaderCompleteEventHandler(pEvent:Event):void {
             var target:LoaderInfo = pEvent.target as LoaderInfo;
             var loader:Loader     = _loaders[target] as Loader;
-
-            trace('FilesLoader.loaderCompleteEventHandler:');
 
             if (!loader) {
                 return;
