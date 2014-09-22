@@ -1,6 +1,4 @@
 package ngine.display {
-    import com.wysegames.stolenkingdom.play.PlayState;
-
     import flash.utils.Dictionary;
 
     import ngine.display.scale.IScalable;
