@@ -3,8 +3,10 @@ package ngine.storage {
 	import flash.events.NetStatusEvent;
 	import flash.net.SharedObject;
 	import flash.net.SharedObjectFlushStatus;
-	
-	public final class LocalStorage {
+
+    import ngine.utils.ObjectUtils;
+
+    public final class LocalStorage {
 		private static var _allowInstance:Boolean;
 		private static var _instance:LocalStorage;
 		
@@ -41,8 +43,17 @@ package ngine.storage {
 			if (!_inited) {
 				return null;
 			}
+
+            var result:* = _storage.data[pID];
+
+            trace('LocalStorage.load:', result);
+            ObjectUtils.repr(result, true);
+
+            if (!result || result == undefined) {
+                return pDefaultValue;
+            }
 			
-			return _storage.data[pID] || pDefaultValue;
+			return result;
 		};
 	
 		public function save(pID:String, pData:Object):void {
