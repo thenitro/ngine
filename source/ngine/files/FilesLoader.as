@@ -1,6 +1,7 @@
 package ngine.files {
 
     import flash.display.Bitmap;
+    import flash.display.BitmapData;
     import flash.display.Loader;
     import flash.display.LoaderInfo;
     import flash.display.MovieClip;
@@ -20,13 +21,13 @@ package ngine.files {
     public class FilesLoader extends EventDispatcher implements IProgressable {
         public static const PROGRESS_EVENT:String = 'event_progress';
 
+        private static var _library:Library = Library.getInstance();
+
         private var _urlRequest:URLRequest;
 
         private var _stack:Dictionary;
         private var _instances:Dictionary;
         private var _loaders:Dictionary;
-
-        private var _library:Library;
 
         private var _bytesLoaded:Number;
         private var _bytesTotal:Number;
@@ -42,8 +43,6 @@ package ngine.files {
             _stack     = new Dictionary();
             _instances = new Dictionary();
             _loaders   = new Dictionary();
-
-            _library  = Library.getInstance();
 
             _completed = true;
         };
@@ -86,7 +85,7 @@ package ngine.files {
                 return;
             }
 
-            if (_library.getByID(pID) || _library.getByURL(pURL)) {
+            if (_library.get(pURL)) {
                 return;
             }
 
@@ -109,8 +108,6 @@ package ngine.files {
 
         private function loadFile(pFile:TFile):void{
             _urlRequest.url = pFile.url;
-
-            trace('FilesLoader.loadFile:', pFile.url);
 
             var loaderContext:LoaderContext = new LoaderContext();
                 loaderContext.checkPolicyFile = true;
@@ -176,8 +173,10 @@ package ngine.files {
             if (loader.content is MovieClip) {
                 file.setContent(loader, target.bytesTotal);
             } else {
-                file.setContent(Texture.fromBitmapData(Bitmap(loader.content).bitmapData.clone()),
-                                target.bytesTotal);
+                var bd:BitmapData = Bitmap(loader.content).bitmapData.clone();
+
+                file.setContent(Texture.fromBitmapData(bd),
+                                target.bytesTotal, bd);
 
                 loader.unload();
             }
@@ -241,6 +240,11 @@ package ngine.files {
         };
 
         private function filesLoaded():void {
+            _completed = true;
+            _total     = 0;
+
+            dispatchEventWith(Event.COMPLETE, false, _stack);
+
             var id:Object;
 
             for (id in _stack) {
@@ -254,11 +258,6 @@ package ngine.files {
             for (id in _instances) {
                 delete _instances[id];
             }
-
-            _completed = true;
-            _total     = 0;
-
-            dispatchEventWith(Event.COMPLETE);
         };
     };
 }

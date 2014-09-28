@@ -33,12 +33,8 @@ package ngine.files {
             _filesByURL[pFile.url] = pFile;
         };
 
-        public function getByID(pID:String):TFile {
-            return _filesByID[pID] as TFile;
-        };
-
-        public function getByURL(pURL:String):TFile {
-            return _filesByURL[pURL] as TFile;
+        public function get(pID:String):TFile {
+            return _filesByID[pID] as TFile || _filesByURL[pID] as TFile;
         };
 
         public function contains(pID:String):Boolean {

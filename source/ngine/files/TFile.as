@@ -4,6 +4,8 @@ package ngine.files {
 
     import npooling.IReusable;
 
+    import starling.textures.Texture;
+
     public class TFile implements IReusable {
         private var _url:String;
         private var _id:String;
@@ -13,6 +15,7 @@ package ngine.files {
         private var _bytes:uint;
 
         private var _content:*;
+        private var _raw:Object;
 
         private var _forceBinaryLoading:Boolean;
         private var _disposed:Boolean;
@@ -26,11 +29,15 @@ package ngine.files {
             _extension =  pURL.substr(pURL.length -3, pURL.length);
         };
 
-        public function setContent(pValue:Object, pBytesLoded:int):void {
-            clearContent();
+        public function setContent(pValue:Object, pBytesLoded:int,
+                                   pRaw:Object = null):void {
+            clearContent(_content);
+            clearContent(_raw);
 
             _content = pValue;
             _bytes   = (pBytesLoded < 0) ? _bytes : uint(pBytesLoded);
+
+            _raw = pRaw;
         };
 
         public function get url():String {
@@ -47,6 +54,10 @@ package ngine.files {
 
         public function get content():Object{
             return _content;
+        };
+
+        public function get raw():Object {
+            return _raw;
         };
 
         public function get bytes():uint {
@@ -92,21 +103,25 @@ package ngine.files {
 
             _extension = null;
 
-            clearContent();
+            clearContent(_content);
+            clearContent(_raw);
+
+            _content = null;
+            _raw     = null;
         };
 
-        private function clearContent():void {
-            if (!_content) {
+        private function clearContent(pContent:Object):void {
+            if (!pContent) {
                 return;
             }
 
-            if (_content is BitmapData) {
-                (_content as BitmapData).dispose();
-            } else if (_content is ByteArray) {
-                (_content as ByteArray).clear();
+            if (pContent is BitmapData) {
+                (pContent as BitmapData).dispose();
+            } else if (pContent is ByteArray) {
+                (pContent as ByteArray).clear();
+            } else if (pContent is Texture) {
+                (pContent as Texture).dispose();
             }
-
-            _content = null;
         };
     };
 }
