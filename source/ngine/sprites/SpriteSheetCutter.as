@@ -42,8 +42,7 @@ package ngine.sprites {
 				throw new Error("SpriteSheetCutter.getByID(pID) there is no texture with id " + pID);
 				return null;
 			}
-			
-			//return _textureByID[pID];
+
 			return _atlas.getTexture(pID.toString());
 		};
 		
@@ -68,28 +67,28 @@ package ngine.sprites {
 			
 			var textureID:int = 0;
 			var texuresText:String = '';
-			
-			for (var y:uint = 0; y < _tilesNumY; y++) {				
+
+			for (var y:uint = 0; y < _tilesNumY; y++) {
 				for (var x:uint = 0; x < _tilesNumX; x++) {
 					var cell:Vector.<String> = _textures[x] as Vector.<String>;
-					
+
 					if (!cell) {
 						cell = new Vector.<String>(_tilesNumY);
 						_textures[x] = cell;
 					}
-					
-					texuresText += '<SubTexture name="' + textureID + '" ' + 
-											'x="' + x * pTileWidth + 
-											'" y="' + y * pTileHeight + 
-											'" width="' + pTileWidth + 
-											'" height="' + pTileHeight + 
+
+					texuresText += '<SubTexture name="' + textureID + '" ' +
+											'x="' + x * pTileWidth +
+											'" y="' + y * pTileHeight +
+											'" width="' + pTileWidth +
+											'" height="' + pTileHeight +
 											'" frameX="0" frameY="0" ' +
-											'frameWidth="' + pTileHeight + 
-											'" frameHeight="' + pTileHeight + 
+											'frameWidth="' + pTileHeight +
+											'" frameHeight="' + pTileHeight +
 											'"/>';
-					
+
 					cell[y] = textureID.toString();
-					
+
 					textureID++;
 				}
 			}
