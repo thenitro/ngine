@@ -45,10 +45,6 @@ package ngine.storage {
 			}
 
             var result:* = _storage.data[pID];
-
-            trace('LocalStorage.load:', result);
-            ObjectUtils.repr(result, true);
-
             if (!result || result == undefined) {
                 return pDefaultValue;
             }

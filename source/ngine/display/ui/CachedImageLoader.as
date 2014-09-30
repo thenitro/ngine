@@ -3,6 +3,7 @@ package ngine.display.ui {
 
     import flash.display.BitmapData;
     import flash.geom.Rectangle;
+    import flash.utils.ByteArray;
 
     import ngine.files.FilesLoader;
 
@@ -29,8 +30,12 @@ package ngine.display.ui {
                     pValue = _library.get(url).content;
                 } else if (_storage.load(url)) {
                     var bmp:Object    = _storage.load(url);
+
+                    var bytes:ByteArray = bmp.source as ByteArray;
+                        bytes.position = 0;
+
                     var bd:BitmapData = new BitmapData(bmp.width, bmp.height, true, 0x0);
-                        bd.setPixels(new Rectangle(0, 0, bmp.width, bmp.height), bmp.source);
+                        bd.setPixels(new Rectangle(0, 0, bmp.width, bmp.height), bytes);
 
                     pValue = Texture.fromBitmapData(bd);
                 } else {
