@@ -15,7 +15,7 @@ package ngine.display.gridcontainer {
 		private var _cellWidth:Number;
 		private var _cellHeight:Number;
 		
-		public function GridContainer(pCellWidth:uint = 0, pCellHeight:uint = 0) {
+		public function GridContainer(pCellWidth:int = 0, pCellHeight:int = 0) {
 			_container = new Sprite();
 			
 			_cellWidth  = pCellWidth;
@@ -40,20 +40,20 @@ package ngine.display.gridcontainer {
 			return _cellHeight;
 		};
 		
-		override public function add(pX:uint, pY:uint, pObject:Object):Object {
+		override public function add(pX:int, pY:int, pObject:Object):Object {
 			super.add(pX, pY, pObject);
 			addVisual(pObject, false);
 			
 			return pObject;
 		};
 		
-		override public function remove(pX:uint, pY:uint):void {
+		override public function remove(pX:int, pY:int):void {
 			removeVisual(take(pX, pY));
 			super.remove(pX, pY);
 		};
 		
-		override public function swap(pObjectAX:uint, pObjectAY:uint, 
-									  pObjectBX:uint, pObjectBY:uint):void {
+		override public function swap(pObjectAX:int, pObjectAY:int, 
+									  pObjectBX:int, pObjectBY:int):void {
 			super.swap(pObjectAX, pObjectAY, pObjectBX, pObjectBY);
 			updateIndexes();
 		};
@@ -66,8 +66,8 @@ package ngine.display.gridcontainer {
 				_pool.allocate(GridContainer, 1);
 			}
 			
-			for (var i:uint = 0; i < sizeX; i++) {
-				for (var j:uint = 0; j < sizeY; j++) {
+			for (var i:int = minX; i < maxX; i++) {
+				for (var j:int = minY; j < maxY; j++) {
 					if (take(i, j)) {
 						grid.add(i, j, take(i, j).clone());
 					}
@@ -78,8 +78,8 @@ package ngine.display.gridcontainer {
 		};
 		
 		override public function clean():void {
-			for (var i:uint = 0; i < sizeX; i++) {
-				for (var j:uint = 0; j < sizeY; j++) {
+			for (var i:int = minX; i < maxX; i++) {
+				for (var j:int = minY; j < maxY; j++) {
 					if (!take(i, j)) {
 						continue;
 					}
@@ -118,21 +118,21 @@ package ngine.display.gridcontainer {
 		};
 		
 		public function update():void {
-			for (var i:uint = 0; i < sizeX; i++) {
-				for (var j:uint = 0; j < sizeY; j++) {
+			for (var i:int = minX; i < maxX; i++) {
+				for (var j:int = minY; j < maxY; j++) {
 					addVisual(take(i, j) as IGridObject);
 				}
 			}
 		};
 		
 		public function updateIndexes():void {
-			for (var i:uint = 0; i < sizeX; i++) {
-				for (var j:uint = 0; j < sizeY; j++) {
+			for (var i:int = minX; i < maxX; i++) {
+				for (var j:int = minY; j < maxY; j++) {
 					var data:IGridObject = take(i, j) as IGridObject;
 					var child:DisplayObject = data as DisplayObject;
 					
 					if (child && _container.contains(child)) {
-						_container.setChildIndex(data as DisplayObject, i + j * sizeX);
+						_container.setChildIndex(data as DisplayObject, i + j * maxX);
 					}
 				}
 			}
