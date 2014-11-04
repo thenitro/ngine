@@ -68,7 +68,7 @@ package ngine.display {
             var startY:int = 0;
 
             var endX:int = Math.ceil(sWidth / _texture.width);
-            var endY:int = Math.ceil(sHeight / _texture.height) + 1;
+            var endY:int = Math.ceil(sHeight / _texture.height);
 
             if (_align == ALIGN_LEFT || _align == ALIGN_RIGHT) {
                 startX = 0;
