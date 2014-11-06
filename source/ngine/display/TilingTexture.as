@@ -43,6 +43,8 @@ package ngine.display {
             _scaleFactor = pScaleFactor;
 
             resize(_width, _height);
+
+            scaleX = scaleY = _scale;
         };
 
         public function resize(pWidth:Number, pHeight:Number):void {
