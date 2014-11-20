@@ -124,7 +124,7 @@ package ngine.core.manager {
 		
 		private function removeFromStack(pEntity:Entity):void {
 			if (_updating) {
-				pEntity.expire(false);
+				pEntity.expire();
 				
 				_expired.push(pEntity);
 				
@@ -146,7 +146,7 @@ package ngine.core.manager {
 			var entity:Entity = _entities.first as Entity;
 			
 			while (entity) {
-				entity.expire(false);
+				entity.expire();
 				entity = _entities.next(entity) as Entity;
 			}
 		};

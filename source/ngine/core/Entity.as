@@ -93,7 +93,7 @@ package ngine.core {
 			expire();
 		};
 		
-		public function expire(pEffect:Boolean = true):void {
+		public function expire():void {
 			_expired = true;
 		};
 		
@@ -105,6 +105,10 @@ package ngine.core {
 			_canvas.rotation = 0;
 			
 			_expired = false;
+
+            if (_canvas) {
+                _canvas.removeFromParent();
+            }
 		};
 		
 		public function dispose():void {
@@ -117,7 +121,7 @@ package ngine.core {
 			_velocity = null;
 			
 			if (_canvas) {
-				_canvas.dispose();
+                _canvas.removeFromParent(true);
 				_canvas = null;	
 			}
 		};
