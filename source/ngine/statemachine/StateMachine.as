@@ -5,7 +5,7 @@ package ngine.statemachine {
 	import starling.events.Event;
 	import starling.events.EventDispatcher;
 	
-	public final class StateMachine extends EventDispatcher {
+	public class StateMachine extends EventDispatcher {
 		public static const STATE_STOPPED:String = 'state_stopped';
 		public static const STATE_STARTED:String = 'state_started';
 
