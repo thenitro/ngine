@@ -1,6 +1,8 @@
 package ngine.display.hexagonalgrid {
     import ncollections.grid.Grid;
 
+    import nmath.vectors.Vector2D;
+
     public class HexagonalGrid extends Grid {
         private var _tileWidth:Number;
         private var _tileHeight:Number;
@@ -71,6 +73,29 @@ package ngine.display.hexagonalgrid {
             //BOTTOM
             result.push(take(pIndexX + offsetX, pIndexY + 1));
             result.push(take(pIndexX,           pIndexY + 1));
+
+            return result;
+        };
+
+        public function takeNeighborsIndexesFor(pIndexX:int, pIndexY:int):Array {
+            var result:Array = [];
+            var offsetX:int  = 1;
+
+            if (pIndexY % 2) {
+                offsetX = -1;
+            }
+
+            //TOP
+            result.push(pIndexX + offsetX, pIndexY - 1);
+            result.push(pIndexX,           pIndexY - 1);
+
+            //MIDDLE
+            result.push(pIndexX - 1, pIndexY);
+            result.push(pIndexX + 1, pIndexY);
+
+            //BOTTOM
+            result.push(pIndexX + offsetX, pIndexY + 1);
+            result.push(pIndexX,           pIndexY + 1);
 
             return result;
         };

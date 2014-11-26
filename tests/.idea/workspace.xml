@@ -40,8 +40,8 @@
           <file leaf-file-name="HexagonalGridTests.as" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/ngine/tests/HexagonalGridTests.as">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.6369748" vertical-offset="2086" max-vertical-offset="2992">
-                  <caret line="145" column="33" selection-start-line="145" selection-start-column="33" selection-end-line="145" selection-end-column="33" />
+                <state vertical-scroll-proportion="0.3512605" vertical-offset="2086" max-vertical-offset="2992">
+                  <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
                   <folding>
                     <element signature="e#26#52#0" expanded="true" />
                   </folding>
@@ -64,10 +64,10 @@
           <file leaf-file-name="HexagonalGrid.as" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/../source/ngine/display/hexagonalgrid/HexagonalGrid.as">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="1428">
-                  <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1649">
+                  <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
                   <folding>
-                    <marker date="1416850061491" expanded="true" signature="1296:1669" placeholder="{...}" />
+                    <marker date="1416915542614" expanded="true" signature="1332:1705" placeholder="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -90,9 +90,11 @@
           <file leaf-file-name="HexagonalGrid.as" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/../source/ngine/display/hexagonalgrid/HexagonalGrid.as">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="1.179832" vertical-offset="131" max-vertical-offset="1428">
-                  <caret line="49" column="32" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
-                  <folding />
+                <state vertical-scroll-proportion="1.179832" vertical-offset="165" max-vertical-offset="1649">
+                  <caret line="51" column="32" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
+                  <folding>
+                    <element signature="e#42#72#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -608,12 +610,12 @@
       <changelist id="d501e3b3-7764-45a3-af85-9c0b20579f89" name="Default" comment="" />
       <created>1416825158265</created>
       <updated>1416825158265</updated>
-      <workItem from="1416825160777" duration="9968000" />
+      <workItem from="1416825160777" duration="11086000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9968000" />
+    <option name="totallyTimeSpent" value="11086000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -622,7 +624,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32910052" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32910052" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -741,18 +743,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../source/ngine/display/hexagonalgrid/HexagonalGrid.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="1037">
-          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1530">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
           <folding>
-            <marker date="1416850061491" expanded="true" signature="1296:1669" placeholder="{...}" />
+            <marker date="1416915542614" expanded="true" signature="1332:1705" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ngine/tests/HexagonalGridTests.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6369748" vertical-offset="2086" max-vertical-offset="2992">
-          <caret line="145" column="33" selection-start-line="145" selection-start-column="33" selection-end-line="145" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.3512605" vertical-offset="2086" max-vertical-offset="2992">
+          <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
           <folding>
             <element signature="e#26#52#0" expanded="true" />
           </folding>
