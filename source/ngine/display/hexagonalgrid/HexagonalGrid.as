@@ -16,6 +16,28 @@ package ngine.display.hexagonalgrid {
             super();
         };
 
+        public static function addNeighbors(pGrid:HexagonalGrid,
+                                            pIndexX:int, pIndexY:int,
+                                            pContainer:Array):void {
+            var offsetX:int  = 1;
+
+            if (pIndexY % 2) {
+                offsetX = -1;
+            }
+
+            //TOP
+            pContainer.push(pGrid.take(pIndexX + offsetX, pIndexY - 1));
+            pContainer.push(pGrid.take(pIndexX,           pIndexY - 1));
+
+            //MIDDLE
+            pContainer.push(pGrid.take(pIndexX - 1, pIndexY));
+            pContainer.push(pGrid.take(pIndexX + 1, pIndexY));
+
+            //BOTTOM
+            pContainer.push(pGrid.take(pIndexX + offsetX, pIndexY + 1));
+            pContainer.push(pGrid.take(pIndexX,           pIndexY + 1));
+        };
+
         override public function add(pX:int, pY:int, pObject:Object):Object {
             if (!_inited) {
                 trace('HexagonalGridContainer.add: not inited!');
@@ -56,23 +78,8 @@ package ngine.display.hexagonalgrid {
 
         public function takeNeighborsFor(pIndexX:int, pIndexY:int):Array {
             var result:Array = [];
-            var offsetX:int  = 1;
 
-            if (pIndexY % 2) {
-                offsetX = -1;
-            }
-
-            //TOP
-            result.push(take(pIndexX + offsetX, pIndexY - 1));
-            result.push(take(pIndexX,           pIndexY - 1));
-
-            //MIDDLE
-            result.push(take(pIndexX - 1, pIndexY));
-            result.push(take(pIndexX + 1, pIndexY));
-
-            //BOTTOM
-            result.push(take(pIndexX + offsetX, pIndexY + 1));
-            result.push(take(pIndexX,           pIndexY + 1));
+            addNeighbors(this, pIndexX, pIndexY, result);
 
             return result;
         };
