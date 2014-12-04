@@ -135,7 +135,8 @@ package ngine.files {
             } else {
                 var urlLoader:URLLoader = new URLLoader();
 
-                if (pFile.extension == "xml" && !pFile.forceBinaryLoading) {
+                if ((pFile.extension == "xml" || pFile.extension == "txt") &&
+                        !pFile.forceBinaryLoading) {
                     urlLoader.dataFormat = URLLoaderDataFormat.TEXT;
                 } else {
                     urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
