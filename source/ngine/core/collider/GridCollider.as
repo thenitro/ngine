@@ -40,7 +40,7 @@ package ngine.core.collider {
 		public function setup(pParameters:IColliderParameters):void {
 			_parameters = pParameters as GridColliderParameters;
 			
-			_entities.clean();
+			//_entities.clean();
 			
 			_checks.length = 0;
 			_grid.length   = 0;
