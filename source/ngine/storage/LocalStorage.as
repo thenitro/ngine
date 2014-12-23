@@ -45,7 +45,7 @@ package ngine.storage {
 			}
 
             var result:* = _storage.data[pID];
-            if (!result || result == undefined) {
+            if (result == undefined) {
                 return pDefaultValue;
             }
 			

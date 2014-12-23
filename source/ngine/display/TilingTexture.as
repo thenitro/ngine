@@ -5,8 +5,9 @@ package ngine.display {
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.textures.Texture;
-	
-	public final class TilingTexture extends Sprite implements IScalable {
+    import starling.textures.TextureSmoothing;
+
+    public final class TilingTexture extends Sprite implements IScalable {
         public static const ALIGN_RIGHT:int  = -1;
         public static const ALIGN_LEFT:int   =  1;
         public static const ALIGN_CENTER:int =  0;
@@ -89,6 +90,7 @@ package ngine.display {
             for (var i:int = startX; i < endX; i++) {
                 for (var j:int = startY; j < endY; j++) {
                     var image:Image = new Image(_texture);
+                        image.smoothing = TextureSmoothing.NONE;
 
                         image.x = i * _texture.width;
                         image.y = j * _texture.height;
