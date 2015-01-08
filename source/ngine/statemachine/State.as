@@ -21,12 +21,10 @@ package ngine.statemachine {
 			return _machine;
 		};
 		
-		public function start(pArgs:Array = null):void {			
-			throw new IllegalOperationError(this + ': Must be overriden!');
+		public function start(pArgs:Array = null):void {
 		};
 		
 		public function stop():void {
-			throw new IllegalOperationError(this + ': Must be overriden!');			
 		};
 	};
 }
