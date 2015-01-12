@@ -1,20 +1,19 @@
 package ngine.statemachine {
-	import flash.errors.IllegalOperationError;
-	
 	import starling.display.Sprite;
-	
+
 	public class State extends Sprite implements IState {
 		private var _machine:StateMachine;
+		private var _id:String;
 		
-		public function State(pMachine:StateMachine) {
+		public function State(pMachine:StateMachine, pID:String) {
 			_machine = pMachine;
+			_id      = pID;
 			
 			super();
 		};
 		
-		public function get id():String {
-			throw new IllegalOperationError(this + ': Must be overriden!');
-			return null;
+		public final function get id():String {
+			return _id;
 		};
 		
 		public function get machine():StateMachine {
