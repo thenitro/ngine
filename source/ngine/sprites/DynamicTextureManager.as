@@ -1,11 +1,11 @@
 package ngine.sprites {
 	import com.emibap.textureAtlas.DynamicAtlas;
-	
+
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
-	
+
 	import starling.textures.TextureAtlas;
-	
+
 	public class DynamicTextureManager extends AbstractTextureManager {
 		
 		public function DynamicTextureManager() {
