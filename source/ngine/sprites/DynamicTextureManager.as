@@ -26,7 +26,7 @@ package ngine.sprites {
 				child.height = child.height > 2048 ? 2048 : child.height;
 			}
 			
-			var atlas:TextureAtlas = DynamicAtlas.fromMovieClipContainer(pTarget, 1, 0, true, true);
+			var atlas:TextureAtlas = DynamicAtlas.fromMovieClipContainer(pTarget, scale, 0, true, true);
 			
 			for (i = 0; i < pTarget.numChildren; i++) {				
 				child = pTarget.getChildAt(i);
