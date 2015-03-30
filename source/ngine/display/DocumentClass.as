@@ -1,13 +1,17 @@
 package ngine.display {
-    import flash.display.Sprite;
+	import flash.desktop.NativeApplication;
+	import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.geom.Rectangle;
 
     import starling.core.Starling;
+	import starling.events.Event;
 
-    public class DocumentClass extends Sprite {
+	public class DocumentClass extends Sprite {
+		private static const RECTANGLE_HELPER:Rectangle = new Rectangle();
+
 		private var TargetClass:Class;
 		private var _starling:Starling;
 		
@@ -15,40 +19,65 @@ package ngine.display {
 			TargetClass = pTargetClass;
 			
 			super();
-			addEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
+			addEventListener(flash.events.Event.ADDED_TO_STAGE, addedToStageEventHandler);
 		};
 		
-		private function addedToStageEventHandler(pEvent:Event):void {
+		private function addedToStageEventHandler(pEvent:flash.events.Event):void {
+			removeEventListener(flash.events.Event.ADDED_TO_STAGE, addedToStageEventHandler);
+
 			stage.align     = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
-			removeEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
-			
 			Starling.multitouchEnabled = true;
-			Starling.handleLostContext = true;
+			Starling.handleLostContext = false;
 			
-			_starling = new Starling(TargetClass, stage/*, null, null, 
-												Context3DRenderMode.AUTO, 
-												Context3DProfile.BASELINE_CONSTRAINED*/);
-			_starling.start();
-            _starling.simulateMultitouch  = true;
+			_starling = new Starling(TargetClass, stage);
+			_starling.addEventListener(starling.events.Event.CONTEXT3D_CREATE,
+									   context3DCreatedEventHandler);
+		};
+
+		private function context3DCreatedEventHandler(pEvent:starling.events.Event):void {
+			_starling.removeEventListener(starling.events.Event.CONTEXT3D_CREATE,
+										  context3DCreatedEventHandler);
+
+			_starling.simulateMultitouch  = true;
 			_starling.enableErrorChecking = true;
-			
+
+			_starling.start();
+
 			CONFIG::DEBUG {
 				_starling.showStats = true;
-                _starling.showStatsAt('right');
+				_starling.showStatsAt('right');
 			}
-			
-			stage.addEventListener(Event.RESIZE, stageResizeEventHandler);
+
+			stage.addEventListener(flash.events.Event.RESIZE, stageResizeEventHandler);
+
+			NativeApplication.nativeApplication.addEventListener(flash.events.Event.ACTIVATE,
+																 nativeApplicationActivateEventHandler);
+
+			NativeApplication.nativeApplication.addEventListener(flash.events.Event.DEACTIVATE,
+																 nativeApplicationDeactivateEventHandler);
 		};
-		
-		private function stageResizeEventHandler(pEvent:Event):void {
-			_starling.viewPort = new Rectangle(0, 0, 
-											   stage.stageWidth, 
-											   stage.stageHeight);
-			
+
+		private function stageResizeEventHandler(pEvent:flash.events.Event):void {
+			RECTANGLE_HELPER.x = 0;
+			RECTANGLE_HELPER.y = 0;
+
+			RECTANGLE_HELPER.width = stage.stageWidth;
+			RECTANGLE_HELPER.height = stage.stageHeight;
+
+			_starling.viewPort = RECTANGLE_HELPER;
+
 			_starling.stage.stageWidth  = stage.stageWidth;
 			_starling.stage.stageHeight = stage.stageHeight;
+		};
+
+		private function nativeApplicationActivateEventHandler(pEvent:flash.events.Event):void {
+			_starling.start();
+		};
+
+		private function nativeApplicationDeactivateEventHandler(pEvent:flash.events.Event):void {
+			_starling.stop();
 		};
 	};
 }
