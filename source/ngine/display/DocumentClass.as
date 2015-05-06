@@ -1,5 +1,8 @@
 package ngine.display {
-	import flash.desktop.NativeApplication;
+	CONFIG::MOBILE {
+		import flash.desktop.NativeApplication;
+	}
+
 	import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
@@ -52,11 +55,13 @@ package ngine.display {
 
 			stage.addEventListener(flash.events.Event.RESIZE, stageResizeEventHandler);
 
-			NativeApplication.nativeApplication.addEventListener(flash.events.Event.ACTIVATE,
-																 nativeApplicationActivateEventHandler);
+			CONFIG::MOBILE {
+				NativeApplication.nativeApplication.addEventListener(flash.events.Event.ACTIVATE,
+						nativeApplicationActivateEventHandler);
 
-			NativeApplication.nativeApplication.addEventListener(flash.events.Event.DEACTIVATE,
-																 nativeApplicationDeactivateEventHandler);
+				NativeApplication.nativeApplication.addEventListener(flash.events.Event.DEACTIVATE,
+						nativeApplicationDeactivateEventHandler);
+			}
 		};
 
 		private function stageResizeEventHandler(pEvent:flash.events.Event):void {
@@ -72,12 +77,14 @@ package ngine.display {
 			_starling.stage.stageHeight = stage.stageHeight;
 		};
 
-		private function nativeApplicationActivateEventHandler(pEvent:flash.events.Event):void {
-			_starling.start();
-		};
+		CONFIG::MOBILE {
+			private function nativeApplicationActivateEventHandler(pEvent:flash.events.Event):void {
+				_starling.start();
+			};
 
-		private function nativeApplicationDeactivateEventHandler(pEvent:flash.events.Event):void {
-			_starling.stop();
-		};
+			private function nativeApplicationDeactivateEventHandler(pEvent:flash.events.Event):void {
+				_starling.stop();
+			};
+		}
 	};
 }
