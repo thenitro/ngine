@@ -34,7 +34,7 @@ package ngine.display {
 			Starling.multitouchEnabled = true;
 			Starling.handleLostContext = false;
 			
-			_starling = new Starling(TargetClass, stage);
+			_starling = new Starling(TargetClass, stage, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight));
 			_starling.addEventListener(starling.events.Event.CONTEXT3D_CREATE,
 									   context3DCreatedEventHandler);
 		};

@@ -9,5 +9,11 @@ package ngine.utils {
         public static function removeElement(pArray:Array, pElement:Object):void {
             pArray.splice(pArray.indexOf(pElement), 1);
         };
+
+        public static function unite(pSource:Array, pDestination:Array):void {
+            for each (var element:Object in pSource) {
+                pDestination.push(element);
+            }
+        };
     }
 }
