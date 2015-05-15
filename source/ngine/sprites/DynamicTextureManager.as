@@ -7,9 +7,8 @@ package ngine.sprites {
 	import starling.textures.TextureAtlas;
 
 	public class DynamicTextureManager extends AbstractTextureManager {
-		
+
 		public function DynamicTextureManager() {
-			
 		};
 		
 		protected function convertToTextures(pTarget:Sprite):void {
