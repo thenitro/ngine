@@ -3,7 +3,7 @@ package ngine.display {
 
     import ngine.display.scale.IScalable;
 
-    import nmath.TMath;
+    import nmath.NMath;
     import nmath.vectors.Vector2D;
 
     import starling.display.Sprite;
@@ -53,7 +53,7 @@ package ngine.display {
                 }
 
                 texture.x -= Math.round(pOffset.x * _multiply[texture]);
-                texture.x  = TMath.clamp(texture.x, -texture.width / 2 + (stage.stageWidth * _scaleFactor), 0);
+                texture.x  = NMath.clamp(texture.x, -texture.width / 2 + (stage.stageWidth * _scaleFactor), 0);
             }
         };
 
