@@ -8,17 +8,12 @@ package ngine.sprites {
 		private static var _emptyBitmapData:BitmapData;
 		private static var _emptyTexture:Texture;
 
-
 		private var _textures:Object;
-		private var _scale:Number;
+
+		public var scale:Number;
 		
 		public function AbstractTextureManager() {
 			_textures = {};
-			_scale    = 1.0;
-		};
-		
-		public function get scale():Number {
-			return _scale;
 		};
 
 		public function get emptyBitmapData():BitmapData {
@@ -29,13 +24,7 @@ package ngine.sprites {
 			return _emptyTexture;
 		};
 		
-		public function init(pStage:Stage, 
-							 pReferenceWidth:Number, pReferenceHeight:Number):void {
-			var scaleX:Number = pStage.stageWidth  / pReferenceWidth;
-			var scaleY:Number = pStage.stageHeight / pReferenceHeight;
-			
-			_scale = Math.min(scaleX, scaleY);
-
+		public function init():void {
 			if (!_emptyBitmapData && !_emptyTexture) {
 				_emptyBitmapData = new BitmapData(2, 2, true, 0x00000000);
 				_emptyTexture    = Texture.fromBitmapData(_emptyBitmapData);

@@ -17,21 +17,15 @@ package ngine.sprites {
 			
 			for (i = 0; i < pTarget.numChildren; i++) {
 				child = pTarget.getChildAt(i);
-				
-				child.width  *= scale;
-				child.height *= scale;
-				
-				child.width  = child.width  > 2048 ? 2048 : child.width;
-				child.height = child.height > 2048 ? 2048 : child.height;
 			}
-			
+
 			var atlas:TextureAtlas = DynamicAtlas.fromMovieClipContainer(pTarget, scale, 0, true, true);
 			
 			for (i = 0; i < pTarget.numChildren; i++) {				
 				child = pTarget.getChildAt(i);
 				addTexure(child.name, atlas.getTextures(child.name)[0]);
 				
-				trace("DynamicTextureManager.convertToTextures(pTarget)", child.name);
+				trace("DynamicTextureManager.convertToTextures(pTarget)", child.name, child.width, child.height);
 			}
 		};
 	};
