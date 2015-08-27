@@ -7,6 +7,17 @@ package ngine.utils {
             throw new IllegalOperationError('ObjectUtils is static!')
         };
 
+        [Inline]
+        public static function length(pObject:Object):int {
+            var result:int = 0;
+
+            for each (var object:Object in pObject) {
+                result++;
+            }
+
+            return result;
+        }
+
         public static function getFirstItem(pObject:Object):Object {
             for each (var item:Object in pObject) {
                 return item;
