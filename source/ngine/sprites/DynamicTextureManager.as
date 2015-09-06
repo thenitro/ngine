@@ -24,8 +24,6 @@ package ngine.sprites {
 			for (i = 0; i < pTarget.numChildren; i++) {				
 				child = pTarget.getChildAt(i);
 				addTexure(child.name, atlas.getTextures(child.name)[0]);
-				
-				trace("DynamicTextureManager.convertToTextures(pTarget)", child.name, child.width, child.height);
 			}
 		};
 	};
