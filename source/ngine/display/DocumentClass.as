@@ -1,4 +1,10 @@
 package ngine.display {
+	import flash.display.Stage3D;
+	import flash.display3D.Context3DProfile;
+	import flash.display3D.Context3DRenderMode;
+
+	import starling.core.RenderSupport;
+
 	CONFIG::MOBILE {
 		import flash.desktop.NativeApplication;
 	}
@@ -33,8 +39,13 @@ package ngine.display {
 			
 			Starling.multitouchEnabled = true;
 			Starling.handleLostContext = true;
+
+			var profile:String  = Context3DProfile.BASELINE;
+			if (stage.stageWidth > 1280) {
+				profile = Context3DProfile.BASELINE_EXTENDED;
+			}
 			
-			_starling = new Starling(TargetClass, stage, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight));
+			_starling = new Starling(TargetClass, stage, new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), null, Context3DRenderMode.AUTO, profile);
 			_starling.addEventListener(starling.events.Event.CONTEXT3D_CREATE,
 									   context3DCreatedEventHandler);
 		};
