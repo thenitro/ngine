@@ -39,7 +39,7 @@ package ngine.display {
 			addEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
 		};
 
-        public function scale(pScale:Number, pScaleFactor:Number):void {
+        public function scaleTo(pScale:Number, pScaleFactor:Number):void {
             _scale       = pScale;
             _scaleFactor = pScaleFactor;
 
