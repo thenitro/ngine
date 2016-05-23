@@ -1,22 +1,18 @@
 package ngine.display {
-	import flash.display.Stage3D;
+	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
 	import flash.display3D.Context3DProfile;
 	import flash.display3D.Context3DRenderMode;
+	import flash.events.Event;
+	import flash.geom.Rectangle;
 
-	import starling.core.RenderSupport;
+	import starling.core.Starling;
+	import starling.events.Event;
 
 	CONFIG::MOBILE {
 		import flash.desktop.NativeApplication;
 	}
-
-	import flash.display.Sprite;
-    import flash.display.StageAlign;
-    import flash.display.StageScaleMode;
-    import flash.events.Event;
-    import flash.geom.Rectangle;
-
-    import starling.core.Starling;
-	import starling.events.Event;
 
 	public class DocumentClass extends Sprite {
 		private static const RECTANGLE_HELPER:Rectangle = new Rectangle();
@@ -38,7 +34,6 @@ package ngine.display {
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
 			Starling.multitouchEnabled = true;
-			Starling.handleLostContext = true;
 
 			var profile:String  = Context3DProfile.BASELINE;
 			if (stage.stageWidth > 1280) {

@@ -1,8 +1,5 @@
 package ngine.display.ui {
-	import starling.display.Shape;
-	import starling.display.Sprite;
-	
-	public final class IconicProgressBar extends UIElement {		
+	public final class IconicProgressBar extends UIElement {
 		private var _fullIcon:Class;
 		private var _emptyIcon:Class;
 		

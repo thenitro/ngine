@@ -1,10 +1,11 @@
 package ngine.core.collider.abstract {
 	import flash.errors.IllegalOperationError;
-	
+
 	import ngine.core.Entity;
-	import ngine.math.TMath;
-	import ngine.math.vectors.Vector2D;
-	
+
+	import nmath.NMath;
+	import nmath.vectors.Vector2D;
+
 	public final class ColliderMethods {
 		
 		public function ColliderMethods() {
@@ -20,17 +21,17 @@ package ngine.core.collider.abstract {
 		
 		public static function rectToRect(pEntityA:Entity,
 										  pEntityB:Entity):Boolean {
-			var overlapX:Boolean = TMath.valueInRange(pEntityA.position.x,
+			var overlapX:Boolean = NMath.valueInRange(pEntityA.position.x,
 												      pEntityB.position.x,
-													  pEntityB.position.x + pEntityB.size) || 
-								   TMath.valueInRange(pEntityB.position.x,
+													  pEntityB.position.x + pEntityB.size) ||
+								   NMath.valueInRange(pEntityB.position.x,
 									   				  pEntityA.position.x,
 													  pEntityA.position.x + pEntityA.size);
 			
-			var overlapY:Boolean = TMath.valueInRange(pEntityA.position.y,
+			var overlapY:Boolean = NMath.valueInRange(pEntityA.position.y,
 												      pEntityB.position.y,
-													  pEntityB.position.y + pEntityB.size) || 
-								   TMath.valueInRange(pEntityB.position.y,
+													  pEntityB.position.y + pEntityB.size) ||
+								   NMath.valueInRange(pEntityB.position.y,
 									   				  pEntityA.position.y,
 													  pEntityA.position.y + pEntityA.size);
 			
