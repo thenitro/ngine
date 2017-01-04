@@ -1,7 +1,5 @@
 package ngine.display {
-	import flash.geom.Point;
-
-	import starling.geom.Polygon;
+	import flash.display.Graphics;
 
 	public final class Shapes {
 		
@@ -9,45 +7,40 @@ package ngine.display {
 			
 		};
 		
-		public static function drawStar(pTarget:Polygon,
+		public static function drawStar(pTarget:Graphics,
 										pX:Number, pY:Number, 
 										pPoints:uint, 
 										pInnerRadius:Number, 
 										pOuterRadius:Number, 
-										pAngle:Number = 0):Polygon {
+										pAngle:Number = 0):void {
 			if(pPoints <= 2) {
 				throw ArgumentError( "Shapes.drawStar: pPoints is too small, 3 minimum to build polygon!" ); 
-				return null;
+				return;
 			}
 			
 			var step:Number     = (Math.PI * 2) / pPoints;;
 			var halfStep:Number = step / 2;
 			var start:Number    = (pAngle / 180) * Math.PI;
-
-			pTarget.addVertices(
-					new Point(
-							pX + (Math.cos(start) * pOuterRadius),
-							pY - (Math.sin(start) * pOuterRadius)));
+			
+			pTarget.moveTo(pX + (Math.cos(start) * pOuterRadius), 
+						   pY - (Math.sin(start) * pOuterRadius));
 			
 			for (var n:Number = 1; n <= pPoints; ++n) {
 				var dx:Number = pX + Math.cos(start + (step * n) - halfStep) * pInnerRadius;
 				var dy:Number = pY - Math.sin(start + (step * n) - halfStep) * pInnerRadius;
 				
-				pTarget.addVertices(new Point(dx, dy));
+				pTarget.lineTo(dx, dy);
 				
 				dx = pX + Math.cos(start + (step * n)) * pOuterRadius;
 				dy = pY - Math.sin(start + (step * n)) * pOuterRadius;
-
-				pTarget.addVertices(new Point(dx, dy));
+				
+				pTarget.lineTo(dx, dy);
 			}
-
-			return pTarget;
 		};
 		
-		public static function drawSpiral(pTarget:Polygon, pRadius:int,
-										  pSides:int, pCoils:int):Polygon {
-
-			pTarget.addVertices(new Point(0, 0));
+		public static function drawSpiral(pTarget:Graphics, pRadius:int, 
+										  pSides:int, pCoils:int):void {
+			pTarget.moveTo(0, 0);
 			
 			var awayStep:Number   = pRadius / pSides;
 			var aroundStep:Number = pCoils  / pSides;
@@ -60,11 +53,9 @@ package ngine.display {
 				
 				var x:Number = Math.cos(around) * away;
 				var y:Number = Math.sin(around) * away;
-
-				pTarget.addVertices(new Point(x, y));
+				
+				pTarget.lineTo(x, y);
 			}
-
-			return pTarget;
 		};
 	};
 }

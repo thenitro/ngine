@@ -41,10 +41,10 @@ package ngine.display.ui {
 				
 				currentObject.x = prevPosition + _spacing;
 				currentObject.y = 0;
-				
-				currentObject.draw();
-				
+
 				addChild(currentObject);
+
+				currentObject.draw();
 				
 				prevPosition = currentObject.x + currentObject.width;
 			}
