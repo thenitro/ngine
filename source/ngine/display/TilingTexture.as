@@ -1,52 +1,37 @@
 package ngine.display {
-    import ngine.display.scale.IScalable;
-
     import starling.display.Image;
-	import starling.display.Sprite;
-	import starling.events.Event;
-	import starling.textures.Texture;
+    import starling.display.Sprite;
+    import starling.events.Event;
+    import starling.textures.Texture;
     import starling.textures.TextureSmoothing;
 
-    public final class TilingTexture extends Sprite implements IScalable {
+    public final class TilingTexture extends Sprite {
         public static const ALIGN_RIGHT:int  = -1;
         public static const ALIGN_LEFT:int   =  1;
         public static const ALIGN_CENTER:int =  0;
 
 		private var _texture:Texture;
+        private var _textureScale:Number;
 		
-		private var _width:Number;
-		private var _height:Number;
+		private var _width:int;
+		private var _height:int;
 
         private var _align:int;
 
-        private var _scale:Number;
-        private var _scaleFactor:Number;
-
-		public function TilingTexture(pTexture:Texture,
-                                      pWidth:Number, pHeight:Number,
+		public function TilingTexture(pTexture:Texture, pTextureScale:Number,
+                                      pWidth:int, pHeight:int,
                                       pAlign:int = ALIGN_LEFT) {
 			_texture = pTexture;
-			
-			_width  = pWidth;
-			_height = pHeight;
+            _textureScale = pTextureScale;
+
+			_width  = pWidth == - 1 ? _texture.width * pTextureScale : pWidth;
+			_height = pHeight == -1 ? _texture.height * pTextureScale : pHeight;
 
             _align = pAlign;
 
-            _scale = 1.0;
-            _scaleFactor = 1.0;
-			
 			super();
 			addEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
 		};
-
-        public function scaleTo(pScale:Number, pScaleFactor:Number):void {
-            _scale       = pScale;
-            _scaleFactor = pScaleFactor;
-
-            resize(_width, _height);
-
-            scaleX = scaleY = _scale;
-        };
 
         public function resize(pWidth:Number, pHeight:Number):void {
             _width  = pWidth;
@@ -62,16 +47,11 @@ package ngine.display {
 		};
 
         private function createTextures():void {
-            unflatten();
-
-            var sWidth:Number  = _width  * _scaleFactor;
-            var sHeight:Number = _height * _scaleFactor;
-
             var startX:int = 0;
             var startY:int = 0;
 
-            var endX:int = Math.ceil(sWidth / _texture.width);
-            var endY:int = Math.ceil(sHeight / _texture.height);
+            var endX:int = Math.ceil(_width / (_texture.width * _textureScale));
+            var endY:int = Math.ceil(_height / (_texture.height * _textureScale));
 
             if (_align == ALIGN_LEFT || _align == ALIGN_RIGHT) {
                 startX = 0;
@@ -90,7 +70,7 @@ package ngine.display {
             for (var i:int = startX; i < endX; i++) {
                 for (var j:int = startY; j < endY; j++) {
                     var image:Image = new Image(_texture);
-                        image.smoothing = TextureSmoothing.NONE;
+                        image.textureSmoothing = TextureSmoothing.NONE;
 
                         image.x = i * _texture.width;
                         image.y = j * _texture.height;
@@ -98,8 +78,6 @@ package ngine.display {
                     addChild(image);
                 }
             }
-
-            flatten();
         };
 	};
 }
