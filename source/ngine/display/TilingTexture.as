@@ -88,8 +88,10 @@ package ngine.display {
                         image.color = _color;
                     }
 
-                        image.x = i * _texture.width;
-                        image.y = j * _texture.height;
+                        image.scaleX = image.scaleY = _textureScale;
+
+                        image.x = i * (_texture.width * _textureScale);
+                        image.y = j * (_texture.height * _textureScale);
 
                     addChild(image);
                 }
