@@ -17,6 +17,7 @@ package ngine.display {
 		private var _height:int;
 
         private var _align:int;
+        private var _color:uint;
 
 		public function TilingTexture(pTexture:Texture, pTextureScale:Number,
                                       pWidth:int, pHeight:int,
@@ -40,6 +41,17 @@ package ngine.display {
             removeChildren(0, -1, true);
             createTextures();
         };
+
+        public function setColor(pColor:uint):void {
+            _color = pColor;
+
+            for (var i:int = 0; i < numChildren; i++) {
+                var image:Image = getChildAt(i) as Image;
+                if (image) {
+                    image.color = pColor;
+                }
+            }
+        }
 		
 		private function addedToStageEventHandler(pEvent:Event):void {
 			removeEventListener(Event.ADDED_TO_STAGE, addedToStageEventHandler);
@@ -71,6 +83,10 @@ package ngine.display {
                 for (var j:int = startY; j < endY; j++) {
                     var image:Image = new Image(_texture);
                         image.textureSmoothing = TextureSmoothing.NONE;
+
+                    if (_color) {
+                        image.color = _color;
+                    }
 
                         image.x = i * _texture.width;
                         image.y = j * _texture.height;

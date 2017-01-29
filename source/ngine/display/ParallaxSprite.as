@@ -52,11 +52,14 @@ package ngine.display {
                 }
 
                 texture.y = Math.round(pOffset.y * _multiply[texture]);
-
-
-                //texture.x  = NMath.clamp(texture.x, -texture.width / 2 + stage.stageWidth, 0);
             }
         };
+
+        public function setColor(pColor:uint):void {
+            for each (var layer:TilingTexture in _layers) {
+                layer.setColor(pColor);
+            }
+        }
 
         public function resize(pWidth:Number, pHeight:Number):void {
             _width = pWidth;
