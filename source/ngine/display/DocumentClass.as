@@ -54,11 +54,6 @@ package ngine.display {
 
 			_starling.start();
 
-			CONFIG::DEBUG {
-				_starling.showStats = true;
-				_starling.showStatsAt('right');
-			}
-
 			stage.addEventListener(flash.events.Event.RESIZE, stageResizeEventHandler);
 
 			CONFIG::MOBILE {
