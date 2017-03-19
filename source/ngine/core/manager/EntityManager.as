@@ -28,8 +28,6 @@ package ngine.core.manager {
 		
 		private var _collider:ICollider;
 		
-		private var _oldTime:int;
-		
 		public function EntityManager() {
 			_entities = _pool.get(LinkedList) as LinkedList;
 			
@@ -41,6 +39,10 @@ package ngine.core.manager {
 			_addedEntities = [];
 			_expired       = [];
 		};
+
+		public static function get NEW():EntityManager {
+			return _pool.get(EntityManager) as EntityManager;
+		}
 		
 		public function get reflection():Class {
 			return EntityManager;
