@@ -50,7 +50,10 @@ package ngine.display {
 										  context3DCreatedEventHandler);
 
 			_starling.simulateMultitouch  = true;
-			_starling.enableErrorChecking = true;
+
+			CONFIG::DEBUG {
+				_starling.enableErrorChecking = true;
+            }
 
 			_starling.start();
 
