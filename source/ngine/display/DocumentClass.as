@@ -50,11 +50,6 @@ package ngine.display {
 										  context3DCreatedEventHandler);
 
 			_starling.simulateMultitouch  = true;
-
-			CONFIG::DEBUG {
-				_starling.enableErrorChecking = true;
-            }
-
 			_starling.start();
 
 			stage.addEventListener(flash.events.Event.RESIZE, stageResizeEventHandler);
